@@ -7,8 +7,9 @@ describe('play-ng-github App', function() {
     page = new PlayNgGithubPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display navigation bar', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getNavBar().isPresent()).toBe(true);
+    expect(page.getNavBar().getText()).toContain('GitHub');
   });
 });

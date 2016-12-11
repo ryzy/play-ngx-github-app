@@ -5,7 +5,7 @@ export class PlayNgGithubPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  public getNavBar() {
+    return element(by.css('app-nav'));
   }
 }
