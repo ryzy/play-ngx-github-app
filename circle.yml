@@ -1,0 +1,24 @@
+machine:
+  node:
+    version: 6.9.2
+
+dependencies:
+  pre:
+    # Install yarn
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+
+  override:
+    - yarn install
+
+  post:
+    - yarn run pree2e:
+        background: true
+
+test:
+
+  override:
+    - yarn run lint
+    - yarn run test:ci
+
+    # TODO: make Chrome browser/driver work on CircleCI
+#    - yarn run e2e
