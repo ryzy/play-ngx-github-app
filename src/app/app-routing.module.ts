@@ -1,15 +1,23 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-const routes: Routes = [
+import { ErrorPageComponent } from './shared/components/error-page/error-page.component';
+
+const appRoutes: Routes = [
+  // {
+  //   path:         '',
+  //   loadChildren: './search/search.module#SearchModule',
+  // },
   {
-    path: '',
-    children: []
+    path:         '**',
+    component:    ErrorPageComponent,
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(appRoutes/*, { preloadingStrategy: PreloadAllModules }/**/),
+  ],
   exports: [RouterModule],
   providers: []
 })

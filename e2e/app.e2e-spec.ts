@@ -1,10 +1,10 @@
-import { PlayNgGithubPage } from './app.po';
+import { AppPage } from './app.po';
 
-describe('play-ng-github App', function() {
-  let page: PlayNgGithubPage;
+describe('App', function() {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new PlayNgGithubPage();
+    page = new AppPage();
   });
 
   it('should display navigation bar', () => {

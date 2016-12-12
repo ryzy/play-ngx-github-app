@@ -1,8 +1,12 @@
 import { browser, element, by } from 'protractor';
 
-export class PlayNgGithubPage {
+export class AppPage {
   navigateTo() {
     return browser.get('/');
+  }
+
+  public getBrowserUrl() {
+    return browser.getCurrentUrl();
   }
 
   public getNavBar() {
