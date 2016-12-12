@@ -22,7 +22,7 @@ describe('GitHubAPIService', () => {
         {
           provide: Http,
           useFactory: (mockBackend: ConnectionBackend, options: RequestOptions) => {
-            return new Http(mockBackend, options)
+            return new Http(mockBackend, options);
           },
           deps: [ MockBackend, BaseRequestOptions ]
         },

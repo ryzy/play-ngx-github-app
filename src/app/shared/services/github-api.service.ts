@@ -31,7 +31,7 @@ export class GitHubAPIService {
    * @param {string} language
    * @returns {Observable<Repository[]>}
    */
-  public retrieveTrendingRepositories(days: number = 7, language: string = 'JavaScript'): Observable<Repository[]> {
+  public retrieveTrendingRepositories(days = 7, language = 'JavaScript'): Observable<Repository[]> {
     const q = `created:>${this.getDate(days)} language:${language}`;
     const url = `${this.apiUrl}/search/repositories?q=${q}`;
     return this.http.get(url)
@@ -46,7 +46,7 @@ export class GitHubAPIService {
    * @returns {string} Date, e.g. 2016-12-31
    */
   private getDate(offsetDays: number): string {
-    const offsetDate = new Date(new Date().getTime() - offsetDays*24*3600*1000);
+    const offsetDate = new Date(new Date().getTime() - offsetDays * 24 * 3600 * 1000);
     return offsetDate.toISOString().substr(0, 10);
   }
 }
