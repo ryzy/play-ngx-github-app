@@ -1,0 +1,16 @@
+@keyframes spinner {
+  to {transform: rotate(360deg); opacity: .2;}
+}
+
+// Make the app loader a bit nicer
+.app-root__loader {
+  &:before {
+    position: absolute;
+    margin: 1rem;
+    content: 'cached';
+    opacity: .5;
+    font-size: 2rem;
+    font-family: 'Material Icons';
+    animation: spinner .6s linear infinite;
+  }
+}
