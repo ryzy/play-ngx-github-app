@@ -11,7 +11,7 @@ import { GitHubAPIService } from './services/github-api.service';
 import { NavComponent } from './components/nav/nav.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { EffectsModule } from '@ngrx/effects';
-import { RepositoryEffect } from './store/effects/repository.effect';
+import { RepositoryEffects } from './store/effects/repository.effects';
 
 @NgModule({
   imports: [
@@ -29,7 +29,7 @@ import { RepositoryEffect } from './store/effects/repository.effect';
     // @see https://github.com/angular/angular-cli/issues/2799
     // @see https://github.com/ngrx/effects/issues/71
     // Therefore for now we cannot use AoT ;(
-    EffectsModule.run(RepositoryEffect),
+    EffectsModule.run(RepositoryEffects),
   ],
   providers: [
     GitHubAPIService,

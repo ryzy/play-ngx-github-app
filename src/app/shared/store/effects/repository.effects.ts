@@ -16,10 +16,10 @@ import { ActionTypes, SearchAction, SearchCompleteAction } from '../actions/repo
 import { Repository } from '../../model/repository';
 
 @Injectable()
-export class RepositoryEffect {
+export class RepositoryEffects {
 
   @Effect()
-  private search$: Observable<Action> = this.actions$
+  public search$: Observable<Action> = this.actions$
     // only take SEARCH actions and debounce them as user types the query
     .ofType(ActionTypes.SEARCH)
     .debounceTime(200)

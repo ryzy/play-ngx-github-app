@@ -48,13 +48,16 @@ export class SearchCompleteAction implements Action {
 export class LoadAction implements Action {
   public type: string = ActionTypes.LOAD;
 
-  constructor(public payload: Repository) {
+  constructor(public payload: Repository[]) {
   }
 }
 
 export class SelectAction implements Action {
   public type: string = ActionTypes.SELECT;
 
+  /**
+   * @param {string} payload: Selected repository identifier
+   */
   constructor(public payload: string) {
   }
 }

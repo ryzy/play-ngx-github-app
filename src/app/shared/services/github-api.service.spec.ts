@@ -5,12 +5,13 @@ import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { GitHubAPIService } from './github-api.service';
 import { Repository } from '../model/repository';
+import { Owner } from '../model/owner';
 
-const mockRepositorySearchResponse = {
+export const mockRepositorySearchResponse = {
   items: [
-    { id: 0, name: 'Repo 1', owner: { name: 'User 1' } },
-    { id: 1, name: 'Repo 2', owner: { name: 'User 2' }  },
-    { id: 2, name: 'Repo 3', owner: { name: 'User 1' }  },
+    { id: 0, name: 'Repo 1', full_name: 'user1/repo1', owner: <Owner>{ login: 'User 1' } },
+    { id: 1, name: 'Repo 2', full_name: 'user2/repo2', owner: <Owner>{ login: 'User 2' }  },
+    { id: 2, name: 'Repo 3', full_name: 'user1/repo3', owner: <Owner>{ login: 'User 1' }  },
   ]
 };
 

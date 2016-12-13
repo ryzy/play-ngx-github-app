@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { StoreRootState } from '../../shared/store';
 import {
-  getRepositorySearchQuery, getRepositoryLoading,
-  getRepositorySearchNames
+  getRepositorySearchQuery, getRepositorySearchLoading,
+  getRepositorySearchIds
 } from '../../shared/store/selectors';
 import { SearchAction } from '../../shared/store/actions/repository.actions';
 
@@ -20,11 +20,11 @@ export class RepositorySearchService {
   }
 
   public getFoundRepositories(): Observable<string[]> {
-    return this.store.select(getRepositorySearchNames);
+    return this.store.select(getRepositorySearchIds);
   }
 
   public isLoading(): Observable<boolean> {
-    return this.store.select(getRepositoryLoading);
+    return this.store.select(getRepositorySearchLoading);
   }
 
   public doSearch(query: string) {

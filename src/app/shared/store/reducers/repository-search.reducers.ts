@@ -3,17 +3,17 @@ import { Repository } from '../../model/repository';
 import { GitHubAPIService } from '../../services/github-api.service';
 
 /**
- * Repository search state
+ * Repository search state schema
  */
 export interface State {
   query: string;
-  names: string[];
+  ids: string[]; // list of found repositories (their identifiers)
   loading: boolean;
 }
 
 export const initialState: State = {
   query: '',
-  names: [],
+  ids: [],
   loading: false,
 };
 
@@ -25,12 +25,12 @@ export const initialState: State = {
  * @returns {any}
  */
 export function reducer(state = initialState, action: repositoryActions.Actions): State {
-  // console.log('repoSearchReducer()', {state, action});
+  // console.log('repository-search reducer()', {state, action});
 
   switch (action.type) {
     case repositoryActions.ActionTypes.SEARCH:
       const query: string = <string>action.payload;
-      // console.log('repoSearchReducer(type=SEARCH)', query);
+      // console.log('repository-search reducer(SEARCH)', query);
 
       if (!GitHubAPIService.isValidSearchQuery(query)) {
         return initialState;
@@ -40,12 +40,16 @@ export function reducer(state = initialState, action: repositoryActions.Actions)
 
     case repositoryActions.ActionTypes.SEARCH_COMPLETE:
       const repositories = <Repository[]>action.payload;
-      // console.log('repoSearchReducer(type=SEARCH_COMPLETE)', repositories);
+      // console.log('repository-search reducer(type=SEARCH_COMPLETE)', repositories);
 
-      // return initialState;
+      // Note: we only store here list of found ids (so e.g. we know
+      // what to display on the search list). Actual repositories
+      // are added to the store in the `repository` reducer).
+      const foundIds = repositories.map((repository: Repository) => repository.full_name);
+
       return {
         query: state.query,
-        names: repositories.map((repository: Repository) => repository.full_name),
+        ids: foundIds,
         loading: false,
       };
 
@@ -62,10 +66,10 @@ export function reducer(state = initialState, action: repositoryActions.Actions)
 export const getQuery = (state: State) => state.query;
 
 /**
- * Reducer's selector: get found repository names
+ * Reducer's selector: get found repository identifiers
  * @param state
  */
-export const getNames = (state: State) => state.names;
+export const getIds = (state: State) => state.ids;
 
 /**
  * Reducer's selector: get current loading state

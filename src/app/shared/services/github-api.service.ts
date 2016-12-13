@@ -18,7 +18,7 @@ export class GitHubAPIService {
    * @returns {boolean}
    */
   public static isValidSearchQuery(query: string): boolean {
-    const q = query.trim();
+    const q = query && query.trim();
     return !!q && q.length >= GITHUB_REPO_SEARCH_QUERY_MIN_LENGTH;
   }
 
