@@ -1,4 +1,5 @@
 # Simple GitHub app for browsing repositories
+[![CircleCI](https://circleci.com/gh/ryzy/play-ng2-github.svg?style=svg)](https://circleci.com/gh/ryzy/play-ng2-github)
 
 # Try it
 
