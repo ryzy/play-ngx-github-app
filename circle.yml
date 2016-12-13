@@ -11,7 +11,8 @@ dependencies:
     - yarn install
 
   post:
-    - yarn run pree2e:
+    # Launch app, so it's ready for e2e tests running later on
+    - yarn run start:
         background: true
 
 test:
@@ -19,6 +20,4 @@ test:
   override:
     - yarn run lint
     - yarn run test:ci
-
-    # TODO: make Chrome browser/driver work on CircleCI
-#    - yarn run e2e
+    - yarn run e2e
