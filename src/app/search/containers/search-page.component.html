@@ -1,0 +1,12 @@
+<md-card>
+  <md-card-content>
+    <md-card-title>
+      <app-search
+        (search)="doSearch($event)"
+        [query]="searchQuery$ | async"
+        [loading]="isLoading$ | async"
+      ></app-search>
+    </md-card-title>
+
+  </md-card-content>
+</md-card>
