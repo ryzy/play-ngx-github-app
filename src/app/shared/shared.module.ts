@@ -25,6 +25,10 @@ import { RepositoryEffect } from './store/effects/repository.effect';
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
 
     // Run NgRx effects for actions
+    // TODO: custom @Effect() annotations are stripped out during AOT compilation
+    // @see https://github.com/angular/angular-cli/issues/2799
+    // @see https://github.com/ngrx/effects/issues/71
+    // Therefore for now we cannot use AoT ;(
     EffectsModule.run(RepositoryEffect),
   ],
   providers: [

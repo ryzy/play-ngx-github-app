@@ -1,0 +1,21 @@
+{
+  "hosting": {
+    "public": "dist",
+    "trailingSlash": false,
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source" : "/index.html",
+        "headers" : [ {
+          "key" : "Cache-Control",
+          "value" : "max-age=60"
+        } ]
+      }
+    ]
+  }
+}

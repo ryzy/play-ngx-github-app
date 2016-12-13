@@ -1,7 +1,10 @@
-# Simple GitHub app for browsing repositories
+# GitHub Depot: simple Angular 2 app for browsing repositories
 [![CircleCI](https://circleci.com/gh/ryzy/play-ng2-github.svg?style=svg)](https://circleci.com/gh/ryzy/play-ng2-github)
 
-# Try it
+Visit **https://ng2-github.firebaseapp.com/** to try it online.
+Deployed automatically from the `master` branch.
+
+# Play with it
 
 * Clone the repository
 * run `yarn install` (or `npm install`)
@@ -14,7 +17,7 @@
 * Angular 2, angular-cli
 * ngrx/store, ngrx/effect for app Redux-style state management
 * Testing: karma + jasmine, protractor for e2e
-* CircleCI for running tests
+* CircleCI for running tests and automatic deployments to Firebase Hosting.
 
 
 # Architecture

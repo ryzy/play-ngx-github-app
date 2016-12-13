@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "dev-ng2-github-d52c4",
+    "prod": "ng2-github"
+  }
+}
