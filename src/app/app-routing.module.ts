@@ -4,10 +4,10 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { ErrorPageComponent } from './shared/components/error-page/error-page.component';
 
 const appRoutes: Routes = [
-  // {
-  //   path:         '',
-  //   loadChildren: './search/search.module#SearchModule',
-  // },
+  {
+    path:         '',
+    loadChildren: './search/search.module#SearchModule',
+  },
   {
     path:         '**',
     component:    ErrorPageComponent,
