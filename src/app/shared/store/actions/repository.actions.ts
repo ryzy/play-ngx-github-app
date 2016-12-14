@@ -1,3 +1,4 @@
+import { Response } from '@angular/http';
 import { Action } from '@ngrx/store';
 
 import { type } from '../../utils';
@@ -14,10 +15,12 @@ import { Repository } from '../../model/repository';
  * action types in the application are unique.
  */
 export const ActionTypes = {
-  SEARCH         : type('@repository/search'),
-  SEARCH_COMPLETE: type('@repository/search/complete'),
-  LOAD           : type('@repository/load'),
-  SELECT         : type('@repository/select'),
+  SEARCH                  : type('@repository/search'),
+  SEARCH_COMPLETE         : type('@repository/search/complete'),
+  LOAD_TRENDING           : type('@repository/load-trending'),
+  LOAD_TRENDING_COMPLETE  : type('@repository/load-trending/complete'),
+  LOAD                    : type('@repository/load'),
+  REQUEST_ERROR           : type('@repository/request-error'),
 };
 
 
@@ -28,38 +31,50 @@ export const ActionTypes = {
  * type checking in reducer functions, using
  * Discriminated Unions pattern.
  */
+
 export class SearchAction implements Action {
   public type: string = ActionTypes.SEARCH;
 
   /**
    * @param {string} payload: Search query
    */
-  constructor(public payload: string) {
-  }
+  constructor(public payload: string) {}
 }
 
 export class SearchCompleteAction implements Action {
   public type: string = ActionTypes.SEARCH_COMPLETE;
 
-  constructor(public payload: Repository[]) {
-  }
+  constructor(public payload: Repository[]) {}
+}
+
+export class LoadTrendingAction implements Action {
+  public type: string = ActionTypes.LOAD_TRENDING;
+
+  /**
+   * @param payload: Not used ATM, LoadTrendingActions doesn't need any payload
+   */
+  constructor(public payload?: any) {}
+}
+
+export class LoadTrendingCompleteAction implements Action {
+  public type: string = ActionTypes.LOAD_TRENDING_COMPLETE;
+
+  constructor(public payload: Repository[]) {}
 }
 
 export class LoadAction implements Action {
   public type: string = ActionTypes.LOAD;
 
-  constructor(public payload: Repository[]) {
-  }
+  constructor(public payload: Repository[]) {}
 }
 
-export class SelectAction implements Action {
-  public type: string = ActionTypes.SELECT;
+export class RequestErrorAction implements Action {
+  public type: string = ActionTypes.REQUEST_ERROR;
 
   /**
    * @param {string} payload: Selected repository identifier
    */
-  constructor(public payload: string) {
-  }
+  constructor(public payload: Response) {}
 }
 
 /**
@@ -69,6 +84,8 @@ export class SelectAction implements Action {
 export type Actions
   = SearchAction
   | SearchCompleteAction
+  | LoadTrendingAction
+  | LoadTrendingCompleteAction
   | LoadAction
-  | SelectAction
+  | RequestErrorAction
   ;

@@ -1,20 +1,27 @@
+import { Response } from '@angular/http';
+
 import * as repositoryActions from '../actions/repository.actions';
+import { AppError } from '../../model/app-error';
 import { Repository } from '../../model/repository';
-import { GitHubAPIService } from '../../services/github-api.service';
 
 /**
  * Repository search state schema
  */
 export interface State {
+  entities: Repository[];
   query: string;
-  ids: string[]; // list of found repositories (their identifiers)
   loading: boolean;
+  error: AppError;
 }
 
+/**
+ *
+ */
 export const initialState: State = {
-  query: '',
-  ids: [],
+  entities: [],
+  query: null,
   loading: false,
+  error: null
 };
 
 /**
@@ -30,28 +37,42 @@ export function reducer(state = initialState, action: repositoryActions.Actions)
   switch (action.type) {
     case repositoryActions.ActionTypes.SEARCH:
       const query: string = <string>action.payload;
-      // console.log('repository-search reducer(SEARCH)', query);
-
-      if (!GitHubAPIService.isValidSearchQuery(query)) {
-        return initialState;
+      if (!query) {
+        return state;
       }
 
-      return Object.assign({}, state, { query, loading: true });
+      return Object.assign({}, initialState, {
+        query: query,
+        loading: true,
+      });
+
+    case repositoryActions.ActionTypes.LOAD_TRENDING:
+      return Object.assign({}, initialState, {
+        entities: [],
+        loading: true,
+      });
 
     case repositoryActions.ActionTypes.SEARCH_COMPLETE:
-      const repositories = <Repository[]>action.payload;
-      // console.log('repository-search reducer(type=SEARCH_COMPLETE)', repositories);
-
-      // Note: we only store here list of found ids (so e.g. we know
-      // what to display on the search list). Actual repositories
-      // are added to the store in the `repository` reducer).
-      const foundIds = repositories.map((repository: Repository) => repository.full_name);
-
+    case repositoryActions.ActionTypes.LOAD_TRENDING_COMPLETE:
+      const entities = <Repository[]>action.payload;
       return {
+        entities: entities,
         query: state.query,
-        ids: foundIds,
         loading: false,
+        error: null,
       };
+
+    case repositoryActions.ActionTypes.REQUEST_ERROR:
+      // console.log('error reducer(action=REQUEST_ERROR)', action.payload);
+      const error = <Response>action.payload;
+      const errorDecoded = error.json ? error.json() : {}; // in case we have some other, not Response error here
+      return Object.assign({}, state, {
+        loading: false,
+        error: {
+          statusCode : error.status,
+          message: errorDecoded.message || error.statusText,
+        }
+      });
 
     default:
       return state;
@@ -66,13 +87,19 @@ export function reducer(state = initialState, action: repositoryActions.Actions)
 export const getQuery = (state: State) => state.query;
 
 /**
- * Reducer's selector: get found repository identifiers
- * @param state
- */
-export const getIds = (state: State) => state.ids;
-
-/**
  * Reducer's selector: get current loading state
  * @param state
  */
 export const getLoading = (state: State) => state.loading;
+
+/**
+ * Reducer's selector: get loaded Repository entities
+ * @param state
+ */
+export const getEntities = (state: State) => state.entities;
+
+/**
+ * Reducer's selector: get request error
+ * @param state
+ */
+export const getError = (state: State) => state.error;

@@ -1,5 +1,8 @@
 import { Owner } from './owner';
 
+/**
+ * GitHub repository model
+ */
 export interface Repository {
   id: number;
   name: string;
@@ -11,8 +14,9 @@ export interface Repository {
   html_url: string;
   homepage: string;
   language: string;
-  git_url: string; // clone .git url (HTTPS)
+  clone_url: string; // clone .git url (HTTPS)
   ssh_url: string; // clone .git url (SSH)
+  fork: boolean; // is it forked from another repo?
   owner: Owner;
 
   // stats
@@ -22,7 +26,6 @@ export interface Repository {
   score: number;
   size: number;
   stargazers_count: number;
-  watchers: number;
 
   // API urls
   issues_url: string;
