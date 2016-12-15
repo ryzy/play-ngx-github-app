@@ -10,3 +10,12 @@
 
   </md-card-content>
 </md-card>
+
+<md-card>
+  <md-card-title>Search results</md-card-title>
+  <md-card-content>
+    <app-error-alert [error]="error$ | async"></app-error-alert>
+
+    <app-repository-list [repositories]="repositories$ | async"></app-repository-list>
+  </md-card-content>
+</md-card>
