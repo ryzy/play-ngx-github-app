@@ -5,8 +5,9 @@ import { DebugElement } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 
 import { SearchPageComponent } from './search-page.component';
-import { SearchComponent } from '../components/search.component';
+import { SearchComponent } from '../components/search/search.component';
 import { SearchModule } from '../search.module';
+import { SharedModule } from '../../shared/shared.module';
 
 describe('SearchPageComponent', () => {
   let component: SearchPageComponent;
@@ -14,7 +15,7 @@ describe('SearchPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ SearchModule ],
+      imports: [ SharedModule.provideStoreModule(), SearchModule ],
     })
     .compileComponents();
   }));

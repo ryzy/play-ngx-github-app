@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
-import { RepositorySearchService } from '../services/repository-search.service';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
+
+import { SearchService } from '../services/search.service';
+import { Repository } from '../../shared/model/repository';
+import { AppError } from '../../shared/model/app-error';
 
 @Component({
   selector: 'app-search-page',
@@ -11,10 +14,18 @@ import 'rxjs/add/operator/take';
 export class SearchPageComponent {
   public searchQuery$: Observable<string>;
   public isLoading$: Observable<boolean>;
+  public repositories$: Observable<Repository[]>;
+  public error$: Observable<AppError>;
 
-  constructor(private searchService: RepositorySearchService) {
+  constructor(private searchService: SearchService) {
     this.searchQuery$ = searchService.getSearchQuery().take(1);
     this.isLoading$ = searchService.isLoading();
+    this.repositories$ = searchService.getRepositories();
+    this.error$ = searchService.getError();
+
+    // Load trending repositories on start
+    // TODO: only load when there's no initial search query!
+    searchService.loadTrending();
   }
 
   public doSearch(query: string) {

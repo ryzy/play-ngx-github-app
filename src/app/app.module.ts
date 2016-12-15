@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+
+    // Provide NgRx store and its effects
+    SharedModule.provideStoreModule(),
+    SharedModule.provideStoreEffectsModule(),
   ],
   providers: [],
   declarations: [

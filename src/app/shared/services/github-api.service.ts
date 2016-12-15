@@ -45,12 +45,13 @@ export class GitHubAPIService {
    * @param {string} language
    * @returns {Observable<Repository[]>}
    */
-  public retrieveTrendingRepositories(days = 7, language = 'JavaScript'): Observable<Repository[]> {
+  public retrieveTrendingRepositories(days = 30, language = 'JavaScript'): Observable<Repository[]> {
     const q = `created:>${this.getDate(days)} language:${language}`;
     const url = `${this.apiUrl}/search/repositories?q=${q}`;
     return this.http.get(url)
       .map((res: Response) => res.json())
-      .map((searchData: { items: Repository[] }) => searchData.items);
+      .map((searchData: { items: Repository[] }) => searchData.items)
+    ;
   }
 
   /**
