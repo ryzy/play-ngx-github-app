@@ -2,12 +2,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { MaterialModule } from '@angular/material';
 
-import { SearchPageComponent } from './search-page.component';
-import { SearchComponent } from '../components/search/search.component';
-import { SearchModule } from '../search.module';
 import { SharedModule } from '../../shared/shared.module';
+import { SearchModule } from '../search.module';
+import { SearchPageComponent } from './search-page.component';
 
 describe('SearchPageComponent', () => {
   let component: SearchPageComponent;

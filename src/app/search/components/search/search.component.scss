@@ -1,12 +1,5 @@
-md-input, md-progress-bar {
+md-input {
   margin-left: 10%;
   margin-right: 10%;
   width: 80%;
-}
-
-md-progress-bar {
-  display: none;
-  &.show {
-    display: block;
-  }
 }

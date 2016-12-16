@@ -1,2 +1,6 @@
-<md-input #input (keyup)="doSearch(input.value)" [value]="query" placeholder="Search for repository..."></md-input>
-<md-progress-bar [class.show]="loading" mode="indeterminate"></md-progress-bar>
+<md-input
+  #input
+  (keyup)="onKeyUp(input.value)"
+  [value]="query"
+  placeholder="Search for repository..."
+></md-input>

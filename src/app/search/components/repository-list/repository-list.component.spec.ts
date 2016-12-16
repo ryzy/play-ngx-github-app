@@ -4,9 +4,10 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 
-import { sampleRepository } from '../repository-card/repository-card.component.spec';
+import { SharedModule } from '../../../shared/shared.module';
 import { RepositoryListComponent } from './repository-list.component';
 import { RepositoryCardComponent } from '../repository-card/repository-card.component';
+import { sampleRepository } from '../repository-card/repository-card.component.spec';
 
 describe('RepositoryListComponent', () => {
   let component: RepositoryListComponent;
@@ -15,7 +16,7 @@ describe('RepositoryListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ RepositoryListComponent, RepositoryCardComponent ],
-      imports: [ MaterialModule.forRoot() ],
+      imports: [ SharedModule ],
     })
     .compileComponents();
   }));

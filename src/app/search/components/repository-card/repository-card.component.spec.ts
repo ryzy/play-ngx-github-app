@@ -2,10 +2,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { MaterialModule } from '@angular/material';
 
-import { RepositoryCardComponent } from './repository-card.component';
+import { SharedModule } from '../../../shared/shared.module';
 import { Repository } from '../../../shared/model/repository';
+import { RepositoryCardComponent } from './repository-card.component';
+
 
 export const sampleRepository: Repository = <Repository>{
   id: 2126244,
@@ -46,7 +47,7 @@ describe('RepositoryCardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ RepositoryCardComponent ],
-      imports: [ MaterialModule.forRoot() ],
+      imports: [ SharedModule ],
     })
     .compileComponents();
   }));

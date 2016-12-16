@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'app-search',
@@ -24,8 +25,16 @@ export class SearchComponent {
    */
   @Output() public search = new EventEmitter<string>();
 
+  private keyUpStream = new EventEmitter<string>();
 
-  public doSearch(query: string) {
-    this.search.emit(query);
+  public constructor() {
+    this.keyUpStream
+      .distinctUntilChanged()
+      // Emit new values in @Output `change` only on a new distinct value
+      .subscribe((value) => this.search.emit(value));
+  }
+
+  public onKeyUp(value: string) {
+    this.keyUpStream.emit(value);
   }
 }

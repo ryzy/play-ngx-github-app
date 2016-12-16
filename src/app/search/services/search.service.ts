@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMap';
+import { Store } from '@ngrx/store';
+import { go } from '@ngrx/router-store';
 
 import { StoreRootState } from '../../shared/store';
 import {
@@ -63,5 +63,13 @@ export class SearchService {
    */
   public loadTrending() {
     this.store.dispatch(new LoadTrendingAction());
+  }
+
+  /**
+   * Action performed when repository got selected (i.e. clicked)
+   * @param repository
+   */
+  public selectRepository(repository: Repository) {
+    this.store.dispatch(go('repo/' + repository.full_name));
   }
 }

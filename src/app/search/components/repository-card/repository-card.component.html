@@ -1,24 +1,24 @@
-<md-card>
+<md-card (click)="navigateToRepository(repository)">
   <md-card-title>{{repository.full_name}}</md-card-title>
   <md-card-content>
     <p>{{repository.description}}</p>
   </md-card-content>
   <md-card-actions>
-    <span class="details-language" title="Primary language">
+    <span class="action action--language" title="Primary language">
       <md-icon>language</md-icon> {{repository.language}}
     </span>
-    <span class="details-stars" title="Stars">
+    <span class="action action--stars" title="Stars">
       <md-icon>stars</md-icon> {{repository.stargazers_count | number}}
     </span>
-    <span class="details-forks" title="Forks">
+    <span class="action action--forks" title="Forks">
       <md-icon>call_split</md-icon> {{repository.forks | number}}
     </span>
-    <span class="details-built-by">
+    <span class="action action--built-by">
       Built by:
       <a href="{{repository.owner.html_url}}" title="{{repository.owner.login}}">
         <img src="{{repository.owner.avatar_url}}" width="20" height="20">
       </a>
     </span>
-    <span class="details-updated-at">Last update: {{repository.updated_at | date:'medium'}}</span>
+    <span class="action action--updated-at">Last update: {{repository.updated_at | date:'medium'}}</span>
   </md-card-actions>
 </md-card>

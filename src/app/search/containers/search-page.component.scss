@@ -1,0 +1,18 @@
+md-progress-bar {
+  position: relative;
+  display: none;
+  &.show {
+    display: block;
+  }
+}
+
+.list {
+  min-height: 150px;
+}
+.title {
+  text-align: center;
+}
+.no-results {
+  text-align: center;
+  font-weight: bold;
+}

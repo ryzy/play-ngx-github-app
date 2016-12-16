@@ -1,21 +1,31 @@
-<md-card>
+<md-card class="search">
   <md-card-content>
     <md-card-title>
       <app-search
         (search)="doSearch($event)"
         [query]="searchQuery$ | async"
-        [loading]="isLoading$ | async"
       ></app-search>
     </md-card-title>
 
   </md-card-content>
 </md-card>
 
-<md-card>
-  <md-card-title>Search results</md-card-title>
+<md-card class="list">
+  <md-card-title *ngIf="showingSearchResults" class="title">Found repositories</md-card-title>
+  <md-card-title *ngIf="!showingSearchResults" class="title">Trending repositories</md-card-title>
+
   <md-card-content>
+    <md-progress-bar [class.show]="isLoading$ | async" mode="indeterminate"></md-progress-bar>
+
     <app-error-alert [error]="error$ | async"></app-error-alert>
 
-    <app-repository-list [repositories]="repositories$ | async"></app-repository-list>
+    <div *ngIf="noResults$ | async" class="no-results">
+      No results. Change your search query and try again.
+    </div>
+
+    <app-repository-list
+      [repositories]="repositories$ | async"
+      (selectRepository)="selectRepository($event)"
+    ></app-repository-list>
   </md-card-content>
 </md-card>

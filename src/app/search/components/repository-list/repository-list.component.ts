@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Repository } from '../../../shared/model/repository';
 
 @Component({
@@ -8,4 +8,9 @@ import { Repository } from '../../../shared/model/repository';
 })
 export class RepositoryListComponent {
   @Input() public repositories: Repository[];
+  @Output() public selectRepository = new EventEmitter<Repository>();
+
+  public navigateToRepository(repository: Repository) {
+    this.selectRepository.next(repository);
+  }
 }

@@ -3,25 +3,11 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { GITHUB_API_BASE_URL } from '../config';
-import { GITHUB_REPO_SEARCH_QUERY_MIN_LENGTH } from '../config';
 import { Repository } from '../model/repository';
 
 @Injectable()
 export class GitHubAPIService {
   private apiUrl: string = GITHUB_API_BASE_URL;
-
-  /**
-   * Helper function to check if query is valid to perform
-   * (i.e. has min length)
-   *
-   * @param query
-   * @returns {boolean}
-   */
-  public static isValidSearchQuery(query: string): boolean {
-    const q = query && query.trim();
-    return !!q && q.length >= GITHUB_REPO_SEARCH_QUERY_MIN_LENGTH;
-  }
-
 
   constructor(private http: Http) { }
 

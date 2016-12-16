@@ -1,3 +1,35 @@
-.details-updated-at {
-  float: right;
+md-card {
+  cursor: pointer;
+  padding-bottom: 2rem;
+  &:hover {
+    outline: rgba(0, 0, 0, .1) solid 1px;
+    background-color: #fcfcfc;
+  }
+}
+
+md-card-actions {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.action {
+  margin-right: 1rem;
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &--updated-at {
+    float: right;
+  }
+}
+
+md-icon {
+  margin-bottom: -.1rem;
+  vertical-align: bottom;
+}
+
+img {
+  margin-left: .5rem;
+  vertical-align: bottom;
+  outline: rgba(0, 0, 0, .1) solid 1px;
 }
