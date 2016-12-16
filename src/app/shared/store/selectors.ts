@@ -1,3 +1,4 @@
+import { RouterState } from '@ngrx/router-store';
 import { createSelector } from 'reselect';
 
 import { StoreRootState } from './index';
@@ -20,3 +21,7 @@ export const getRepositorySearchEntities = createSelector(getRepositorySearchSta
 export const getRepositorySearchQuery = createSelector(getRepositorySearchState, repositorySearch.getQuery);
 export const getRepositorySearchLoading = createSelector(getRepositorySearchState, repositorySearch.getLoading);
 export const getRepositorySearchError = createSelector(getRepositorySearchState, repositorySearch.getError);
+
+// router selectors
+export const getRouterState = (state: StoreRootState) => state.router;
+export const getRouterPath = createSelector(getRouterState, (state: RouterState) => state.path);

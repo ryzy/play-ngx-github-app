@@ -41,3 +41,8 @@ is a separate so-called _feature module_ and it's loaded lazily.
 Lazy loading starts from the home page featuring `SearchModule`
 (why? you could end up first on some subpage using deep-linking, thus
 the SearchModule would be not needed).
+
+
+# Authors
+
+Author: Marcin ryzy Ryzycki (<marcin@m12.io>)

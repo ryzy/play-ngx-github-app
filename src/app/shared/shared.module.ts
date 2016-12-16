@@ -6,8 +6,9 @@ import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RouterStoreModule } from '@ngrx/router-store';
 
-import { rootReducer } from './store/index';
+import { rootReducer, storeRootInitialState } from './store/index';
 import { GitHubAPIService } from './services/github-api.service';
 import { RepositorySearchEffects } from './store/effects/repository-search.effects';
 import { NavComponent } from './components/nav/nav.component';
@@ -53,7 +54,8 @@ export class SharedModule {
   public static provideStoreModule(): ModuleWithProviders[] {
     return [
       // Provide NgRx store with root reducer
-      StoreModule.provideStore(rootReducer),
+      StoreModule.provideStore(rootReducer, storeRootInitialState),
+      RouterStoreModule.connectRouter(),
       StoreDevtoolsModule.instrumentOnlyWithExtension(),
     ];
   }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
+import { SearchRoutingModule } from './search-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { SearchService } from './services/search.service';
 import { RepositoryCardComponent } from './components/repository-card/repository-card.component';
@@ -11,11 +11,8 @@ import { SearchPageComponent } from './containers/search-page.component';
 
 @NgModule({
   imports: [
+    SearchRoutingModule,
     SharedModule,
-    RouterModule.forChild([{
-      path: '',
-      component: SearchPageComponent,
-    }]),
   ],
   declarations: [
     RepositoryCardComponent,

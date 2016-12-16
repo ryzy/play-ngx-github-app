@@ -75,6 +75,10 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-2.0.0.tgz#db4c3e1b69030229cb6b908477115b3479e4c4e0"
 
+"@ngrx/router-store@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-1.2.5.tgz#1cff82c5488fab995872c6f0d57a29a7ac91e598"
+
 "@ngrx/store-devtools@3.2.2":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-3.2.2.tgz#4409c18b8ae656a2cdfb097155855d5d5d81ab80"
