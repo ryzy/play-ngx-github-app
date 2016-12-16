@@ -9,6 +9,10 @@ const appRoutes: Routes = [
     loadChildren: './search/search.module#SearchModule',
   },
   {
+    path:         'repo',
+    loadChildren: './repository/repository.module#RepositoryModule',
+  },
+  {
     path:         '**',
     component:    ErrorPageComponent,
   }
