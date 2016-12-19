@@ -2,7 +2,8 @@
 [![CircleCI](https://circleci.com/gh/ryzy/play-ng2-github.svg?style=svg)](https://circleci.com/gh/ryzy/play-ng2-github)
 
 Visit **https://ng2-github.firebaseapp.com/** to try it online.
-Deployed automatically from the `master` branch.
+Deployed automatically from the `master` branch. The `dev` branch
+is also deployed and available [here]https://dev-ng2-github-d52c4.firebaseio.com/).
 
 
 # Play with it

@@ -19,15 +19,20 @@ test:
   override:
     - yarn run lint
     - yarn run test:ci
+    - yarn run build # test the dev build as well, to make sure it works
     - yarn run e2e
 
   post:
-    - yarn run build # test building normal build
+    # Prepare production build
     # TODO: make it AoT once https://github.com/angular/angular-cli/issues/2799 is fixed
     # as @ngrx/effects doesn't work currently with AoT.
-    - yarn run build:prod # test building production build
+    - yarn run build:prod
 
 deployment:
+  branch: dev
+    commands:
+      - yarn run deploy
+
   development:
     branch: master
     commands:
