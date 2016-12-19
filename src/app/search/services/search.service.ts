@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { go } from '@ngrx/router-store';
 
 import { StoreRootState } from '../../shared/store';
 import {
   getRepositorySearchQuery, getRepositorySearchLoading, getRepositorySearchEntities, getRepositorySearchError,
 } from '../../shared/store/selectors';
-import { SearchAction, LoadTrendingAction } from '../../shared/store/actions/repository.actions';
+import { SearchAction, LoadTrendingAction, SelectAction } from '../../shared/store/actions/repository.actions';
 import { AppError } from '../../shared/model/app-error';
 import { Repository } from '../../shared/model/repository';
 
@@ -20,7 +19,6 @@ export class SearchService {
 
   /**
    * Get current search query
-   * @returns {Observable<string>}
    */
   public getSearchQuery(): Observable<string> {
     return this.store.select(getRepositorySearchQuery);
@@ -28,7 +26,6 @@ export class SearchService {
 
   /**
    * Get current repositories
-   * @returns {Observable<Repository[]>}
    */
   public getRepositories(): Observable<Repository[]> {
     return this.store.select(getRepositorySearchEntities);
@@ -36,7 +33,6 @@ export class SearchService {
 
   /**
    * Get error occurred during request (search or load)
-   * @returns {Observable<error.State>}
    */
   public getError(): Observable<AppError> {
     return this.store.select(getRepositorySearchError);
@@ -44,7 +40,6 @@ export class SearchService {
 
   /**
    * Get loading status for search query
-   * @returns {Observable<boolean>}
    */
   public isLoading(): Observable<boolean> {
     return this.store.select(getRepositorySearchLoading);
@@ -70,6 +65,6 @@ export class SearchService {
    * @param repository
    */
   public selectRepository(repository: Repository) {
-    this.store.dispatch(go('repo/' + repository.full_name));
+    this.store.dispatch(new SelectAction(repository));
   }
 }

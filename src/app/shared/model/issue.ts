@@ -27,5 +27,5 @@ export interface IssueLabel {
   id: number;
   url: string;
   name: string;
-  color: string, // hex color, but without `#`
+  color: string; // hex color, but without `#`
 }

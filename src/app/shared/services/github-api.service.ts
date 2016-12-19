@@ -1,15 +1,66 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import 'rxjs/add/operator/cache';
+import 'rxjs/add/operator/switchMap';
 
 import { GITHUB_API_BASE_URL } from '../config';
 import { Repository } from '../model/repository';
+import { Commit } from '../model/commit';
+import { Issue } from '../model/issue';
+import { PullRequest } from '../model/pull-request';
+
+// const requestOptions = {search: 'client_id=550a2799cf7516968ffb&client_secret=2fd4923d61ed0d53aedcf131b5280a1a1d2ece13'};
+const requestOptions = {};
 
 @Injectable()
 export class GitHubAPIService {
   private apiUrl: string = GITHUB_API_BASE_URL;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
+
+  /**
+   * Get repository data
+   * @param repoFullName
+   * @returns {Observable<Repository>}
+   */
+  public retrieveRepository(repoFullName: string): Observable<Repository> {
+    return this.http.get(`${this.apiUrl}/repos/${repoFullName}`, requestOptions)
+      .map((res: Response) => res.json());
+  }
+
+  public retrieveRepositoryCommits(repoFullName: string): Observable<Commit[]> {
+    return this.http.get(`${this.apiUrl}/repos/${repoFullName}/commits`, requestOptions)
+      .map((res: Response) => res.json());
+  }
+
+  public retrieveRepositoryIssues(repoFullName: string): Observable<Issue[]> {
+    return this.http.get(`${this.apiUrl}/repos/${repoFullName}/issues`, requestOptions)
+      .map((res: Response) => res.json());
+  }
+
+  public retrieveRepositoryPulls(repoFullName: string): Observable<PullRequest[]> {
+    return this.http.get(`${this.apiUrl}/repos/${repoFullName}/pulls`, requestOptions)
+      .map((res: Response) => res.json());
+  }
+
+  /**
+   * Get repository README content (rendered as HTML)
+   * @param repoFullName
+   * @returns {Observable<string>}
+   */
+  public retrieveRepositoryReadme(repoFullName: string): Observable<string> {
+    return this.http.get(`${this.apiUrl}/repos/${repoFullName}/readme`, requestOptions)
+      .map((res: Response) => res.json())
+      .map((data: { content: string }) => atob(data.content)) // decode base64 encoded README content
+      .switchMap((readme: string) => {
+        // convert README markdown to HTML
+        return this.http.post(`${this.apiUrl}/markdown/raw`, readme, requestOptions)
+          .map((res: Response) => res.text());
+      })
+      ;
+  }
 
   /**
    * Search GitHub repositories by given query
@@ -37,6 +88,7 @@ export class GitHubAPIService {
     return this.http.get(url)
       .map((res: Response) => res.json())
       .map((searchData: { items: Repository[] }) => searchData.items)
+      .cache()
     ;
   }
 

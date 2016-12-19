@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Effect, Actions } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
-import { replace } from '@ngrx/router-store';
+import { replace, go } from '@ngrx/router-store';
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
@@ -17,8 +17,9 @@ import { of } from 'rxjs/observable/of';
 import { Repository } from '../../model/repository';
 import { GitHubAPIService } from '../../services/github-api.service';
 import { StoreRootState } from '../index';
-import { ActionTypes, LoadTrendingCompleteAction,
-  RequestErrorAction, SearchAction, SearchCompleteAction
+import {
+  ActionTypes, LoadTrendingCompleteAction,
+  SearchErrorAction, SearchAction, SearchCompleteAction, SelectAction
 } from '../actions/repository.actions';
 
 
@@ -35,7 +36,7 @@ export class RepositorySearchEffects {
     .switchMap((action: Action) => {
       return this.gitHubAPIService.retrieveTrendingRepositories()
         .map((repositories: Repository[]) => new LoadTrendingCompleteAction(repositories))
-        .catch((error: Response) => of(new RequestErrorAction(error)))
+        .catch((error: Response) => of(new SearchErrorAction(error)))
       ;
     })
   ;
@@ -70,8 +71,22 @@ export class RepositorySearchEffects {
       return this.gitHubAPIService.retrieveRepositories(query)
         .takeUntil(nextSearch$)
         .map((repositories: Repository[]) => new SearchCompleteAction(repositories))
-        .catch((error: Response) => of(new RequestErrorAction(error)))
+        .catch((error: Response) => of(new SearchErrorAction(error)))
       ;
+    })
+  ;
+
+  /**
+   * When repository got selected, dispatch router go() action
+   *
+   * @type {Observable<Action>}
+   */
+  @Effect()
+  public selectRepo$: Observable<Action> = this.actions$
+    .ofType(ActionTypes.SELECT)
+    .map((action: SelectAction) => <Repository>action.payload)
+    .switchMap((repository: Repository) => {
+      return of(go('/repo/' + repository.full_name));
     })
   ;
 

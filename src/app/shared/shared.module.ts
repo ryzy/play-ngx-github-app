@@ -14,6 +14,7 @@ import { RepositorySearchEffects } from './store/effects/repository-search.effec
 import { NavComponent } from './components/nav/nav.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { ErrorAlertComponent } from './components/error-alert/error-alert.component';
+import { RepositoryEffects } from './store/effects/repository.effects';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ export class SharedModule {
    */
   public static provideStoreEffectsModule(): ModuleWithProviders[] {
     return [
+      EffectsModule.run(RepositoryEffects),
       EffectsModule.run(RepositorySearchEffects),
     ];
   }
