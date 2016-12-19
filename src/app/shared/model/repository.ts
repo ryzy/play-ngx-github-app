@@ -23,9 +23,10 @@ export interface Repository {
   forks: number;
   has_issues: boolean;
   open_issues: number;
-  score: number;
+  score?: number;
   size: number;
-  stargazers_count: number;
+  stargazers_count: number; // stars
+  subscribers_count?: number; // watchers (note: not available from search results)
 
   // API urls
   issues_url: string;
