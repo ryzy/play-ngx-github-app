@@ -62,8 +62,8 @@ export function reducer(state = initialState, action: repositoryActions.Actions)
         error: null,
       };
 
-    case repositoryActions.ActionTypes.REQUEST_ERROR:
-      // console.log('error reducer(action=REQUEST_ERROR)', action.payload);
+    case repositoryActions.ActionTypes.SEARCH_ERROR:
+      // console.log('error reducer(action=SEARCH_ERROR)', action.payload);
       const error = <Response>action.payload;
       const errorDecoded = error.json ? error.json() : {}; // in case we have some other, not Response error here
       return Object.assign({}, state, {

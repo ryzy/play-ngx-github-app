@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import { reducer, initialState, State } from './repository-search.reducers';
 import * as repositoryActions from '../actions/repository.actions';
-import { mockRepositorySearchResponse } from '../../services/github-api.service.spec';
+import { repositoriesTestData } from '../../../../testing/fixtures/repositories';
 import { Repository } from '../../model/repository';
 import { Response } from '@angular/http';
 
@@ -29,24 +29,24 @@ describe('reducers: repository-search', () => {
 
   it('should produce state for SearchCompleteAction and LoadTrendingCompleteAction', () => {
     const state = Object.assign({}, initialState, { query: 'foo' });
-    const payload = <Repository[]>mockRepositorySearchResponse.items;
+    const payload = <Repository[]>repositoriesTestData;
 
     const searchCompleteState = reducer(state, new repositoryActions.SearchCompleteAction(payload));
-    expect(searchCompleteState.entities.length).toEqual(mockRepositorySearchResponse.items.length);
+    expect(searchCompleteState.entities.length).toEqual(repositoriesTestData.length);
     expect(searchCompleteState.query).toEqual('foo');
     expect(searchCompleteState.loading).toEqual(false);
     expect(searchCompleteState.error).toBeNull();
 
     const trendingCompleteState = reducer(state, new repositoryActions.LoadTrendingCompleteAction(payload));
-    expect(trendingCompleteState.entities.length).toEqual(mockRepositorySearchResponse.items.length);
+    expect(trendingCompleteState.entities.length).toEqual(repositoriesTestData.length);
     expect(trendingCompleteState.loading).toEqual(false);
     expect(trendingCompleteState.error).toBeNull();
   });
 
-  it('should produce state for RequestErrorAction', () => {
+  it('should produce state for SearchErrorAction', () => {
     const state = Object.assign({}, initialState, { loading: true });
     const error = <Response>{ status: 500, statusText: 'Some server error' };
-    const newState = reducer(state, new repositoryActions.RequestErrorAction(error));
+    const newState = reducer(state, new repositoryActions.SearchErrorAction(error));
     expect(newState.query).toBeNull();
     expect(newState.loading).toEqual(false);
     expect(newState.error).not.toBeNull();

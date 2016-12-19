@@ -3,6 +3,9 @@ import { Action } from '@ngrx/store';
 
 import { type } from '../../utils';
 import { Repository } from '../../model/repository';
+import { Commit } from '../../model/commit';
+import { Issue } from '../../model/issue';
+import { PullRequest } from '../../model/pull-request';
 
 /**
  * Repository action types list
@@ -17,10 +20,20 @@ import { Repository } from '../../model/repository';
 export const ActionTypes = {
   SEARCH                  : type('@repository/search'),
   SEARCH_COMPLETE         : type('@repository/search/complete'),
+  SEARCH_ERROR            : type('@repository/search/error'),
   LOAD_TRENDING           : type('@repository/load-trending'),
   LOAD_TRENDING_COMPLETE  : type('@repository/load-trending/complete'),
+  SELECT                  : type('@repository/select'),
   LOAD                    : type('@repository/load'),
-  REQUEST_ERROR           : type('@repository/request-error'),
+  LOAD_ERROR              : type('@repository/load/error'),
+  LOAD_COMMITS            : type('@repository/load-commits'),
+  LOAD_COMMITS_COMPLETE   : type('@repository/load-commits/complete'),
+  LOAD_ISSUES             : type('@repository/load-issues'),
+  LOAD_ISSUES_COMPLETE    : type('@repository/load-issues/complete'),
+  LOAD_PULLS              : type('@repository/load-pulls'),
+  LOAD_PULLS_COMPLETE     : type('@repository/load-pulls/complete'),
+  LOAD_README             : type('@repository/load-readme'),
+  LOAD_README_COMPLETE    : type('@repository/load-readme/complete'),
 };
 
 
@@ -41,6 +54,12 @@ export class SearchAction implements Action {
   constructor(public payload: string) {}
 }
 
+export class SearchErrorAction implements Action {
+  public type: string = ActionTypes.SEARCH_ERROR;
+
+  constructor(public payload: Response) {}
+}
+
 export class SearchCompleteAction implements Action {
   public type: string = ActionTypes.SEARCH_COMPLETE;
 
@@ -50,10 +69,7 @@ export class SearchCompleteAction implements Action {
 export class LoadTrendingAction implements Action {
   public type: string = ActionTypes.LOAD_TRENDING;
 
-  /**
-   * @param payload: Not used ATM, LoadTrendingActions doesn't need any payload
-   */
-  constructor(public payload?: any) {}
+  constructor(public payload?: any) {} // payload not used / not relevant
 }
 
 export class LoadTrendingCompleteAction implements Action {
@@ -62,20 +78,75 @@ export class LoadTrendingCompleteAction implements Action {
   constructor(public payload: Repository[]) {}
 }
 
+export class SelectAction implements Action {
+  public type: string = ActionTypes.SELECT;
+
+  constructor(public payload: Repository) {}
+}
+
 export class LoadAction implements Action {
   public type: string = ActionTypes.LOAD;
 
-  constructor(public payload: Repository[]) {}
+  constructor(public payload: Repository) {}
 }
 
-export class RequestErrorAction implements Action {
-  public type: string = ActionTypes.REQUEST_ERROR;
+export class LoadErrorAction implements Action {
+  public type: string = ActionTypes.LOAD_ERROR;
 
-  /**
-   * @param {string} payload: Selected repository identifier
-   */
   constructor(public payload: Response) {}
 }
+
+export class LoadCommitsAction implements Action {
+  public type: string = ActionTypes.LOAD_COMMITS;
+
+  constructor(public payload: Repository) {}
+}
+
+export class LoadCommitsCompleteAction implements Action {
+  public type: string = ActionTypes.LOAD_COMMITS_COMPLETE;
+
+  constructor(public payload: Commit[]) {}
+}
+
+export class LoadIssuesAction implements Action {
+  public type: string = ActionTypes.LOAD_ISSUES;
+
+  constructor(public payload: Repository) {}
+}
+
+export class LoadIssuesCompleteAction implements Action {
+  public type: string = ActionTypes.LOAD_ISSUES_COMPLETE;
+
+  constructor(public payload: Issue[]) {}
+}
+
+export class LoadPullsAction implements Action {
+  public type: string = ActionTypes.LOAD_PULLS;
+
+  constructor(public payload: Repository) {}
+}
+
+export class LoadPullsCompleteAction implements Action {
+  public type: string = ActionTypes.LOAD_PULLS_COMPLETE;
+
+  constructor(public payload: PullRequest[]) {}
+}
+
+export class LoadReadmeAction implements Action {
+  public type: string = ActionTypes.LOAD_README;
+
+  constructor(public payload: Repository) {}
+}
+
+export class LoadReadmeCompleteAction implements Action {
+  public type: string = ActionTypes.LOAD_README_COMPLETE;
+
+  /**
+   * @param payload: Readme content. Rendered as HTML
+   */
+  constructor(public payload: string) {}
+}
+
 
 /**
  * Export a type alias of all actions in this action group
@@ -83,9 +154,19 @@ export class RequestErrorAction implements Action {
  */
 export type Actions
   = SearchAction
+  | SearchErrorAction
   | SearchCompleteAction
   | LoadTrendingAction
   | LoadTrendingCompleteAction
+  | SelectAction
   | LoadAction
-  | RequestErrorAction
+  | LoadErrorAction
+  | LoadCommitsAction
+  | LoadCommitsCompleteAction
+  | LoadIssuesAction
+  | LoadIssuesCompleteAction
+  | LoadPullsAction
+  | LoadPullsCompleteAction
+  | LoadReadmeAction
+  | LoadReadmeCompleteAction
   ;
