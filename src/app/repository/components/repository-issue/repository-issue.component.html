@@ -1,0 +1,19 @@
+<md-list-item>
+  <a href="{{issue.user.html_url}}" md-list-avatar title="Author: {{issue.user.login}}">
+    <img md-list-avatar [src]="issue.user.avatar_url" alt="{{issue.user.login}}">
+  </a>
+
+  <h2 md-line>
+    {{issue.title}}
+    <span
+      *ngFor="let label of issue.labels"
+      [style.background]="getLabelColor(label.color)"
+      class="label"
+    >{{label.name}}</span>
+  </h2>
+  <h3 md-line>
+    <a href="{{issue.html_url}}">#{{issue.number}}</a>
+    opened by <a href="{{issue.user.html_url}">{{issue.user.login}}</a>
+    on {{issue.created_at | date:'fullDate'}}</h3>
+</md-list-item>
+<md-divider></md-divider>

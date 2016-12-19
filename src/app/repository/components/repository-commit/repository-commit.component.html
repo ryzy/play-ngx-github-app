@@ -1,0 +1,15 @@
+<md-list-item>
+  <a *ngIf="commit.author" href="{{commit.author.html_url}}" md-list-avatar title="Author: {{commit.author.login}}">
+    <img md-list-avatar [src]="commit.author.avatar_url" alt="{{commit.author.login}}">
+  </a>
+  <h2 md-line>{{commit.commit.message}}</h2>
+  <p md-line>
+    <span>
+      <a *ngIf="commit.author" href="{{commit.author.html_url}}" class="author">{{commit.commit.author.name}}</a>
+      <span *ngIf="!commit.author" class="author">{{commit.commit.author.name}}</span>
+    </span>
+    committed on {{commit.commit.author.date}}
+  </p>
+  <a md-raised-button href="{{commit.html_url}}">{{commit.sha | slice:0:7 }}</a>
+</md-list-item>
+<md-divider></md-divider>

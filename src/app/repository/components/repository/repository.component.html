@@ -1,0 +1,27 @@
+<md-card-title>
+  <a href="{{repository.owner.html_url}}">{{repository.owner.login}}</a>
+  /
+  <a href="{{repository.html_url}}">{{repository.name}}</a>
+</md-card-title>
+<md-card-subtitle>
+  <span title="Primary language" class="stats">
+    <md-icon>language</md-icon> {{repository.language}}
+  </span>
+  <span title="Watchers" class="stats">
+    <md-icon>remove_red_eye</md-icon> {{repository.subscribers_count | number}}
+  </span>
+  <span title="Stars" class="stats">
+    <md-icon>stars</md-icon> {{repository.stargazers_count | number}}
+  </span>
+  <span title="Forks" class="stats">
+    <md-icon>call_split</md-icon> {{repository.forks | number}}
+  </span>
+</md-card-subtitle>
+
+<md-card-content>
+  <p>
+    {{repository.description}}
+    <span *ngIf="repository.description && repository.homepage">|</span>
+    <a *ngIf="repository.homepage" href="{{repository.homepage}}" target="_blank">{{repository.homepage}}</a>
+  </p>
+</md-card-content>
