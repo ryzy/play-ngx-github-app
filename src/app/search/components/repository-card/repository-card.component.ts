@@ -8,9 +8,4 @@ import { Repository } from '../../../shared/model/repository';
 })
 export class RepositoryCardComponent {
   @Input() public repository: Repository;
-  @Output() public click = new EventEmitter<Repository>();
-
-  public navigateToRepository() {
-    this.click.next(this.repository);
-  }
 }

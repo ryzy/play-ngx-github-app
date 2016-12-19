@@ -7,7 +7,7 @@ import { MaterialModule } from '@angular/material';
 import { SharedModule } from '../../../shared/shared.module';
 import { RepositoryListComponent } from './repository-list.component';
 import { RepositoryCardComponent } from '../repository-card/repository-card.component';
-import { sampleRepository } from '../repository-card/repository-card.component.spec';
+import { repositoriesTestData } from '../../../../testing/fixtures/repositories';
 
 describe('RepositoryListComponent', () => {
   let component: RepositoryListComponent;
@@ -24,7 +24,7 @@ describe('RepositoryListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RepositoryListComponent);
     component = fixture.componentInstance;
-    component.repositories = [ sampleRepository ];
+    component.repositories = repositoriesTestData;
     fixture.detectChanges();
   });
 
