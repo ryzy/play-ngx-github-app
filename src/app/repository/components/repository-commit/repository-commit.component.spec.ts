@@ -12,6 +12,7 @@ import { repositoryCommitsTestData } from '../../../../testing/fixtures/reposito
 describe('RepositoryCommitComponent', () => {
   let component: RepositoryCommitComponent;
   let fixture: ComponentFixture<RepositoryCommitComponent>;
+  let titleEl: HTMLElement;
 
   const commit = <Commit>repositoryCommitsTestData[0];
 
@@ -28,9 +29,12 @@ describe('RepositoryCommitComponent', () => {
     component = fixture.componentInstance;
     component.commit = commit;
     fixture.detectChanges();
+
+    titleEl = fixture.debugElement.query(By.css('h2')).nativeElement;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(titleEl.textContent).toContain(commit.commit.message);
   });
 });

@@ -22,16 +22,15 @@ describe('RepositoryComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RepositoryComponent);
-
     component = fixture.componentInstance;
     component.repository = repositoryTestData;
-    titleEl = fixture.debugElement.query(By.css('md-card-title')).nativeElement;
-
     fixture.detectChanges();
+
+    titleEl = fixture.debugElement.query(By.css('md-card-title')).nativeElement;
   });
 
   it('should work', () => {
     expect(component).toBeTruthy();
-
+    expect(titleEl.textContent).toContain(repositoryTestData.name);
   });
 });

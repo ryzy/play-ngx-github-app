@@ -12,6 +12,7 @@ import { repositoryPullsTestData } from '../../../../testing/fixtures/repository
 describe('RepositoryPullComponent', () => {
   let component: RepositoryPullComponent;
   let fixture: ComponentFixture<RepositoryPullComponent>;
+  let titleEl: HTMLElement;
 
   const pull = <PullRequest>repositoryPullsTestData[0];
 
@@ -28,9 +29,12 @@ describe('RepositoryPullComponent', () => {
     component = fixture.componentInstance;
     component.pull = pull;
     fixture.detectChanges();
+
+    titleEl = fixture.debugElement.query(By.css('h2')).nativeElement;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(titleEl.textContent).toContain(pull.title);
   });
 });

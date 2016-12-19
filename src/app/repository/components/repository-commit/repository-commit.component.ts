@@ -8,9 +8,4 @@ import { Commit } from '../../../shared/model/commit';
 })
 export class RepositoryCommitComponent {
   @Input() public commit: Commit;
-  @Output() public commitClick = new EventEmitter<Commit>();
-
-  public onCommitClick() {
-    this.commitClick.next(this.commit);
-  }
 }

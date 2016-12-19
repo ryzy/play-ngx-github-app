@@ -12,6 +12,7 @@ import { repositoryIssuesTestData } from '../../../../testing/fixtures/repositor
 describe('RepositoryIssueComponent', () => {
   let component: RepositoryIssueComponent;
   let fixture: ComponentFixture<RepositoryIssueComponent>;
+  let titleEl: HTMLElement;
 
   const issue = <Issue>repositoryIssuesTestData[0];
 
@@ -28,9 +29,19 @@ describe('RepositoryIssueComponent', () => {
     component = fixture.componentInstance;
     component.issue = issue;
     fixture.detectChanges();
+
+    titleEl = fixture.debugElement.query(By.css('h2')).nativeElement;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(titleEl.textContent).toContain(issue.title);
   });
+
+  it('getLabelColor() should generate hex color', () => {
+    const cmp = new RepositoryIssueComponent();
+    expect(cmp.getLabelColor(123)).toEqual('#123');
+    expect(cmp.getLabelColor('abc')).toEqual('#abc');
+    expect(cmp.getLabelColor('abcdef')).toEqual('#abcdef');
+  })
 });
