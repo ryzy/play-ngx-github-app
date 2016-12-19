@@ -1,0 +1,15 @@
+.repository-card {
+  margin-bottom: 1rem;
+}
+.repository-details-card {
+  margin-top: 1rem;
+  padding-top: 1px;
+}
+
+md-list {
+  > h2 {
+    margin: 1rem 0 .4rem;
+    padding-bottom: .2rem;
+    border-bottom: 1px solid rgba(#000, 0.12);
+  }
+}

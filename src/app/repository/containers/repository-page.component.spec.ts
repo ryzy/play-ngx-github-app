@@ -7,6 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ActivatedRouteStub } from '../../../testing/activated-route.stub';
 import { SharedModule } from '../../shared/shared.module';
 import { RepositoryPageComponent } from './repository-page.component';
+import { RepositoryComponent } from '../components/repository/repository.component';
+import { RepositoryService } from '../services/repository.service';
+import { RepositoryModule } from '../repository.module';
 
 describe('RepositoryPageComponent', () => {
   let component: RepositoryPageComponent;
@@ -14,9 +17,8 @@ describe('RepositoryPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ SharedModule ],
-      providers: [ { provide: ActivatedRoute, useClass: ActivatedRouteStub } ],
-      declarations: [ RepositoryPageComponent ],
+      imports: [ SharedModule, SharedModule.provideStoreModule(), RepositoryModule ],
+      providers: [ RepositoryService ],
     })
     .compileComponents();
   }));
