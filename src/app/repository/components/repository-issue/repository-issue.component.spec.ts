@@ -43,5 +43,5 @@ describe('RepositoryIssueComponent', () => {
     expect(cmp.getLabelColor(123)).toEqual('#123');
     expect(cmp.getLabelColor('abc')).toEqual('#abc');
     expect(cmp.getLabelColor('abcdef')).toEqual('#abcdef');
-  })
+  });
 });

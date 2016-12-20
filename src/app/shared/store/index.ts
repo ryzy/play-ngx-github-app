@@ -38,8 +38,7 @@ const productionReducer: ActionReducer<StoreRootState> = combineReducers(reducer
 export function rootReducer(state: StoreRootState, action: any) {
   if (environment.production) {
     return productionReducer(state, action);
-  }
-  else {
+  } else {
     return developmentReducer(state, action);
   }
 }

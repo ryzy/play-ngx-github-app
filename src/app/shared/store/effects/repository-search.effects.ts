@@ -93,9 +93,7 @@ export class RepositorySearchEffects {
     .ofType(ActionTypes.SEARCH, ActionTypes.LOAD_TRENDING)
     .debounceTime(1000)
     .map((action: SearchAction|LoadTrendingAction) => action.payload)
-    .switchMap((q: string) => {
-      return of(replace('/', q ? {q} : {}))
-    })
+    .switchMap((q: string) => of(replace('/', q ? {q} : {})))
   ;
 
   /**
