@@ -29,11 +29,12 @@ test:
     - yarn run build:prod
 
 deployment:
-  branch: dev
-    commands:
-      - yarn run deploy
-
-  development:
+  production: # Deploy `master` to https://ng2-github.firebaseapp.com/
     branch: master
     commands:
       - yarn run deploy:prod
+
+  development: # Deploy `dev` to https://dev-ng2-github-d52c4.firebaseio.com/
+    branch: dev
+    commands:
+      - yarn run deploy
