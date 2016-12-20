@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Repository } from '../../shared/model/repository';
 import { RepositoryService } from '../services/repository.service';
 import { Observable } from 'rxjs/Observable';
@@ -13,28 +12,30 @@ import { PullRequest } from '../../shared/model/pull-request';
   templateUrl: './repository-page.component.html',
   styleUrls: ['./repository-page.component.scss']
 })
-export class RepositoryPageComponent {
+export class RepositoryPageComponent implements OnInit {
   public repository: Repository;
-
   public commits$: Observable<Commit[]>;
   public issues$: Observable<Issue[]>;
   public pulls$: Observable<PullRequest[]>;
   public readme$: Observable<string>;
-
   public error$: Observable<AppError>;
 
-  constructor(private service: RepositoryService) {
-    this.service.getRepository()
+  constructor(
+    private repositoryService: RepositoryService
+  ) { }
+
+  public ngOnInit() {
+    this.repositoryService.getRepository()
       .take(1)
       .subscribe((repository: Repository) => {
         this.repository = repository;
 
-        this.readme$ = this.service.getReadme(repository, true);
-        this.commits$ = this.service.getCommits(repository, true);
-        this.issues$ = this.service.getIssues(repository, true);
-        this.pulls$ = this.service.getPulls(repository, true);
+        this.readme$ = this.repositoryService.getReadme(repository, true);
+        this.commits$ = this.repositoryService.getCommits(repository, true);
+        this.issues$ = this.repositoryService.getIssues(repository, true);
+        this.pulls$ = this.repositoryService.getPulls(repository, true);
     });
 
-    this.error$ = this.service.getError();
+    this.error$ = this.repositoryService.getError();
   }
 }

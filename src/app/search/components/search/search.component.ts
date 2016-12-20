@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
@@ -6,7 +6,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
   /**
    * Initially provided search query value (if any)
    * @type {string}
@@ -27,7 +27,7 @@ export class SearchComponent {
 
   private keyUpStream = new EventEmitter<string>();
 
-  public constructor() {
+  public ngOnInit() {
     this.keyUpStream
       .distinctUntilChanged()
       // Emit new values in @Output `change` only on a new distinct value
