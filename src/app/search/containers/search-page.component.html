@@ -11,8 +11,8 @@
 </md-card>
 
 <md-card class="list">
-  <md-card-title *ngIf="showingSearchResults" class="title">Found repositories</md-card-title>
-  <md-card-title *ngIf="!showingSearchResults" class="title">Trending repositories</md-card-title>
+  <md-card-title *ngIf="!(showingTrending$ | async)" class="title">Found repositories</md-card-title>
+  <md-card-title *ngIf="(showingTrending$ | async)" class="title">Trending repositories</md-card-title>
 
   <md-card-content>
     <md-progress-bar [class.show]="isLoading$ | async" mode="indeterminate"></md-progress-bar>

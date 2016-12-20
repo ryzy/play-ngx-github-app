@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
@@ -13,38 +14,35 @@ import { AppError } from '../../shared/model/app-error';
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent {
+export class SearchPageComponent implements OnInit {
   public searchQuery$: Observable<string>;
   public isLoading$: Observable<boolean>;
   public repositories$: Observable<Repository[]>;
   public error$: Observable<AppError>;
   public noResults$: Observable<boolean>;
-
-  /**
-   * Flag indicating that we show search results,
-   * not trending repositories (loaded when there's no search query)
-   *
-   * @type {boolean}
-   */
-  public showingSearchResults = false;
-
+  public showingTrending$: Observable<boolean>;
 
   constructor(
-    private searchService: SearchService
-  ) {
-    this.searchQuery$ = searchService.getSearchQuery().take(1);
-    this.isLoading$ = searchService.isLoading();
-    this.repositories$ = searchService.getRepositories();
-    this.error$ = searchService.getError();
+    private searchService: SearchService,
+    private route: ActivatedRoute,
+  ) { }
+
+  public ngOnInit() {
+    this.searchQuery$ = this.searchService.getSearchQuery();
+    this.isLoading$ = this.searchService.isLoading();
+    this.repositories$ = this.searchService.getRepositories();
+    this.error$ = this.searchService.getError();
+    this.showingTrending$ = this.searchService.hasTrending();
 
     // Determine if `no result` message should be shown
     // (i.e. search query present, but repository list empty and no error).
-    this.noResults$ = searchService.getSearchQuery()
+    this.noResults$ = this.searchService.getSearchQuery()
       .combineLatest(this.repositories$, this.isLoading$, this.error$)
       .map((combined) => {
         const [query, repositories, loading, error] = combined;
         return query && repositories.length === 0 && !loading && !error;
-      });
+      })
+    ;
 
     this.doInitialSearch();
   }
@@ -55,8 +53,11 @@ export class SearchPageComponent {
    * @param query
    */
   public doSearch(query: string) {
-    this.showingSearchResults = true;
-    this.searchService.doSearch(query);
+    if (query) {
+      this.searchService.doSearch(query);
+    } else {
+      this.searchService.loadTrending();
+    }
   }
 
   /**
@@ -76,14 +77,12 @@ export class SearchPageComponent {
    * when the URL is updated due to user's typing in the search box.
    */
   private doInitialSearch() {
-    this.searchQuery$
+    this.route.queryParams
+      .map((params: Params) => params['q'])
       .combineLatest(this.repositories$)
       .take(1)
       .subscribe((combined) => {
         const [q, repositories] = combined;
-
-        // Update `showingSearchResults` if we have a query string on start
-        this.showingSearchResults = !!q;
 
         // Do we already have some repositories loaded in the store?
         // Do nothing then (it means we came back to this page
@@ -93,13 +92,7 @@ export class SearchPageComponent {
           return;
         }
 
-        if (q) {
-          // Do we have search query? Perform the search
-          this.doSearch(q);
-        } else {
-          // No search query? Load trending repositories.
-          this.searchService.loadTrending();
-        }
+        this.doSearch(q);
       });
   }
 }

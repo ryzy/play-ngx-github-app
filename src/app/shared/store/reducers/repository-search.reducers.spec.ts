@@ -16,6 +16,7 @@ describe('reducers: repository-search', () => {
     expect(newState.entities).toEqual([]);
     expect(newState.query).toEqual('foo');
     expect(newState.loading).toEqual(true);
+    expect(newState.trending).toEqual(false);
     expect(newState.error).toBeNull();
   });
 
@@ -24,6 +25,7 @@ describe('reducers: repository-search', () => {
     expect(newState.entities).toEqual([]);
     expect(newState.query).toBeNull();
     expect(newState.loading).toEqual(true);
+    expect(newState.trending).toEqual(true);
     expect(newState.error).toBeNull();
   });
 
@@ -35,11 +37,13 @@ describe('reducers: repository-search', () => {
     expect(searchCompleteState.entities.length).toEqual(repositoriesTestData.length);
     expect(searchCompleteState.query).toEqual('foo');
     expect(searchCompleteState.loading).toEqual(false);
+    expect(searchCompleteState.trending).toEqual(false);
     expect(searchCompleteState.error).toBeNull();
 
     const trendingCompleteState = reducer(state, new repositoryActions.LoadTrendingCompleteAction(payload));
     expect(trendingCompleteState.entities.length).toEqual(repositoriesTestData.length);
     expect(trendingCompleteState.loading).toEqual(false);
+    expect(trendingCompleteState.trending).toEqual(true);
     expect(trendingCompleteState.error).toBeNull();
   });
 

@@ -9,6 +9,7 @@ import { Repository } from '../../model/repository';
  */
 export interface State {
   entities: Repository[];
+  trending: boolean;
   query: string;
   loading: boolean;
   error: AppError;
@@ -19,6 +20,7 @@ export interface State {
  */
 export const initialState: State = {
   entities: [],
+  trending: true, // flag indicating that we're showing trending repositories (i.e. not from search query)
   query: null,
   loading: false,
   error: null
@@ -42,6 +44,7 @@ export function reducer(state = initialState, action: repositoryActions.Actions)
       }
 
       return Object.assign({}, initialState, {
+        trending: false,
         query: query,
         loading: true,
       });
@@ -57,6 +60,7 @@ export function reducer(state = initialState, action: repositoryActions.Actions)
       const entities = <Repository[]>action.payload;
       return {
         entities: entities,
+        trending: repositoryActions.ActionTypes.LOAD_TRENDING_COMPLETE === action.type,
         query: state.query,
         loading: false,
         error: null,
@@ -91,6 +95,13 @@ export const getQuery = (state: State) => state.query;
  * @param state
  */
 export const getLoading = (state: State) => state.loading;
+
+/**
+ * Reducer's selector: get current trending state
+ * @param state
+ */
+export const getTrending = (state: State) => state.trending;
+
 
 /**
  * Reducer's selector: get loaded Repository entities

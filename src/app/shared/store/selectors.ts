@@ -19,6 +19,7 @@ export const getRepositorySearchState = (state: StoreRootState) => state.reposit
 export const getRepositorySearchEntities = createSelector(getRepositorySearchState, repositorySearch.getEntities);
 export const getRepositorySearchQuery = createSelector(getRepositorySearchState, repositorySearch.getQuery);
 export const getRepositorySearchLoading = createSelector(getRepositorySearchState, repositorySearch.getLoading);
+export const getRepositorySearchHasTrending = createSelector(getRepositorySearchState, repositorySearch.getTrending);
 export const getRepositorySearchError = createSelector(getRepositorySearchState, repositorySearch.getError);
 
 // repository selectors

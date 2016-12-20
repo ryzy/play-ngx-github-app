@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 
 import { StoreRootState } from '../../shared/store';
 import {
-  getRepositorySearchQuery, getRepositorySearchLoading, getRepositorySearchEntities, getRepositorySearchError,
+  getRepositorySearchQuery, getRepositorySearchLoading, getRepositorySearchEntities,
+  getRepositorySearchError, getRepositorySearchHasTrending
 } from '../../shared/store/selectors';
 import { SearchAction, LoadTrendingAction, SelectAction } from '../../shared/store/actions/repository.actions';
 import { AppError } from '../../shared/model/app-error';
@@ -43,6 +44,13 @@ export class SearchService {
    */
   public isLoading(): Observable<boolean> {
     return this.store.select(getRepositorySearchLoading);
+  }
+
+  /**
+   * Get trending status for currently displayed entities
+   */
+  public hasTrending(): Observable<boolean> {
+    return this.store.select(getRepositorySearchHasTrending);
   }
 
   /**
