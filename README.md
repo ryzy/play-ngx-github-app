@@ -3,7 +3,7 @@
 
 Visit **https://ng2-github.firebaseapp.com/** to try it online.
 Deployed automatically from the `master` branch. The `dev` branch
-is also deployed and available [here]https://dev-ng2-github-d52c4.firebaseio.com/).
+is also deployed and available [here](https://dev-ng2-github-d52c4.firebaseapp.com).
 
 
 # Play with it
@@ -48,7 +48,8 @@ Each major part of application (e.g. search, repository details)
 is a separate so-called _feature module_ and it's loaded lazily.
 Lazy loading starts from the home page featuring `SearchModule`
 (why? you could end up first on some subpage using deep-linking, thus
-the SearchModule would be not needed).
+the SearchModule would be not needed). Plus, the app is configured
+to compile with **AoT**.
 
 ### CI/CD
 Each commit runs tests on [CircleCI](https://circleci.com/gh/ryzy/play-ng2-github),
