@@ -30,7 +30,7 @@ export class RepositorySearchEffects {
    * and dispatch LOAD_TRENDING_COMPLETE with received data.
    */
   @Effect()
-  public loadTrending$: Observable<LoadTrendingCompleteAction> = this.actions$
+  public loadTrending$: Observable<LoadTrendingCompleteAction|SearchErrorAction> = this.actions$
     .ofType(ActionTypes.LOAD_TRENDING)
     .switchMap((action: Action) => {
       return this.gitHubAPIService.retrieveTrendingRepositories()
@@ -46,7 +46,7 @@ export class RepositorySearchEffects {
    * with received data.
    */
   @Effect()
-  public search$: Observable<SearchCompleteAction> = this.actions$
+  public search$: Observable<SearchCompleteAction|SearchErrorAction> = this.actions$
     // only take SEARCH actions and debounce them as user types the query
     .ofType(ActionTypes.SEARCH)
     .debounceTime(300)

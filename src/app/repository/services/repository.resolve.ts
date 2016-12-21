@@ -38,7 +38,7 @@ export class RepositoryResolve implements Resolve<Repository> {
   /**
    * Get requested repository from the store (if available)
    */
-  public getRepoFromStore(repoName: string): Observable<Repository|false> {
+  public getRepoFromStore(repoName: string): Observable<Repository|boolean> {
     return this.store.select(getRepositoryEntity)
       .map((repository: Repository) => {
         return repository && repository.full_name === repoName ? repository : false;
@@ -49,7 +49,7 @@ export class RepositoryResolve implements Resolve<Repository> {
   /**
    * Get requested repository from GitHub API
    */
-  public getRepoFromAPI(repoName: string): Observable<Repository|false> {
+  public getRepoFromAPI(repoName: string): Observable<Repository|boolean> {
     return this.apiService.retrieveRepository(repoName)
       .do((repository: Repository) => this.store.dispatch(new LoadAction(repository)))
       .catch((error: Response) => {
