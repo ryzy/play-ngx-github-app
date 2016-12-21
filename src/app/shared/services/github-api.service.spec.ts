@@ -2,7 +2,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import {
   HttpModule, Http, ConnectionBackend, RequestOptions, BaseRequestOptions, Response, ResponseOptions,
-  RequestMethod
+  RequestMethod, ResponseType
 } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
@@ -123,6 +123,18 @@ describe('GitHubAPIService', () => {
       expect(readme).toBeTruthy();
       expect(typeof readme).toBe('string');
       expect(readme).toContain('<h1>some rendered markdown</h1>');
+    });
+  }));
+
+  it('should retrieve repository readme when not found', inject([GitHubAPIService, MockBackend], (service: GitHubAPIService, mockBackend: MockBackend) => {
+    mockBackend.connections.subscribe((connection: MockConnection) => {
+      connection.mockError(new Error());
+    });
+
+    service.retrieveRepositoryReadme('some/repo').subscribe((readme) => {
+      expect(readme).toBeTruthy();
+      expect(typeof readme).toBe('string');
+      expect(readme).toContain('README not found');
     });
   }));
 
