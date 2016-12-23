@@ -6,6 +6,8 @@ import { AppError } from '../../shared/model/app-error';
 import { Commit } from '../../shared/model/commit';
 import { Issue } from '../../shared/model/issue';
 import { PullRequest } from '../../shared/model/pull-request';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'app-repository-page',
@@ -25,7 +27,22 @@ export class RepositoryPageComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
+    // We might have an error when repository could not be found
+    // or loaded (e.g. due to API rate limits). In such a case
+    // we still want to use this component (instead of e.g. doing
+    // redirect to error page) and show appropriate message.
+    this.error$ = this.repositoryService.getError();
+
+    // Although we could take the current repository from the
+    // ActivatedRoute.snapshot.data['repository'] (@see RepositoryResolve
+    // from the route config), we prefer to take it from the global state store,
+    // to keep things consistent and always use the store as a single source of truth.
     this.repositoryService.getRepository()
+      // Skip if we don't have a valid repository here
+      // which might happen if the repository could not be loaded
+      // e.g. due to 404 Not Found error.
+      .filter((repository: Repository) => !!repository)
+      // End this subscription after taking the 1st Repository
       .take(1)
       .subscribe((repository: Repository) => {
         this.repository = repository;
@@ -35,7 +52,5 @@ export class RepositoryPageComponent implements OnInit {
         this.issues$ = this.repositoryService.getIssues(repository, true);
         this.pulls$ = this.repositoryService.getPulls(repository, true);
     });
-
-    this.error$ = this.repositoryService.getError();
   }
 }

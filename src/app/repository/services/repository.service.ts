@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import 'rxjs/add/operator/filter';
 
 import { StoreRootState } from '../../shared/store/index';
 import { Observable } from 'rxjs/Observable';
@@ -30,8 +29,7 @@ export class RepositoryService {
    * Get currently selected repository
    */
   public getRepository(): Observable<Repository> {
-    return this.store.select(getRepositoryEntity)
-      .filter((repository: Repository) => !!repository);
+    return this.store.select(getRepositoryEntity);
   }
 
   /**

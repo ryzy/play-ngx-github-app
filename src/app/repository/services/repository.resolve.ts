@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { Store } from '@ngrx/store';
@@ -20,7 +20,7 @@ export class RepositoryResolve implements Resolve<Repository> {
     private apiService: GitHubAPIService
   ) {}
 
-  public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Repository> {
+  public resolve(route: ActivatedRouteSnapshot): Observable<Repository> {
     const repoName = route.params['owner'] + '/' + route.params['repoName'];
 
     return this.getRepoFromStore(repoName)
