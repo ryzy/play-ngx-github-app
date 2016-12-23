@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders, ClassProvider, ExistingProvider, FactoryProvider, TypeProvider, ValueProvider } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';

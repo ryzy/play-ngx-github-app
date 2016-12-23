@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Params } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Params, Data } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -14,14 +14,17 @@ export class ActivatedRouteStub {
   // params, queryParams needs to be Observable
   public params: Observable<Params>;
   public queryParams: Observable<Params>;
+  public data: Observable<Data>;
 
   // create helper BehaviorSubject to easily push test params into Observables
   private paramsSubject: BehaviorSubject<Params>;
   private queryParamsSubject: BehaviorSubject<Params>;
+  private dataSubject: BehaviorSubject<Data>;
 
   // create internal variables to easy get/set existing test params
   private _params = <Params>{};
   private _queryParams = <Params>{};
+  private _data = <Data>{};
 
   constructor() {
     this.paramsSubject = new BehaviorSubject(this._params);
@@ -29,6 +32,9 @@ export class ActivatedRouteStub {
 
     this.queryParamsSubject = new BehaviorSubject(this._queryParams);
     this.queryParams = this.queryParamsSubject.asObservable();
+
+    this.dataSubject = new BehaviorSubject(this._data);
+    this.data = this.dataSubject.asObservable();
   }
 
   get testParams(): Params {
@@ -47,11 +53,20 @@ export class ActivatedRouteStub {
     this.queryParamsSubject.next(params);
   }
 
+  get testData(): Data {
+    return this._data;
+  }
+  set testData(data: Data) {
+    this._data = data;
+    this.dataSubject.next(data);
+  }
+
   // ActivatedRoute.snapshot.params
   get snapshot(): ActivatedRouteSnapshot {
     return <ActivatedRouteSnapshot>{
       params: this.testParams,
       queryParams: this.testQueryParams,
+      data: this.testData,
     };
   }
 }
