@@ -1,15 +1,26 @@
-@keyframes spinner {
-  to {transform: rotate(360deg)}
-}
+@import '~clarity-ui/src/utils/_variables.clarity.scss';
+@import '~clarity-ui/src/images/_icons.clarity.scss';
 
 // Make the app loader a bit nicer
-.app-root__loader {
-    position: absolute;
-    height: 24px;
-    width: 24px;
-    margin: 1.5rem;
-    border-radius: 50%;
-    border: 1px solid #673ab7;
-    border-right-color: transparent;
-    animation: spinner 0.8s infinite linear;
+// Copied from Clarity UI
+.app-root-loader {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin: 1.5rem;
+  animation: spinner 1s linear infinite;
+  padding: 0;
+  background: generateSpinnerIcon();
+  text-indent: 100%;
+  overflow: hidden;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

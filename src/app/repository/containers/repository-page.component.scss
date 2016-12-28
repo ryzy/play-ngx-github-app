@@ -1,15 +1,18 @@
-.repository-card {
-  margin-bottom: 1rem;
-}
-.repository-details-card {
-  margin-top: 1rem;
-  padding-top: 1px;
+// all .spinner loaders on repository page (inside tabs)
+/deep/ .spinner {
+  $size: 50px;
+  position: absolute;
+  left: 50%;
+  min-width: $size;
+  min-height: $size;
+  width: $size;
+  height: $size;
+  margin: 2rem $size/-2;
 }
 
-md-list {
-  > h2 {
-    margin: 1rem 0 .4rem;
-    padding-bottom: .2rem;
-    border-bottom: 1px solid rgba(#000, 0.12);
+clr-tab-content /deep/ {
+  // set minimum height for content inside tab, just so it looks nice even w/o any content in it
+  > section {
+    min-height: 6rem;
   }
 }

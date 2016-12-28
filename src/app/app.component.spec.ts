@@ -17,6 +17,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         SharedModule,
+        SharedModule.provideStoreModule(),
       ],
       declarations: [
         AppComponent

@@ -20,19 +20,12 @@ export class RepositoryPageComponent implements OnInit {
   public issues$: Observable<Issue[]>;
   public pulls$: Observable<PullRequest[]>;
   public readme$: Observable<string>;
-  public error$: Observable<AppError>;
 
   constructor(
     private repositoryService: RepositoryService
   ) { }
 
   public ngOnInit() {
-    // We might have an error when repository could not be found
-    // or loaded (e.g. due to API rate limits). In such a case
-    // we still want to use this component (instead of e.g. doing
-    // redirect to error page) and show appropriate message.
-    this.error$ = this.repositoryService.getError();
-
     // Although we could take the current repository from the
     // ActivatedRoute.snapshot.data['repository'] (@see RepositoryResolve
     // from the route config), we prefer to take it from the global state store,

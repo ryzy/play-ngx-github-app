@@ -1,8 +1,5 @@
-// Global app styles
+// This file contains global styles, applicable for
+// the entire app (i.e. not encapsulated by Angular)
 
-// Vendor styles
-@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.scss';
-
-@import 'objects/reset';
 @import 'objects/typography';
 @import 'objects/app-loader';

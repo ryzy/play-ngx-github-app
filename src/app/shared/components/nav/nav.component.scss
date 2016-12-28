@@ -1,8 +1,29 @@
-h1 {
-  cursor: pointer;
+@import '~clarity-ui/src/utils/_colors.clarity.scss';
+
+header {
+  .branding {
+    .title {
+      font-size: 1.3rem;
+    }
+    /deep/ svg path:last-child {
+      fill: #fff;
+    }
+
+    a:hover {
+      .title {
+        color: $clr-action-blue-light;
+      }
+      /deep/ svg path:last-child {
+        fill: $clr-action-blue-light;
+      }
+    }
+  }
 }
-span {
-  margin: .3rem 0 0 1rem;
-  font-size: small;
-  opacity: .6;
+
+.header-actions {
+  span {
+    align-self: center;
+    margin-right: 1.5rem;
+    color: $clr-dark-midtone-gray;
+  }
 }

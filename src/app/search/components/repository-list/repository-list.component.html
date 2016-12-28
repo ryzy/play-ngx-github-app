@@ -1,5 +1,5 @@
 <app-repository-card
   *ngFor="let repository of repositories"
   [repository]="repository"
-  (click)="navigateToRepository(repository)"
+  (click)="navigateToRepository(repository, $event)"
 ></app-repository-card>

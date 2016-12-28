@@ -1,31 +1,24 @@
-<md-card class="search">
-  <md-card-content>
-    <md-card-title>
-      <app-search
-        (search)="doSearch($event)"
-        [query]="searchQuery$ | async"
-      ></app-search>
-    </md-card-title>
+<app-search
+  (search)="doSearch($event)"
+  [query]="searchQuery$ | async"
+></app-search>
 
-  </md-card-content>
-</md-card>
+<div class="card">
+  <div class="card-header" *ngIf="!(showingTrending$ | async)">Found repositories:</div>
+  <div class="card-header" *ngIf="(showingTrending$ | async)">Trending repositories:</div>
 
-<md-card class="list">
-  <md-card-title *ngIf="!(showingTrending$ | async)" class="title">Found repositories</md-card-title>
-  <md-card-title *ngIf="(showingTrending$ | async)" class="title">Trending repositories</md-card-title>
+  <div class="card-block">
+    <div class="spinner spinner-md" [class.show]="isLoading$ | async"></div>
 
-  <md-card-content>
-    <md-progress-bar [class.show]="isLoading$ | async" mode="indeterminate"></md-progress-bar>
-
-    <app-error-alert [error]="error$ | async"></app-error-alert>
-
-    <div *ngIf="noResults$ | async" class="no-results">
-      No results. Change your search query and try again.
-    </div>
+    <clr-alert *ngIf="noResults$ | async" class="no-results" clrAlertType="alert-warning" [clrAlertClosable]="false">
+      <div class="alert-item">
+        No results. Change your search query and try again.
+      </div>
+    </clr-alert>
 
     <app-repository-list
       [repositories]="repositories$ | async"
       (selectRepository)="selectRepository($event)"
     ></app-repository-list>
-  </md-card-content>
-</md-card>
+  </div>
+</div>

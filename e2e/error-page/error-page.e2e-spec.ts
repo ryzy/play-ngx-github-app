@@ -7,12 +7,12 @@ describe('Error Page', function() {
     page = new ErrorPage();
   });
 
-  it('shout display error 404', () => {
+  it('should display error 404', () => {
     page.navigateTo();
     expect(page.getNavBar().isPresent()).toBe(true);
   });
 
-  it('shout offer link and navigate to main page', () => {
+  it('should offer link and navigate to main page', () => {
     page.navigateTo();
     expect(page.getBrowserUrl()).toContain(page.ERROR_URL);
 

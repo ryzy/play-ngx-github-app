@@ -10,7 +10,11 @@ export class RepositoryListComponent {
   @Input() public repositories: Repository[];
   @Output() public selectRepository = new EventEmitter<Repository>();
 
-  public navigateToRepository(repository: Repository) {
+  public navigateToRepository(repository: Repository, ev: Event) {
+    if (ev.target['href']) {
+      return; // Skip navigation if user clicked on a link with `href` attribute set
+    }
+
     this.selectRepository.next(repository);
   }
 }

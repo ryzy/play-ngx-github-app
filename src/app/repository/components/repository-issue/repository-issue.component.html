@@ -1,19 +1,22 @@
-<md-list-item>
-  <a href="{{issue.user.html_url}}" md-list-avatar title="Author: {{issue.user.login}}">
-    <img md-list-avatar [src]="issue.user.avatar_url" alt="{{issue.user.login}}">
-  </a>
+<div class="card">
+  <div class="card-header">
+    <a href="{{issue.user.html_url}}" title="Author: {{issue.user.login}}" class="card-header-image">
+      <img [src]="issue.user.avatar_url" alt="{{issue.user.login}}">
+    </a>
+    <span class="card-header-title">{{issue.title}}</span>
+  </div>
 
-  <h2 md-line>
-    {{issue.title}}
-    <span
-      *ngFor="let label of issue.labels"
-      [style.background]="getLabelColor(label.color)"
-      class="label"
-    >{{label.name}}</span>
-  </h2>
-  <h3 md-line>
-    <a href="{{issue.html_url}}">#{{issue.number}}</a>
-    opened by <a href="{{issue.user.html_url}">{{issue.user.login}}</a>
-    on {{issue.created_at | date:'fullDate'}}</h3>
-</md-list-item>
-<md-divider></md-divider>
+  <div class="card-block">
+    <div class="card-text">
+      <a href="{{issue.html_url}}">#{{issue.number}}</a>
+      opened by <a href="{{issue.user.html_url}}">{{issue.user.login}}</a>
+      on {{issue.created_at | date:'fullDate'}}
+
+      <span
+        class="label"
+        [style.background]="getLabelColor(label.color)"
+        *ngFor="let label of issue.labels"
+      >{{label.name}}</span>
+    </div>
+  </div>
+</div>

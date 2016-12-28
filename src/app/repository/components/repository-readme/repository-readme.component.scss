@@ -1,5 +1,6 @@
-md-spinner {
-  margin: 2rem auto;
-  width: 50px;
-  height: 50px;
+// Style README content
+/deep/.content {
+  h2, h3, h4 {
+    border-bottom: 1px solid #eee;
+  }
 }

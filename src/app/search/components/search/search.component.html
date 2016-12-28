@@ -1,6 +1,17 @@
-<md-input
-  #input
-  (keyup)="onKeyUp(input.value)"
-  [value]="query"
-  placeholder="Search for repository..."
-></md-input>
+<div class="card">
+  <div class="card-header">
+    <label for="inputEl">Search for repository</label>
+  </div>
+  <div class="card-block">
+    <div class="card-text">
+      <input
+        #input
+        (keyup)="onKeyUp(input.value)"
+        [value]="query"
+        placeholder="Type to start searching..."
+        id="inputEl"
+        class="form-control"
+      />
+    </div>
+  </div>
+</div>

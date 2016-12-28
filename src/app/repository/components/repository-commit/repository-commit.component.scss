@@ -1,3 +1,23 @@
-.author {
-  font-weight: bold;
+img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.card {
+  .card-header {
+    display: flex;
+
+    .card-header-image,
+    .card-header-title {
+      margin-right: 1rem;
+    }
+    .btn {
+      min-width: 100px;
+      margin-left: auto;
+    }
+  }
+  .card-block {
+    padding-left: 4.2rem; // align the content to be where .author-image-link ends
+  }
 }

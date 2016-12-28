@@ -2,7 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { MaterialModule } from '@angular/material';
+import { ClarityModule } from 'clarity-angular';
 
 import { ErrorAlertComponent } from './error-alert.component';
 
@@ -13,7 +13,7 @@ describe('ErrorAlertComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ErrorAlertComponent ],
-      imports: [ MaterialModule.forRoot() ],
+      imports: [ ClarityModule ],
     })
     .compileComponents();
   }));
@@ -35,7 +35,7 @@ describe('ErrorAlertComponent', () => {
     };
     fixture.detectChanges();
 
-    const contentEl: HTMLElement = fixture.debugElement.query(By.css('md-card-content')).nativeElement;
+    const contentEl: HTMLElement = fixture.debugElement.query(By.css('.alert-item')).nativeElement;
     expect(contentEl.textContent).toContain(component.error.message);
   });
 });

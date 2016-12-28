@@ -1,24 +1,27 @@
-<md-card>
-  <md-card-title>{{repository.full_name}}</md-card-title>
-  <md-card-content>
-    <p>{{repository.description}}</p>
-  </md-card-content>
-  <md-card-actions>
-    <span class="action action--language" title="Primary language">
-      <md-icon>language</md-icon> {{repository.language}}
+<div class="card">
+  <div class="card-block">
+    <div class="card-title">
+      {{repository.full_name}}
+    </div>
+    <div class="card-text">
+      {{repository.description}}
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <span class="label label-purple" title="Primary language">
+      {{repository.language}}
     </span>
-    <span class="action action--stars" title="Stars">
-      <md-icon>stars</md-icon> {{repository.stargazers_count | number}}
+    <span class="label label-orange" title="Stars">
+      Stars: <span class="badge">{{repository.stargazers_count | number}}</span>
     </span>
-    <span class="action action--forks" title="Forks">
-      <md-icon>call_split</md-icon> {{repository.forks | number}}
+    <span class="label label-light-blue" title="Forks">
+      Forks: <span class="badge">{{repository.forks | number}}</span>
     </span>
-    <span class="action action--built-by">
+    <a class="label clickable" href="{{repository.owner.html_url}}" title="{{repository.owner.login}}">
       Built by:
-      <a href="{{repository.owner.html_url}}" title="{{repository.owner.login}}">
-        <img src="{{repository.owner.avatar_url}}" width="20" height="20">
-      </a>
-    </span>
-    <span class="action action--updated-at">Last update: {{repository.updated_at | date:'medium'}}</span>
-  </md-card-actions>
-</md-card>
+      <img src="{{repository.owner.avatar_url}}" class="badge badge--img" alt="{{repository.owner.login}}" />
+    </a>
+    <span class="label">Last update: {{repository.updated_at | date:'medium'}}</span>
+  </div>
+</div>

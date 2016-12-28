@@ -14,6 +14,6 @@ export class ErrorPage extends AppPage {
   }
 
   getHomeLink() {
-    return element(by.css('p a'));
+    return element(by.css('.card-text a'));
   }
 }

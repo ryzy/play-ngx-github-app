@@ -18,7 +18,6 @@ export class SearchPageComponent implements OnInit {
   public searchQuery$: Observable<string>;
   public isLoading$: Observable<boolean>;
   public repositories$: Observable<Repository[]>;
-  public error$: Observable<AppError>;
   public noResults$: Observable<boolean>;
   public showingTrending$: Observable<boolean>;
 
@@ -31,16 +30,15 @@ export class SearchPageComponent implements OnInit {
     this.searchQuery$ = this.searchService.getSearchQuery();
     this.isLoading$ = this.searchService.isLoading();
     this.repositories$ = this.searchService.getRepositories();
-    this.error$ = this.searchService.getError();
     this.showingTrending$ = this.searchService.hasTrending();
 
     // Determine if `no result` message should be shown
-    // (i.e. search query present, but repository list empty and no error).
+    // (i.e. search query present, but repository list empty).
     this.noResults$ = this.searchService.getSearchQuery()
-      .combineLatest(this.repositories$, this.isLoading$, this.error$)
+      .combineLatest(this.repositories$, this.isLoading$)
       .map((combined) => {
-        const [query, repositories, loading, error] = combined;
-        return query && repositories.length === 0 && !loading && !error;
+        const [query, repositories, loading] = combined;
+        return query && repositories.length === 0 && !loading;
       })
     ;
 

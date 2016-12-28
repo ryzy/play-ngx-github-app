@@ -1,18 +1,25 @@
-md-progress-bar {
-  position: relative;
-  display: none;
-  &.show {
-    display: block;
-  }
+.card-header {
+  text-align: center;
+}
+.card-block {
+  padding-top: 0; // we have .card elements inside which have already margin-top set
+  padding-bottom: 0;
 }
 
-.list {
-  min-height: 150px;
+.spinner {
+  display: none;
+  left: 50%;
+  margin: 1.5rem -1rem ;
+
+  &.show { display: block }
 }
-.title {
-  text-align: center;
-}
-.no-results {
-  text-align: center;
-  font-weight: bold;
+
+
+/deep/ .alert {
+  .alert-item {
+    display: block;
+    padding: .75rem;
+    text-align: center;
+    //font-weight: bold;
+  }
 }

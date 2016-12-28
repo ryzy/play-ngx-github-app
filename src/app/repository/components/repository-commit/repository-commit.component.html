@@ -1,15 +1,15 @@
-<md-list-item>
-  <a *ngIf="commit.author" href="{{commit.author.html_url}}" md-list-avatar title="Author: {{commit.author.login}}">
-    <img md-list-avatar [src]="commit.author.avatar_url" alt="{{commit.author.login}}">
-  </a>
-  <h2 md-line>{{commit.commit.message}}</h2>
-  <p md-line>
-    <span>
-      <a *ngIf="commit.author" href="{{commit.author.html_url}}" class="author">{{commit.commit.author.name}}</a>
-      <span *ngIf="!commit.author" class="author">{{commit.commit.author.name}}</span>
-    </span>
-    committed on {{commit.commit.author.date}}
-  </p>
-  <a md-raised-button href="{{commit.html_url}}">{{commit.sha | slice:0:7 }}</a>
-</md-list-item>
-<md-divider></md-divider>
+<div class="card">
+  <div class="card-header">
+    <a *ngIf="commit.author" href="{{commit.author.html_url}}" title="Author: {{commit.author.login}}" class="card-header-image">
+      <img [src]="commit.author.avatar_url" alt="{{commit.author.login}}">
+    </a>
+    <span class="card-header-title">{{commit.commit.message | trim:160}}</span>
+    <a href="{{commit.html_url}}" class="btn btn-outline">{{commit.sha | slice:0:7 }}</a>
+  </div>
+  <div class="card-block">
+    <div class="card-text">
+      <a href="{{commit.author?.html_url}}">{{commit.commit.author.name}}</a>
+      committed on {{commit.commit.author.date}}
+    </div>
+  </div>
+</div>

@@ -1,12 +1,16 @@
-<md-list-item>
-  <a href="{{pull.user.html_url}}" md-list-avatar title="Author: {{pull.user.login}}">
-    <img md-list-avatar [src]="pull.user.avatar_url" alt="{{pull.user.login}}">
-  </a>
+<div class="card">
+  <div class="card-header">
+    <a [href]="pull.user.html_url" title="Author: {{pull.user.login}}" class="card-header-image">
+      <img [src]="pull.user.avatar_url" alt="{{pull.user.login}}">
+    </a>
+    <span class="card-header-title">{{pull.title}}</span>
+  </div>
 
-  <h2 md-line>{{pull.title}}</h2>
-  <h3 md-line>
-    <a href="{{pull.html_url}}">#{{pull.number}}</a>
-    by <a href="{{pull.user.html_url}">{{pull.user.login}}</a>
-    on {{pull.created_at | date:'fullDate'}}</h3>
-</md-list-item>
-<md-divider></md-divider>
+  <div class="card-block">
+    <div class="card-text">
+      <a [href]="pull.html_url">#{{pull.number}}</a>
+      by <a [href]="pull.user.html_url">{{pull.user.login}}</a>
+      on {{pull.created_at | date:'fullDate'}}
+    </div>
+  </div>
+</div>

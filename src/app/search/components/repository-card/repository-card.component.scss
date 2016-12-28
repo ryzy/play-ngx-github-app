@@ -1,35 +1,22 @@
-md-card {
+.card {
   cursor: pointer;
-  padding-bottom: 2rem;
   &:hover {
-    outline: rgba(0, 0, 0, .1) solid 1px;
-    background-color: #fcfcfc;
+    box-shadow: 2px 2px 10px 2px rgba(116, 116, 116, .20);
   }
 }
 
-md-card-actions {
-  margin-left: 0;
-  margin-right: 0;
-}
+.label {
+  // User avatar with .badge class
+  > .badge--img {
+    height: 19px;
+    width: 19px;
+    margin-right: -12px;
+    padding: 0;
+  }
 
-.action {
-  margin-right: 1rem;
   &:last-child {
+    float: right;
+    margin-top: 2px;
     margin-right: 0;
   }
-
-  &--updated-at {
-    float: right;
-  }
-}
-
-md-icon {
-  margin-bottom: -.1rem;
-  vertical-align: bottom;
-}
-
-img {
-  margin-left: .5rem;
-  vertical-align: bottom;
-  outline: rgba(0, 0, 0, .1) solid 1px;
 }

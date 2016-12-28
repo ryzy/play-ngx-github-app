@@ -26,7 +26,7 @@ describe('RepositoryComponent', () => {
     component.repository = repositoryTestData;
     fixture.detectChanges();
 
-    titleEl = fixture.debugElement.query(By.css('md-card-title')).nativeElement;
+    titleEl = fixture.debugElement.query(By.css('.card-header')).nativeElement;
   });
 
   it('should work', () => {

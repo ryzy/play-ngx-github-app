@@ -30,7 +30,7 @@ describe('RepositoryCommitComponent', () => {
     component.commit = commit;
     fixture.detectChanges();
 
-    titleEl = fixture.debugElement.query(By.css('h2')).nativeElement;
+    titleEl = fixture.debugElement.query(By.css('.card-header-title')).nativeElement;
   });
 
   it('should create', () => {

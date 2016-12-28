@@ -2,8 +2,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { MaterialModule } from '@angular/material';
 
+import { SharedModule } from '../../../shared/shared.module';
 import { SearchComponent } from './search.component';
 
 describe('SearchComponent', () => {
@@ -13,7 +13,7 @@ describe('SearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SearchComponent ],
-      imports: [ MaterialModule.forRoot() ],
+      imports: [ SharedModule ],
     })
     .compileComponents();
   }));

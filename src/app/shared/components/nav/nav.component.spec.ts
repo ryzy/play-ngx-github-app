@@ -2,7 +2,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { MaterialModule } from '@angular/material';
+import { ClarityModule } from 'clarity-angular';
+import { SharedModule } from '../../shared.module';
 
 import { NavComponent } from './nav.component';
 
@@ -16,9 +17,11 @@ describe('NavComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NavComponent ],
-      imports: [ MaterialModule.forRoot() ]
+      imports: [ ClarityModule ]
     })
     .compileComponents();
+
+    SharedModule.configureIcons();
   }));
 
   beforeEach(() => {
@@ -26,7 +29,7 @@ describe('NavComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    titleDe = fixture.debugElement.query(By.css('h1'));
+    titleDe = fixture.debugElement.query(By.css('.title'));
     titleEl = titleDe.nativeElement;
   });
 
