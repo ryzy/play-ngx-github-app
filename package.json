@@ -5,9 +5,9 @@
   "angular-cli": {},
   "scripts": {
     "start": "ng serve --port=4100",
-    "start:prod": "ng serve --port=4100 --aot -prod",
-    "build": "rimraf dist/ && ng build --verbose --aot false",
-    "build:prod": "rimraf dist/ && ng build -prod --progress=false --verbose --aot true",
+    "start:prod": "ng serve --port=4100 --aot=true --verbose -prod",
+    "build": "rimraf dist/ && ng build --verbose --aot=false",
+    "build:prod": "rimraf dist/ && ng build --progress=false --sourcemap=false --aot=true --verbose -prod",
     "deploy": "firebase deploy --only=hosting --project default --token=$FIREBASE_TOKEN",
     "deploy:prod": "firebase deploy --only=hosting --project prod --token=$FIREBASE_TOKEN",
     "lint": "tslint \"src/**/*.ts\"",
