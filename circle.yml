@@ -3,11 +3,15 @@ machine:
     version: 6.9.2
 
 dependencies:
+  cache_directories:
+    - ~/.cache/yarn # Add yarn cache to CircleCI cache (shared between builds)
+
   pre:
     # Install yarn
     - curl -o- -L https://yarnpkg.com/install.sh | bash
 
   override:
+    - rm -rf node_modules # Remove this restored by CircleCI. Utilise yarn cache instead.
     - yarn install
 
   post:
