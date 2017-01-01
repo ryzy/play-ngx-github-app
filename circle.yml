@@ -7,6 +7,13 @@ dependencies:
     - ~/.cache/yarn # Add yarn cache to CircleCI cache (shared between builds)
 
   pre:
+    # Update Chrome to v55 (CircleCI has v53 now).
+    # Why? Seems like Custom Elements are not available in v53 and we need them
+    # for Clarity UI (and the @webcomponents/custom-elements polyfil breaks Angular tests)
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    - sudo apt-get update && sudo apt-get install google-chrome-stable
+
     # Install yarn
     - curl -o- -L https://yarnpkg.com/install.sh | bash
 

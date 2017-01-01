@@ -12,7 +12,7 @@ module.exports = function (config) {
       require('angular-cli/plugins/karma')
     ],
     files: [
-      { pattern: './node_modules/@webcomponents/custom-elements/custom-elements.min.js', watched: false },
+      // Load Clarity UI icons, which define global `window.ClarityIcons` - see SharedModule where it's used
       { pattern: './node_modules/clarity-icons/clarity-icons.min.js', watched: false },
       { pattern: './src/test.ts', watched: false }
     ],
