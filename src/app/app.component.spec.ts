@@ -37,7 +37,7 @@ describe('AppComponent', () => {
   }));
 
   it(`should have <app-nav> component`, async(() => {
-    let appNavDe: DebugElement = fixture.debugElement.query(By.css('app-nav'));
+    const appNavDe: DebugElement = fixture.debugElement.query(By.css('app-nav'));
     expect(appNavDe).toBeTruthy();
   }));
 });

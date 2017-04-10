@@ -1,4 +1,4 @@
-/* tslint:disable:no-unused-variable */
+/* tslint:disable:no-unused-variable max-line-length */
 import { TestBed, async, inject } from '@angular/core/testing';
 import {
   HttpModule, Http, ConnectionBackend, RequestOptions, BaseRequestOptions, Response, ResponseOptions,

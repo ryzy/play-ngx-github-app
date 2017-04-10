@@ -1,5 +1,8 @@
 // This file contains global styles, applicable for
 // the entire app (i.e. not encapsulated by Angular)
 
+$clr-black: #444;
+$clr-near-black: #666;
+
 @import 'objects/typography';
 @import 'objects/app-loader';
