@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
@@ -7,19 +7,20 @@ import 'rxjs/add/operator/combineLatest';
 
 import { SearchService } from '../services/search.service';
 import { Repository } from '../../shared/model/repository';
-import { AppError } from '../../shared/model/app-error';
 
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponent implements OnInit, OnDestroy {
   public searchQuery$: Observable<string|undefined>;
   public isLoading$: Observable<boolean>;
   public repositories$: Observable<Repository[]>;
   public noResults$: Observable<boolean>;
   public showingTrending$: Observable<boolean>;
+
+  private ngOnDestroy$: EventEmitter<boolean> = new EventEmitter();
 
   public constructor(
     private searchService: SearchService,
@@ -27,7 +28,7 @@ export class SearchPageComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.searchQuery$ = this.searchService.getSearchQuery();
+    this.searchQuery$ = this.searchService.getSearchQuery().map(q => q || '');
     this.isLoading$ = this.searchService.isLoading();
     this.repositories$ = this.searchService.getRepositories();
     this.showingTrending$ = this.searchService.hasTrending();
@@ -36,6 +37,7 @@ export class SearchPageComponent implements OnInit {
     // (i.e. search query present, but repository list empty).
     this.noResults$ = this.searchService.getSearchQuery()
       .combineLatest(this.repositories$, this.isLoading$)
+      .takeUntil(this.ngOnDestroy$)
       .map((combined) => {
         const [query, repositories, loading] = combined;
         return !!query && repositories.length === 0 && !loading;
@@ -45,12 +47,16 @@ export class SearchPageComponent implements OnInit {
     this.doInitialSearch();
   }
 
+  public ngOnDestroy(): void {
+    this.ngOnDestroy$.next(true);
+  }
+
   /**
    * Perform search
    *
    * @param query
    */
-  public doSearch(query: string): void {
+  public doSearch(query?: string): void {
     if (query) {
       this.searchService.doSearch(query);
     } else {
@@ -75,21 +81,11 @@ export class SearchPageComponent implements OnInit {
    * when the URL is updated due to user's typing in the search box.
    */
   private doInitialSearch(): void {
-    this.route.queryParams
-      .map((params: Params) => params['q'])
-      .combineLatest(this.repositories$)
-      .take(1)
-      .subscribe((combined) => {
-        const [q, repositories] = combined;
-
-        // Do we already have some repositories loaded in the store?
-        // Do nothing then (it means we came back to this page
-        // from another page and therefore nothing needs to be done,
-        // previously displayed list of repositories is fine).
-        if (repositories.length) {
-          return;
-        }
-
+    this.route.queryParamMap
+      .takeUntil(this.ngOnDestroy$)
+      .map((params: ParamMap) => params.get('q'))
+      .distinctUntilChanged()
+      .subscribe((q: string) => {
         this.doSearch(q);
       });
   }

@@ -93,7 +93,7 @@ export class RepositorySearchEffects {
     .debounceTime(1000)
     .map((action: SearchAction|LoadTrendingAction) => action.payload)
     .do((q: string) => {
-      console.log('RepositorySearchEffects#searchUpdateUrl$', q);
+      this.router.navigate(['.'], { queryParams: { q } });
     })
   ;
 
