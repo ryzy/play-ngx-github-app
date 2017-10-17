@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('App', function() {
+describe('App', () => {
   let page: AppPage;
 
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe('App', function() {
 
   it('should display navigation bar', () => {
     page.navigateTo();
-    expect(page.getNavBar().isPresent()).toBe(true);
+    expect(page.getNavBar().isPresent()).toBe(true as any);
     expect(page.getNavBar().getText()).toContain('GitHub');
   });
 });

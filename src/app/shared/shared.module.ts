@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ClarityModule } from 'clarity-angular';
 
 import { TrimPipe } from './pipes/trim.pipe';
 import { NavComponent } from './components/nav/nav.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { ErrorAlertComponent } from './components/error-alert/error-alert.component';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     ClarityModule,
   ],
   providers: [

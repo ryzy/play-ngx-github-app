@@ -43,6 +43,9 @@
     {
       "project": "src/tsconfig.spec.json",
       "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.json"
     }
   ],
   "test": {
