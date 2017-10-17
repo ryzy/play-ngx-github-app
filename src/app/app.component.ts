@@ -10,13 +10,13 @@ import { AppError } from './shared/model/app-error';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public appError$: Observable<AppError>;
+  public appError$: Observable<AppError|undefined>;
 
   constructor(
     private errorService: ErrorService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.appError$ = this.errorService.getAppError();
   }
 }

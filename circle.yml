@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 6.9.2
+    version: 6.11.4
 
 dependencies:
   cache_directories:
@@ -38,12 +38,12 @@ test:
     - yarn run build:prod
 
 deployment:
-  production: # Deploy `master` to https://ng2-github.firebaseapp.com/
+  production: # Deploy `master` to https://dev-ng2-github-d52c4.firebaseio.com/
     branch: master
     commands:
-      - yarn run deploy:prod
-
-  development: # Deploy `dev` to https://dev-ng2-github-d52c4.firebaseio.com/
-    branch: dev
-    commands:
       - yarn run deploy
+
+  development: # Deploy `prod` to  https://ng2-github.firebaseapp.com/
+    branch: prod
+    commands:
+      - yarn run deploy:prod

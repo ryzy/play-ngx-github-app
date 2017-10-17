@@ -1,8 +1,8 @@
 import { Response } from '@angular/http';
 
-import * as repositoryActions from '../actions/repository.actions';
-import { AppError } from '../../model/app-error';
-import { Repository } from '../../model/repository';
+import * as repositoryActions from '../repository.actions';
+import { AppError } from '../../../shared/model/app-error';
+import { Repository } from '../../../shared/model/repository';
 
 /**
  * Repository search state schema
@@ -10,9 +10,9 @@ import { Repository } from '../../model/repository';
 export interface State {
   entities: Repository[];
   trending: boolean;
-  query: string;
+  query?: string;
   loading: boolean;
-  error: AppError;
+  error?: AppError;
 }
 
 /**
@@ -21,9 +21,7 @@ export interface State {
 export const initialState: State = {
   entities: [],
   trending: true, // flag indicating that we're showing trending repositories (i.e. not from search query)
-  query: null,
   loading: false,
-  error: null
 };
 
 /**
@@ -33,7 +31,7 @@ export const initialState: State = {
  * @param action
  * @returns {any}
  */
-export function reducer(state = initialState, action: repositoryActions.Actions): State {
+export function reducer(state: State = initialState, action: repositoryActions.Actions): State {
   // console.log('repository-search reducer()', {state, action});
 
   switch (action.type) {
@@ -63,7 +61,6 @@ export function reducer(state = initialState, action: repositoryActions.Actions)
         trending: repositoryActions.ActionTypes.LOAD_TRENDING_COMPLETE === action.type,
         query: state.query,
         loading: false,
-        error: null,
       };
 
     case repositoryActions.ActionTypes.SEARCH_ERROR:
@@ -94,7 +91,7 @@ export const getQuery = (state: State) => state.query;
  * Reducer's selector: get current loading state
  * @param state
  */
-export const getLoading = (state: State) => state.loading;
+export const getLoading = (state: State) => !!state.loading;
 
 /**
  * Reducer's selector: get current trending state

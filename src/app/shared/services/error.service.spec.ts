@@ -1,19 +1,21 @@
 /* tslint:disable:no-unused-variable */
 import { TestBed, inject } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 
 import { AppError } from '../model/app-error';
 import { ErrorService } from './error.service';
-import { SharedModule } from '../shared.module';
-import { StoreRootState } from '../store/index';
-import { SearchErrorAction } from '../store/actions/repository.actions';
+import { CoreModule } from '../../core/core.module';
+import { AppRootState } from '../../core/state/index';
+import { SearchErrorAction } from '../../core/state/repository.actions';
 
 describe('ErrorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        SharedModule.provideStoreModule(),
+        RouterTestingModule,
+        CoreModule, // just so we have configured Store
       ],
       providers: [
         ErrorService,
@@ -25,7 +27,7 @@ describe('ErrorService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should get app error', inject([ErrorService, Store], (service: ErrorService, store: Store<StoreRootState>) => {
+  it('should get app error', inject([ErrorService, Store], (service: ErrorService, store: Store<AppRootState>) => {
     const error$ = service.getAppError()
       .filter((err) => !!err); // skip the first NULLs
 

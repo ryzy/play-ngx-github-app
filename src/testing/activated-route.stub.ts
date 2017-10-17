@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Params, Data } from '@angular/router';
+import { ActivatedRouteSnapshot, Params, Data, ParamMap, convertToParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -7,14 +7,26 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
  * Stub of ActivatedRoute class to use in testing
  * where ActivatedRoute needs to be provided
  *
+ * Usage:
+ * ```typescript
+ * TestBed.configureTestingModule({
+ *   imports: [ ... ],
+ *   providers: [
+ *     { provide: ActivatedRoute, useClass: ActivatedRouteStub }
+ *   ]
+ * })
+ * .compileComponents();
+ * ```
+ *
  * @see https://angular.io/docs/ts/latest/guide/testing.html
  */
 @Injectable()
 export class ActivatedRouteStub {
-  // params, queryParams needs to be Observable
-  public params: Observable<Params>;
-  public queryParams: Observable<Params>;
   public data: Observable<Data>;
+  public params: Observable<Params>;
+  public queryParamMap: Observable<ParamMap>;
+  /** @deprecated */
+  public queryParams: Observable<Params>;
 
   // create helper BehaviorSubject to easily push test params into Observables
   private paramsSubject: BehaviorSubject<Params>;
@@ -22,15 +34,16 @@ export class ActivatedRouteStub {
   private dataSubject: BehaviorSubject<Data>;
 
   // create internal variables to easy get/set existing test params
-  private _params = <Params>{};
-  private _queryParams = <Params>{};
-  private _data = <Data>{};
+  private _params: Params = {};
+  private _queryParams: Params = {};
+  private _data: Data = {};
 
   constructor() {
     this.paramsSubject = new BehaviorSubject(this._params);
     this.params = this.paramsSubject.asObservable();
 
     this.queryParamsSubject = new BehaviorSubject(this._queryParams);
+    this.queryParamMap = this.queryParamsSubject.map((p: Params) => convertToParamMap(p));
     this.queryParams = this.queryParamsSubject.asObservable();
 
     this.dataSubject = new BehaviorSubject(this._data);
@@ -66,6 +79,7 @@ export class ActivatedRouteStub {
     return <ActivatedRouteSnapshot>{
       params: this.testParams,
       queryParams: this.testQueryParams,
+      queryParamMap: convertToParamMap(this.testQueryParams),
       data: this.testData,
     };
   }

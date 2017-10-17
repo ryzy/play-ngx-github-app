@@ -1,10 +1,12 @@
 /* tslint:disable:max-line-length */
 
+import { PullRequest } from '../../app/shared/model/pull-request';
+
 /**
  * Sample data returned from
  * GET /repos/:owner/:repo/pulls
  */
-export const repositoryPullsTestData = [
+export const repositoryPullsTestData: PullRequest[] = [
   {
     url: 'https://api.github.com/repos/angular/angular/pulls/13549',
     id: 98455433,

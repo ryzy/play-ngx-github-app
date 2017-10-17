@@ -1,15 +1,16 @@
-import { browser, element, by } from 'protractor';
+import { browser, element, by, ElementFinder } from 'protractor';
+import * as webdriver from 'selenium-webdriver';
 
 import { AppPage } from '../app.po';
 
 export class ErrorPage extends AppPage {
-  public ERROR_URL = '/some-error-page';
+  public ERROR_URL: string = '/some-error-page';
 
-  public navigateTo() {
+  public navigateTo(): webdriver.promise.Promise<void> {
     return browser.get(this.ERROR_URL);
   }
 
-  public getHomeLink() {
+  public getHomeLink(): ElementFinder {
     return element(by.css('.card-text a'));
   }
 }

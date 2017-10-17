@@ -1,13 +1,9 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { ActivatedRouteStub } from '../../../testing/activated-route.stub';
-import { SharedModule } from '../../shared/shared.module';
+import { CoreModule } from '../../core/core.module';
 import { RepositoryPageComponent } from './repository-page.component';
-import { RepositoryComponent } from '../components/repository/repository.component';
 import { RepositoryService } from '../services/repository.service';
 import { RepositoryModule } from '../repository.module';
 
@@ -17,14 +13,18 @@ describe('RepositoryPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ SharedModule, SharedModule.provideStoreModule(), RepositoryModule ],
-      providers: [ RepositoryService ],
-    })
-    .compileComponents();
+        imports: [
+          RouterTestingModule,
+          CoreModule,
+          RepositoryModule,
+        ],
+        providers: [ RepositoryService ],
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RepositoryPageComponent);
+    fixture   = TestBed.createComponent(RepositoryPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

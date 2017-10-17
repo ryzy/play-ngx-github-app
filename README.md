@@ -1,5 +1,5 @@
-# GitHub Depot: simple Angular 2 app for browsing repositories
-[![CircleCI](https://circleci.com/gh/ryzy/play-ng2-github.svg?style=svg)](https://circleci.com/gh/ryzy/play-ng2-github)
+# GitHub Depot: Angular playground app for browsing GitHub repositories
+[![CircleCI](https://circleci.com/gh/ryzy/play-ngx-github-app.svg?style=svg)](https://circleci.com/gh/ryzy/play-ngx-github-app)
 
 Visit **https://ng2-github.firebaseapp.com/** to try it online.
 Deployed automatically from the `master` branch. The `dev` branch
@@ -16,9 +16,8 @@ is also deployed and available [here](https://dev-ng2-github-d52c4.firebaseapp.c
 
 # Tech stack
 
-* [Angular](https://angular.io/) with [angular-cli](https://github.com/angular/angular-cli)
-* [@ngrx/store](https://github.com/ngrx/store), [@ngrx/effects](https://github.com/ngrx/effects)
-  for the Redux-style *app state management*
+* [Angular](https://angular.io/) v4.4 with [angular-cli](https://github.com/angular/angular-cli)
+* [@ngrx/platform](https://github.com/ngrx/platform) for Redux-style *app state management*
 * Testing: karma + jasmine, protractor for e2e
 * [CircleCI](https://circleci.com/gh/ryzy/play-ng2-github) for running
   tests and automatic deployments to [Firebase Hosting](https://firebase.google.com/).

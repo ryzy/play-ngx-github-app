@@ -1,6 +1,6 @@
 import { ErrorPage } from './error-page.po';
 
-describe('Error Page', function() {
+describe('Error Page', () => {
   let page: ErrorPage;
 
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe('Error Page', function() {
 
   it('should display error 404', () => {
     page.navigateTo();
-    expect(page.getNavBar().isPresent()).toBe(true);
+    expect(page.getNavBar().isPresent()).toBe(true as any);
   });
 
   it('should offer link and navigate to main page', () => {
@@ -18,7 +18,7 @@ describe('Error Page', function() {
 
     // look up for home link
     const homeLink = page.getHomeLink();
-    expect(homeLink.isPresent()).toBe(true);
+    expect(homeLink.isPresent()).toBe(true as any);
 
     // navigate to home page and check the url
     homeLink.click();

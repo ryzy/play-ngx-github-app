@@ -1,10 +1,12 @@
 /* tslint:disable:max-line-length quotemark */
 
+import { Issue } from '../../app/shared/model/issue';
+
 /**
  * Sample data returned from
  * GET /repos/:owner/:repo/issues
  */
-export const repositoryIssuesTestData = [
+export const repositoryIssuesTestData: Issue[] = [
   {
     url: "https://api.github.com/repos/angular/angular/issues/13550",
     repository_url: "https://api.github.com/repos/angular/angular",

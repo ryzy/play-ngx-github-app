@@ -12,38 +12,27 @@ module.exports = function (config) {
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
     ],
-    client:{
+    client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     files: [
-      // Load Clarity UI icons, which define global `window.ClarityIcons` - see SharedModule where it's used
-      { pattern: './node_modules/clarity-icons/clarity-icons.min.js', watched: false },
-      { pattern: './src/test.ts', watched: false }
+      { pattern: './node_modules/@angular/material/prebuilt-themes/indigo-pink.css', watched: false },
     ],
-    preprocessors: {
-      './src/test.ts': ['@angular/cli']
-    },
-    mime: {
-      'text/x-typescript': ['ts','tsx']
-    },
     coverageIstanbulReporter: {
-      reports: [
-        'html',
-        'lcovonly',
-      ],
+      reports: [ 'html', 'lcovonly', 'json', 'text-summary' ],
       fixWebpackSourcePaths: true
     },
     angularCli: {
       environment: 'dev'
     },
-    reporters: config.angularCli && config.angularCli.codeCoverage
-                ? ['progress', 'coverage-istanbul']
-                : ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    // Detect CI env here, run in headless Chrome when in CI
+    browsers: [ config.angularCli && config.angularCli.codeCoverage ? 'ChromeHeadless' : 'Chrome' ],
+    concurrency: Infinity,
     singleRun: false
   });
 };

@@ -1,13 +1,20 @@
 /* tslint:disable:no-unused-variable */
-import { TestBed, async, inject } from '@angular/core/testing';
-import { SharedModule } from '../../shared/shared.module';
+import { TestBed, inject } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+
 import { SearchService } from './search.service';
+import { CoreModule } from '../../core/core.module';
 
 describe('SearchService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SharedModule, SharedModule.provideStoreModule()],
-      providers: [SearchService]
+      imports: [
+        RouterTestingModule,
+        CoreModule,
+      ],
+      providers: [
+        SearchService,
+      ]
     });
   });
 

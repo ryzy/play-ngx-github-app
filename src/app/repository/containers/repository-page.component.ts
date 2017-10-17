@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Repository } from '../../shared/model/repository';
 import { RepositoryService } from '../services/repository.service';
 import { Observable } from 'rxjs/Observable';
-import { AppError } from '../../shared/model/app-error';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/take';
+
 import { Commit } from '../../shared/model/commit';
 import { Issue } from '../../shared/model/issue';
 import { PullRequest } from '../../shared/model/pull-request';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'app-repository-page',
@@ -19,13 +19,13 @@ export class RepositoryPageComponent implements OnInit {
   public commits$: Observable<Commit[]>;
   public issues$: Observable<Issue[]>;
   public pulls$: Observable<PullRequest[]>;
-  public readme$: Observable<string>;
+  public readme$: Observable<string|undefined>;
 
   constructor(
     private repositoryService: RepositoryService
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     // Although we could take the current repository from the
     // ActivatedRoute.snapshot.data['repository'] (@see RepositoryResolve
     // from the route config), we prefer to take it from the global state store,

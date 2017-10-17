@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import { StoreRootState } from '../../shared/store/index';
 import { Observable } from 'rxjs/Observable';
+
+import { AppRootState } from '../../core/state/index';
 import { Repository } from '../../shared/model/repository';
 import {
   getRepositoryEntity, getRepositoryError, getRepositoryReadme,
   getRepositoryIssues, getRepositoryCommits, getRepositoryPulls
-} from '../../shared/store/selectors';
+} from '../../core/state/selectors';
 import { AppError } from '../../shared/model/app-error';
 import {
   LoadReadmeAction, LoadIssuesAction, LoadCommitsAction,
   LoadPullsAction
-} from '../../shared/store/actions/repository.actions';
+} from '../../core/state/repository.actions';
 import { Issue } from '../../shared/model/issue';
 import { Commit } from '../../shared/model/commit';
 import { PullRequest } from '../../shared/model/pull-request';
@@ -22,20 +22,20 @@ import { PullRequest } from '../../shared/model/pull-request';
 export class RepositoryService {
 
   public constructor(
-    private store: Store<StoreRootState>
+    private store: Store<AppRootState>
   ) { }
 
   /**
    * Get currently selected repository
    */
-  public getRepository(): Observable<Repository> {
+  public getRepository(): Observable<Repository|undefined> {
     return this.store.select(getRepositoryEntity);
   }
 
   /**
    * Get error occurred during loading the repository
    */
-  public getError(): Observable<AppError> {
+  public getError(): Observable<AppError|undefined> {
     return this.store.select(getRepositoryError);
   }
 
@@ -92,7 +92,7 @@ export class RepositoryService {
    *                            Should be set to true when we want to trigger fetching new data to store.
    * @returns {Observable}
    */
-  public getReadme(repository: Repository, dispatch = false): Observable<string> {
+  public getReadme(repository: Repository, dispatch = false): Observable<string|undefined> {
     if (dispatch) {
       this.store.dispatch(new LoadReadmeAction(repository));
     }

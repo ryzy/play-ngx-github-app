@@ -12,11 +12,14 @@ export interface PullRequest {
   user: Owner;
   state: string;
   locked: boolean;
-  assignee: Owner;
-  assignees: Owner[];
-  milestone: Object;
+  assignee?: Owner|null;
+  assignees?: Owner[]|null;
+  milestone?: Object|null;
   created_at: string;
   updated_at: string;
-  closed_at: string;
+  closed_at?: string|null;
   body: string;
+
+  // Remaining properties
+  [key: string]: any;
 }

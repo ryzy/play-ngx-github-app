@@ -1,25 +1,24 @@
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/skip';
-import 'rxjs/add/operator/takeUntil';
-import 'rxjs/add/operator/startWith';
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
-import { replace, go } from '@ngrx/router-store';
 import { Observable } from 'rxjs/Observable';
-import { empty } from 'rxjs/observable/empty';
-import { of } from 'rxjs/observable/of';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/switchMap';
 
-import { Repository } from '../../model/repository';
-import { GitHubAPIService } from '../../services/github-api.service';
+import { Repository } from '../../shared/model/repository';
+import { GitHubAPIService } from '../../shared/services/github-api.service';
 import {
   ActionTypes, LoadTrendingCompleteAction,
   SearchErrorAction, SearchAction, SearchCompleteAction, SelectAction, LoadTrendingAction
-} from '../actions/repository.actions';
+} from './repository.actions';
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -35,7 +34,7 @@ export class RepositorySearchEffects {
     .switchMap((action: Action) => {
       return this.gitHubAPIService.retrieveTrendingRepositories()
         .map((repositories: Repository[]) => new LoadTrendingCompleteAction(repositories))
-        .catch((error: Response) => of(new SearchErrorAction(error)))
+        .catch((error: Response) => Observable.of(new SearchErrorAction(error)))
       ;
     })
   ;
@@ -59,7 +58,7 @@ export class RepositorySearchEffects {
     .switchMap((query: string) => {
       if (!query) {
         // Empty query? Return Observable which immediately completes.
-        return empty();
+        return Observable.empty();
       }
 
       const nextSearch$ = this.actions$.ofType(ActionTypes.SEARCH).skip(1);
@@ -77,7 +76,7 @@ export class RepositorySearchEffects {
         .takeUntil(nextSearch$)
         .takeUntil(nextLoadTrending$)
         .map((repositories: Repository[]) => new SearchCompleteAction(repositories))
-        .catch((error: Response) => of(new SearchErrorAction(error)))
+        .catch((error: Response) => Observable.of(new SearchErrorAction(error)))
       ;
     })
   ;
@@ -85,33 +84,34 @@ export class RepositorySearchEffects {
   /**
    * Update `?q` param in the url when search query changes
    */
-  @Effect()
-  public searchUpdateUrl$: Observable<any> = this.actions$
+  @Effect({ dispatch: false })
+  public searchUpdateUrl$: Observable<string|undefined> = this.actions$
   // Note: we listen to the SEARCH and LOAD_TRENDING actions,
   // so when user deletes the search query (and thus empty query is present)
   // we also remove the query from the url.
     .ofType(ActionTypes.SEARCH, ActionTypes.LOAD_TRENDING)
     .debounceTime(1000)
     .map((action: SearchAction|LoadTrendingAction) => action.payload)
-    .switchMap((q: string) => of(replace('/', q ? {q} : {})))
+    .do((q: string) => {
+      this.router.navigate(['.'], { queryParams: { q } });
+    })
   ;
 
   /**
    * When repository got selected, dispatch router go() action
-   *
-   * @type {Observable<Action>}
    */
-  @Effect()
-  public selectRepo$: Observable<Action> = this.actions$
+  @Effect({ dispatch: false })
+  public selectRepo$: Observable<Repository> = this.actions$
     .ofType(ActionTypes.SELECT)
     .map((action: SelectAction) => <Repository>action.payload)
-    .switchMap((repository: Repository) => {
-      return of(go('/repo/' + repository.full_name));
+    .do((repository: Repository) => {
+      this.router.navigateByUrl('/repo/' + repository.full_name);
     })
   ;
 
   constructor(
     private actions$: Actions,
+    private router: Router,
     private gitHubAPIService: GitHubAPIService
   ) { }
 }

@@ -1,11 +1,11 @@
 import { Response } from '@angular/http';
 import { Action } from '@ngrx/store';
 
-import { type } from '../../utils';
-import { Repository } from '../../model/repository';
-import { Commit } from '../../model/commit';
-import { Issue } from '../../model/issue';
-import { PullRequest } from '../../model/pull-request';
+import { type } from '../../shared/utils';
+import { Repository } from '../../shared/model/repository';
+import { Commit } from '../../shared/model/commit';
+import { Issue } from '../../shared/model/issue';
+import { PullRequest } from '../../shared/model/pull-request';
 
 /**
  * Repository action types list
