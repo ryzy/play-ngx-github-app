@@ -3,30 +3,37 @@
 <div class="card" *ngIf="repository">
   <div class="card-block">
     <clr-tabs>
-      <clr-tab-link>Readme</clr-tab-link>
-      <clr-tab-link>Commits</clr-tab-link>
-      <clr-tab-link>Issues</clr-tab-link>
-      <clr-tab-link>PRs</clr-tab-link>
+      <clr-tab>
+        <button clrTabLink>Readme</button>
+        <clr-tab-content *clrIfActive="true">
+          <app-repository-readme [readme]="readme$ | async"></app-repository-readme>
+        </clr-tab-content>
+      </clr-tab>
 
-      <clr-tab-content [clrTabContentActive]="true">
-        <app-repository-readme [readme]="readme$ | async"></app-repository-readme>
-      </clr-tab-content>
+      <clr-tab>
+        <button clrTabLink>Commits</button>
+        <clr-tab-content>
+          <h2>Latest commits</h2>
+          <app-repository-commit
+            *ngFor="let commit of (commits$ | async)" [commit]="commit"></app-repository-commit>
+        </clr-tab-content>
+      </clr-tab>
 
-      <clr-tab-content>
-        <h2>Latest commits</h2>
-        <app-repository-commit
-          *ngFor="let commit of (commits$ | async)" [commit]="commit"></app-repository-commit>
-      </clr-tab-content>
+      <clr-tab>
+        <button clrTabLink>Issues</button>
+        <clr-tab-content>
+          <h2>Issues</h2>
+          <app-repository-issue *ngFor="let issue of (issues$ | async)" [issue]="issue"></app-repository-issue>
+        </clr-tab-content>
+      </clr-tab>
 
-      <clr-tab-content>
-        <h2>Issues</h2>
-        <app-repository-issue *ngFor="let issue of (issues$ | async)" [issue]="issue"></app-repository-issue>
-      </clr-tab-content>
-
-      <clr-tab-content>
-        <h2>Pull Requests</h2>
-        <app-repository-pull *ngFor="let pull of (pulls$ | async)" [pull]="pull"></app-repository-pull>
-      </clr-tab-content>
+      <clr-tab>
+        <button clrTabLink>PRs</button>
+        <clr-tab-content>
+          <h2>Pull Requests</h2>
+          <app-repository-pull *ngFor="let pull of (pulls$ | async)" [pull]="pull"></app-repository-pull>
+        </clr-tab-content>
+      </clr-tab>
     </clr-tabs>
   </div>
 </div>

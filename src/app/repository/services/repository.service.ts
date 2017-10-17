@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { AppRootState } from '../../shared/store/index';
+import { AppRootState } from '../../core/state/index';
 import { Repository } from '../../shared/model/repository';
 import {
   getRepositoryEntity, getRepositoryError, getRepositoryReadme,
   getRepositoryIssues, getRepositoryCommits, getRepositoryPulls
-} from '../../shared/store/selectors';
+} from '../../core/state/selectors';
 import { AppError } from '../../shared/model/app-error';
 import {
   LoadReadmeAction, LoadIssuesAction, LoadCommitsAction,
   LoadPullsAction
-} from '../../shared/store/actions/repository.actions';
+} from '../../core/state/repository.actions';
 import { Issue } from '../../shared/model/issue';
 import { Commit } from '../../shared/model/commit';
 import { PullRequest } from '../../shared/model/pull-request';

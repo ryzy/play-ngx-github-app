@@ -12,12 +12,12 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/switchMap';
 
-import { Repository } from '../../model/repository';
-import { GitHubAPIService } from '../../services/github-api.service';
+import { Repository } from '../../shared/model/repository';
+import { GitHubAPIService } from '../../shared/services/github-api.service';
 import {
   ActionTypes, LoadTrendingCompleteAction,
   SearchErrorAction, SearchAction, SearchCompleteAction, SelectAction, LoadTrendingAction
-} from '../actions/repository.actions';
+} from './repository.actions';
 import { Router } from '@angular/router';
 
 

@@ -5,11 +5,11 @@ import { Store } from '@ngrx/store';
 import {
   getRepositorySearchQuery, getRepositorySearchLoading, getRepositorySearchEntities,
   getRepositorySearchError, getRepositorySearchHasTrending
-} from '../../shared/store/selectors';
-import { SearchAction, LoadTrendingAction, SelectAction } from '../../shared/store/actions/repository.actions';
+} from '../../core/state/selectors';
+import { SearchAction, LoadTrendingAction, SelectAction } from '../../core/state/repository.actions';
 import { AppError } from '../../shared/model/app-error';
 import { Repository } from '../../shared/model/repository';
-import { AppRootState } from '../../shared/store/index';
+import { AppRootState } from '../../core/state/index';
 
 
 @Injectable()

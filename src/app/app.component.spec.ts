@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { DebugElement } from '@angular/core';
+import { CoreModule } from './core/core.module';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -16,11 +17,11 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
+        CoreModule,
         SharedModule,
-        SharedModule.provideStoreModule(),
       ],
       declarations: [
-        AppComponent
+        AppComponent,
       ],
     });
     TestBed.compileComponents();

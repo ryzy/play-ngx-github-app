@@ -1,8 +1,8 @@
 import { Response } from '@angular/http';
 
-import * as repositoryActions from '../actions/repository.actions';
-import { AppError } from '../../model/app-error';
-import { Repository } from '../../model/repository';
+import * as repositoryActions from '../repository.actions';
+import { AppError } from '../../../shared/model/app-error';
+import { Repository } from '../../../shared/model/repository';
 
 /**
  * Repository search state schema

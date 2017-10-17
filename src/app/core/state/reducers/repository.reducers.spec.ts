@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 import { reducer, initialState, State } from './repository.reducers';
-import * as repositoryActions from '../actions/repository.actions';
-import { Repository } from '../../model/repository';
+import * as repositoryActions from '../repository.actions';
+import { Repository } from '../../../shared/model/repository';
 
 import { repositoryTestData } from '../../../../testing/fixtures/repository';
 import { repositoryCommitsTestData } from '../../../../testing/fixtures/repository-commits';
@@ -18,11 +18,11 @@ describe('reducers: repository', () => {
   it('should produce state for LOAD, SELECT action', () => {
     const newState = reducer(initialState, new repositoryActions.LoadAction(repositoryTestData));
     expect(newState.entity).toBe(repository);
-    expect(newState.error).toBeNull();
+    expect(newState.error).toBe(undefined);
 
     const selectState = reducer(initialState, new repositoryActions.SelectAction(repositoryTestData));
     expect(selectState.entity).toBe(repository);
-    expect(selectState.error).toBeNull();
+    expect(selectState.error).toBe(undefined);
   });
 
   it('should produce state for LOAD_* actions', () => {

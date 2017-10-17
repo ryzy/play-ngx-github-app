@@ -13,16 +13,16 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/of';
 
-import { Repository } from '../../model/repository';
-import { GitHubAPIService } from '../../services/github-api.service';
+import { Repository } from '../../shared/model/repository';
+import { GitHubAPIService } from '../../shared/services/github-api.service';
 import {
   ActionTypes, LoadReadmeAction, LoadReadmeCompleteAction,
   LoadErrorAction, LoadCommitsAction, LoadCommitsCompleteAction, LoadIssuesAction, LoadIssuesCompleteAction,
   LoadPullsAction, LoadPullsCompleteAction
-} from '../actions/repository.actions';
-import { Commit } from '../../model/commit';
-import { Issue } from '../../model/issue';
-import { PullRequest } from '../../model/pull-request';
+} from './repository.actions';
+import { Commit } from '../../shared/model/commit';
+import { Issue } from '../../shared/model/issue';
+import { PullRequest } from '../../shared/model/pull-request';
 
 
 @Injectable()

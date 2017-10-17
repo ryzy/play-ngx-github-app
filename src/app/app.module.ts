@@ -1,19 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+    CoreModule,
     SharedModule,
-
-    // Provide NgRx store and its effects
-    SharedModule.provideStoreModule(),
-    SharedModule.provideStoreEffectsModule(),
+    AppRoutingModule,
   ],
   providers: [],
   declarations: [

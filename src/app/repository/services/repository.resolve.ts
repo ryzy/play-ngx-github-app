@@ -7,11 +7,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import { Store } from '@ngrx/store';
 
-import { AppRootState } from '../../shared/store/index';
+import { AppRootState } from '../../core/state/index';
 import { GitHubAPIService } from '../../shared/services/github-api.service';
 import { Repository } from '../../shared/model/repository';
-import { LoadAction, LoadErrorAction } from '../../shared/store/actions/repository.actions';
-import { getRepositoryEntity } from '../../shared/store/selectors';
+import { LoadAction, LoadErrorAction } from '../../core/state/repository.actions';
+import { getRepositoryEntity } from '../../core/state/selectors';
 
 
 @Injectable()

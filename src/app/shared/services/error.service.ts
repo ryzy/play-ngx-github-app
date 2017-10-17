@@ -3,9 +3,9 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/merge';
 
-import { AppRootState } from '../store/index';
+import { AppRootState } from '../../core/state/index';
 import { AppError } from '../model/app-error';
-import { getRepositorySearchError, getRepositoryError } from '../store/selectors';
+import { getRepositorySearchError, getRepositoryError } from '../../core/state/selectors';
 
 @Injectable()
 export class ErrorService {
