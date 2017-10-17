@@ -6,14 +6,14 @@ import { Store } from '@ngrx/store';
 import { AppError } from '../model/app-error';
 import { ErrorService } from './error.service';
 import { SharedModule } from '../shared.module';
-import { StoreRootState } from '../store/index';
+import { AppRootState } from '../store/index';
 import { SearchErrorAction } from '../store/actions/repository.actions';
 
 describe('ErrorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        SharedModule.provideStoreModule(),
+        // SharedModule.provideStoreModule(),
       ],
       providers: [
         ErrorService,
@@ -25,7 +25,7 @@ describe('ErrorService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should get app error', inject([ErrorService, Store], (service: ErrorService, store: Store<StoreRootState>) => {
+  it('should get app error', inject([ErrorService, Store], (service: ErrorService, store: Store<AppRootState>) => {
     const error$ = service.getAppError()
       .filter((err) => !!err); // skip the first NULLs
 

@@ -8,18 +8,15 @@ import 'rxjs/add/operator/startWith';
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Effect, Actions } from '@ngrx/effects';
-import { Action, Store } from '@ngrx/store';
-import { replace, go } from '@ngrx/router-store';
+import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { empty } from 'rxjs/observable/empty';
-import { of } from 'rxjs/observable/of';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/of';
 
 import { Repository } from '../../model/repository';
 import { GitHubAPIService } from '../../services/github-api.service';
-import { StoreRootState } from '../index';
 import {
-  ActionTypes, LoadTrendingCompleteAction,
-  SearchErrorAction, SearchAction, SearchCompleteAction, SelectAction, LoadReadmeAction, LoadReadmeCompleteAction,
+  ActionTypes, LoadReadmeAction, LoadReadmeCompleteAction,
   LoadErrorAction, LoadCommitsAction, LoadCommitsCompleteAction, LoadIssuesAction, LoadIssuesCompleteAction,
   LoadPullsAction, LoadPullsCompleteAction
 } from '../actions/repository.actions';
@@ -38,7 +35,7 @@ export class RepositoryEffects {
     .switchMap((repository: Repository) => {
       return this.gitHubAPIService.retrieveRepositoryCommits(repository.full_name)
         .map((commits: Commit[]) => new LoadCommitsCompleteAction(commits))
-        .catch((error: Response) => of(new LoadErrorAction(error)));
+        .catch((error: Response) => Observable.of(new LoadErrorAction(error)));
     })
   ;
 
@@ -49,7 +46,7 @@ export class RepositoryEffects {
     .switchMap((repository: Repository) => {
       return this.gitHubAPIService.retrieveRepositoryIssues(repository.full_name)
         .map((issues: Issue[]) => new LoadIssuesCompleteAction(issues))
-        .catch((error: Response) => of(new LoadErrorAction(error)));
+        .catch((error: Response) => Observable.of(new LoadErrorAction(error)));
     })
   ;
 
@@ -60,7 +57,7 @@ export class RepositoryEffects {
     .switchMap((repository: Repository) => {
       return this.gitHubAPIService.retrieveRepositoryPulls(repository.full_name)
         .map((pulls: PullRequest[]) => new LoadPullsCompleteAction(pulls))
-        .catch((error: Response) => of(new LoadErrorAction(error)));
+        .catch((error: Response) => Observable.of(new LoadErrorAction(error)));
     })
   ;
 
@@ -71,7 +68,7 @@ export class RepositoryEffects {
     .switchMap((repository: Repository) => {
       return this.gitHubAPIService.retrieveRepositoryReadme(repository.full_name)
         .map((readme: string) => new LoadReadmeCompleteAction(readme))
-        .catch((error: Response) => of(new LoadErrorAction(error)));
+        .catch((error: Response) => Observable.of(new LoadErrorAction(error)));
     })
   ;
 

@@ -60,8 +60,8 @@ describe('reducers: repository', () => {
   it('should produce state for LOAD_ERROR actions', () => {
     const error = <Response>{ status: 500, statusText: 'Some server error' };
     const newState = reducer(initialState, new repositoryActions.LoadErrorAction(error));
-    expect(newState.error.statusCode).toEqual(500);
-    expect(newState.error.message).toEqual('Some server error');
+    expect(newState.error!.statusCode).toEqual(500);
+    expect(newState.error!.message).toEqual('Some server error');
     expect(newState.loading).toBe(false);
   });
 });

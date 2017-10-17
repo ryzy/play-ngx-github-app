@@ -11,4 +11,7 @@ export interface Owner {
   starred_url: string; // API url to user's starred repos
   type: string; // e.g. User|Organisation
   url: string; // HTML url to user's profile
+
+  // Remaining properties
+  [key: string]: any;
 }

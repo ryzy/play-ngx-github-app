@@ -54,7 +54,7 @@ describe('reducers: repository-search', () => {
     expect(newState.query).toBeNull();
     expect(newState.loading).toEqual(false);
     expect(newState.error).not.toBeNull();
-    expect(newState.error.message).toEqual(error.statusText);
-    expect(newState.error.statusCode).toEqual(error.status);
+    expect(newState.error!.message).toEqual(error.statusText!);
+    expect(newState.error!.statusCode).toEqual(error.status);
   });
 });

@@ -1,7 +1,6 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { SharedModule } from '../../../shared/shared.module';
 import { RepositoryIssueComponent } from './repository-issue.component';
@@ -40,7 +39,7 @@ describe('RepositoryIssueComponent', () => {
 
   it('getLabelColor() should generate hex color', () => {
     const cmp = new RepositoryIssueComponent();
-    expect(cmp.getLabelColor(123)).toEqual('#123');
+    expect(cmp.getLabelColor(123 as any)).toEqual('#123');
     expect(cmp.getLabelColor('abc')).toEqual('#abc');
     expect(cmp.getLabelColor('abcdef')).toEqual('#abcdef');
   });

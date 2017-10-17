@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Issue } from '../../../shared/model/issue';
 
 @Component({
@@ -9,7 +9,7 @@ import { Issue } from '../../../shared/model/issue';
 export class RepositoryIssueComponent {
   @Input() public issue: Issue;
 
-  public getLabelColor(color) {
+  public getLabelColor(color: string): string {
     return '#' + color;
   }
 }

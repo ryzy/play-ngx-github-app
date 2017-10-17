@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import { StoreRootState } from '../../shared/store/index';
 import { Observable } from 'rxjs/Observable';
+
+import { AppRootState } from '../../shared/store/index';
 import { Repository } from '../../shared/model/repository';
 import {
   getRepositoryEntity, getRepositoryError, getRepositoryReadme,
@@ -22,20 +22,20 @@ import { PullRequest } from '../../shared/model/pull-request';
 export class RepositoryService {
 
   public constructor(
-    private store: Store<StoreRootState>
+    private store: Store<AppRootState>
   ) { }
 
   /**
    * Get currently selected repository
    */
-  public getRepository(): Observable<Repository> {
+  public getRepository(): Observable<Repository|undefined> {
     return this.store.select(getRepositoryEntity);
   }
 
   /**
    * Get error occurred during loading the repository
    */
-  public getError(): Observable<AppError> {
+  public getError(): Observable<AppError|undefined> {
     return this.store.select(getRepositoryError);
   }
 
@@ -92,7 +92,7 @@ export class RepositoryService {
    *                            Should be set to true when we want to trigger fetching new data to store.
    * @returns {Observable}
    */
-  public getReadme(repository: Repository, dispatch = false): Observable<string> {
+  public getReadme(repository: Repository, dispatch = false): Observable<string|undefined> {
     if (dispatch) {
       this.store.dispatch(new LoadReadmeAction(repository));
     }

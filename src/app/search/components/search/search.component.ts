@@ -9,32 +9,29 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class SearchComponent implements OnInit {
   /**
    * Initially provided search query value (if any)
-   * @type {string}
    */
-  @Input() public query = '';
+  @Input() public query: string = '';
 
   /**
    * Flag indicating that search is in progress
-   * @type {boolean}
    */
-  @Input() public loading = false;
+  @Input() public loading: boolean = false;
 
   /**
    * Emits search string on each change
-   * @type {EventEmitter<string>}
    */
-  @Output() public search = new EventEmitter<string>();
+  @Output() public search: EventEmitter<string> = new EventEmitter();
 
-  private keyUpStream = new EventEmitter<string>();
+  private keyUpStream: EventEmitter<string> = new EventEmitter();
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.keyUpStream
       .distinctUntilChanged()
       // Emit new values in @Output `change` only on a new distinct value
       .subscribe((value) => this.search.emit(value));
   }
 
-  public onKeyUp(value: string) {
+  public onKeyUp(value: string): void {
     this.keyUpStream.emit(value);
   }
 }

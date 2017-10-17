@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import { PullRequest } from '../../../shared/model/pull-request';
 
 @Component({

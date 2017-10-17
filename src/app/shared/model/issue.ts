@@ -12,15 +12,18 @@ export interface Issue {
   user: Owner;
   state: string;
   locked: boolean;
-  assignee: Owner;
-  assignees: Owner[];
-  milestone: Object;
+  assignee?: Owner|null;
+  assignees?: Owner[]|null;
+  milestone?: Object|null;
   labels: IssueLabel[];
   comments: number;
   created_at: string;
   updated_at: string;
-  closed_at: string;
+  closed_at?: string|null;
   body: string;
+
+  // Remaining properties
+  [key: string]: any;
 }
 
 export interface IssueLabel {
@@ -28,4 +31,7 @@ export interface IssueLabel {
   url: string;
   name: string;
   color: string; // hex color, but without `#`
+
+  // Remaining properties
+  [key: string]: any;
 }

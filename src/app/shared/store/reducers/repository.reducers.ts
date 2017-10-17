@@ -11,33 +11,26 @@ import { PullRequest } from '../../model/pull-request';
  * Repository state schema
  */
 export interface State {
-  entity: Repository; // currently loaded/displayed repository
-  error: AppError; // any error while loading entity and/or commits/issues/pulls etc
+  entity?: Repository; // currently loaded/displayed repository
+  error?: AppError; // any error while loading entity and/or commits/issues/pulls etc
   loading: boolean;
   commits: Commit[];
   issues: Issue[];
   pulls: PullRequest[];
-  readme: string;
+  readme?: string;
 }
 
 export const initialState: State = {
-  entity: null,
-  error: null,
   loading: false,
   commits: [],
   issues: [],
   pulls: [],
-  readme: null,
 };
 
 /**
  * Repository reducer
- *
- * @param {State} state
- * @param action
- * @returns {any}
  */
-export function reducer(state = initialState, action: repositoryActions.Actions): State {
+export function reducer(state: State = initialState, action: repositoryActions.Actions): State {
   // console.log('repository reducer()', {state, action});
 
   switch (action.type) {

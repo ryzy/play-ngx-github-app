@@ -15,18 +15,18 @@ import { AppError } from '../../shared/model/app-error';
   styleUrls: ['./search-page.component.scss']
 })
 export class SearchPageComponent implements OnInit {
-  public searchQuery$: Observable<string>;
+  public searchQuery$: Observable<string|undefined>;
   public isLoading$: Observable<boolean>;
   public repositories$: Observable<Repository[]>;
   public noResults$: Observable<boolean>;
   public showingTrending$: Observable<boolean>;
 
-  constructor(
+  public constructor(
     private searchService: SearchService,
     private route: ActivatedRoute,
   ) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.searchQuery$ = this.searchService.getSearchQuery();
     this.isLoading$ = this.searchService.isLoading();
     this.repositories$ = this.searchService.getRepositories();
@@ -38,7 +38,7 @@ export class SearchPageComponent implements OnInit {
       .combineLatest(this.repositories$, this.isLoading$)
       .map((combined) => {
         const [query, repositories, loading] = combined;
-        return query && repositories.length === 0 && !loading;
+        return !!query && repositories.length === 0 && !loading;
       })
     ;
 
@@ -50,7 +50,7 @@ export class SearchPageComponent implements OnInit {
    *
    * @param query
    */
-  public doSearch(query: string) {
+  public doSearch(query: string): void {
     if (query) {
       this.searchService.doSearch(query);
     } else {
@@ -63,7 +63,7 @@ export class SearchPageComponent implements OnInit {
    *
    * @param repository
    */
-  public selectRepository(repository: Repository) {
+  public selectRepository(repository: Repository): void {
     this.searchService.selectRepository(repository);
   }
 
@@ -74,7 +74,7 @@ export class SearchPageComponent implements OnInit {
    * Note: we only subscribe to the 1st change (.take(1)) and ignore the next ones
    * when the URL is updated due to user's typing in the search box.
    */
-  private doInitialSearch() {
+  private doInitialSearch(): void {
     this.route.queryParams
       .map((params: Params) => params['q'])
       .combineLatest(this.repositories$)

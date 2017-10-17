@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/switchMap';
 
 import { GITHUB_API_BASE_URL, GITHUB_API_CLIENT_ID, GITHUB_API_CLIENT_SECRET } from '../config';
@@ -64,7 +65,7 @@ export class GitHubAPIService {
       })
       // GitHub returns 404 Not Found in case repository doesn't have available README content.
       // Catch such errors and return nice README error message instead of just 404.
-      .catch((res: Response) => of(GITHUB_API_ERROR_README_NOT_FOUND))
+      .catch((res: Response) => Observable.of(GITHUB_API_ERROR_README_NOT_FOUND))
     ;
   }
 

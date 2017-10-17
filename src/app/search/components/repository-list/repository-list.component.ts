@@ -8,10 +8,10 @@ import { Repository } from '../../../shared/model/repository';
 })
 export class RepositoryListComponent {
   @Input() public repositories: Repository[];
-  @Output() public selectRepository = new EventEmitter<Repository>();
+  @Output() public selectRepository: EventEmitter<Repository> = new EventEmitter();
 
-  public navigateToRepository(repository: Repository, ev: Event) {
-    if (ev.target['href']) {
+  public navigateToRepository(repository: Repository, ev: Event): void {
+    if ((ev.target as any)['href']) {
       return; // Skip navigation if user clicked on a link with `href` attribute set
     }
 
