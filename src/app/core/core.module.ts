@@ -1,4 +1,5 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
@@ -6,15 +7,16 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MAT_PLACEHOLDER_GLOBAL_OPTIONS } from '@angular/material';
+import { ApolloModule } from 'apollo-angular';
 
 import { environment } from '../../environments/environment';
 import { appRootInitialState, appRootReducers, metaReducers } from './state/index';
-import { HttpModule } from '@angular/http';
 import { GitHubAPIService } from '../shared/services/github-api.service';
 import { ErrorService } from '../shared/services/error.service';
 import { RepositoryEffects } from './state/repository.effects';
 import { RepositorySearchEffects } from './state/repository-search.effects';
 import { AppRouterStateSerializer } from './services/router-state-serializer';
+import { graphQLClientWrapper } from './graphql/apollo-client';
 
 /**
  * CoreModule, must be imported only by root module.
@@ -36,6 +38,8 @@ import { AppRouterStateSerializer } from './services/router-state-serializer';
     ]),
     environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 50 }),
     StoreRouterConnectingModule,
+
+    ApolloModule.forRoot(graphQLClientWrapper),
   ],
   providers: [
     { provide: RouterStateSerializer, useClass: AppRouterStateSerializer },

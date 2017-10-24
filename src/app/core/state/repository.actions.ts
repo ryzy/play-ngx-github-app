@@ -2,10 +2,10 @@ import { Response } from '@angular/http';
 import { Action } from '@ngrx/store';
 
 import { type } from '../../shared/utils';
-import { Repository } from '../../shared/model/repository';
 import { Commit } from '../../shared/model/commit';
 import { Issue } from '../../shared/model/issue';
 import { PullRequest } from '../../shared/model/pull-request';
+import { RepositoryFragment } from '../queries.types';
 
 /**
  * Repository action types list
@@ -63,7 +63,7 @@ export class SearchErrorAction implements Action {
 export class SearchCompleteAction implements Action {
   public type: string = ActionTypes.SEARCH_COMPLETE;
 
-  constructor(public payload: Repository[]) {}
+  constructor(public payload: RepositoryFragment[]) {}
 }
 
 export class LoadTrendingAction implements Action {
@@ -75,19 +75,19 @@ export class LoadTrendingAction implements Action {
 export class LoadTrendingCompleteAction implements Action {
   public type: string = ActionTypes.LOAD_TRENDING_COMPLETE;
 
-  constructor(public payload: Repository[]) {}
+  constructor(public payload: RepositoryFragment[]) {}
 }
 
 export class SelectAction implements Action {
   public type: string = ActionTypes.SELECT;
 
-  constructor(public payload: Repository) {}
+  constructor(public payload: RepositoryFragment) {}
 }
 
 export class LoadAction implements Action {
   public type: string = ActionTypes.LOAD;
 
-  constructor(public payload: Repository) {}
+  constructor(public payload: RepositoryFragment) {}
 }
 
 export class LoadErrorAction implements Action {
@@ -99,7 +99,7 @@ export class LoadErrorAction implements Action {
 export class LoadCommitsAction implements Action {
   public type: string = ActionTypes.LOAD_COMMITS;
 
-  constructor(public payload: Repository) {}
+  constructor(public payload: RepositoryFragment) {}
 }
 
 export class LoadCommitsCompleteAction implements Action {
@@ -111,7 +111,7 @@ export class LoadCommitsCompleteAction implements Action {
 export class LoadIssuesAction implements Action {
   public type: string = ActionTypes.LOAD_ISSUES;
 
-  constructor(public payload: Repository) {}
+  constructor(public payload: RepositoryFragment) {}
 }
 
 export class LoadIssuesCompleteAction implements Action {
@@ -123,7 +123,7 @@ export class LoadIssuesCompleteAction implements Action {
 export class LoadPullsAction implements Action {
   public type: string = ActionTypes.LOAD_PULLS;
 
-  constructor(public payload: Repository) {}
+  constructor(public payload: RepositoryFragment) {}
 }
 
 export class LoadPullsCompleteAction implements Action {
@@ -135,7 +135,7 @@ export class LoadPullsCompleteAction implements Action {
 export class LoadReadmeAction implements Action {
   public type: string = ActionTypes.LOAD_README;
 
-  constructor(public payload: Repository) {}
+  constructor(public payload: RepositoryFragment) {}
 }
 
 export class LoadReadmeCompleteAction implements Action {

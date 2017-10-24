@@ -2,7 +2,7 @@
 import { reducer, initialState } from './repository-search.reducers';
 import * as repositoryActions from '../repository.actions';
 import { repositoriesTestData } from '../../../../testing/fixtures/repositories';
-import { Repository } from '../../../shared/model/repository';
+import { RepositoryFragment } from '../../queries.types';
 import { Response } from '@angular/http';
 
 describe('reducers: repository-search', () => {
@@ -31,7 +31,7 @@ describe('reducers: repository-search', () => {
 
   it('should produce state for SearchCompleteAction and LoadTrendingCompleteAction', () => {
     const state = Object.assign({}, initialState, { query: 'foo' });
-    const payload = <Repository[]>repositoriesTestData;
+    const payload = <RepositoryFragment[]>repositoriesTestData;
 
     const searchCompleteState = reducer(state, new repositoryActions.SearchCompleteAction(payload));
     expect(searchCompleteState.entities.length).toEqual(repositoriesTestData.length);

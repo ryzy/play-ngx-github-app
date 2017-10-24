@@ -1,4 +1,4 @@
-import { Owner } from './owner';
+import { RepositoryOwnerFragment } from '../../core/queries.types';
 
 /**
  * GitHub repository PR model
@@ -9,11 +9,11 @@ export interface PullRequest {
   number: number;
   title: string;
 
-  user: Owner;
+  user: RepositoryOwnerFragment;
   state: string;
   locked: boolean;
-  assignee?: Owner|null;
-  assignees?: Owner[]|null;
+  assignee?: RepositoryOwnerFragment|null;
+  assignees?: RepositoryOwnerFragment[]|null;
   milestone?: Object|null;
   created_at: string;
   updated_at: string;

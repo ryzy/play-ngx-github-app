@@ -1,38 +1,45 @@
-import { Repository } from '../../app/shared/model/repository';
-import { Owner } from '../../app/shared/model/owner';
+import { RepositoryFragment } from '../../app/core/queries.types';
 
 /**
  * Sample data returned from
  * GET /repos/:owner/:repo
  */
-export const repositoryTestData = <Repository>{
-  id: 2126244,
-  name: 'bootstrap',
-  full_name: 'twbs/bootstrap',
-  owner: <Owner>{
-    login: 'twbs',
-    id: 2918581,
-    avatar_url: 'https://avatars.githubusercontent.com/u/2918581?v=3',
-    html_url: 'https://github.com/twbs',
-    starred_url: 'https://api.github.com/users/twbs/starred{/owner}{/repo}',
-    repos_url: 'https://api.github.com/users/twbs/repos',
-    type: 'Organization',
+export const repositoryTestData: RepositoryFragment = {
+  id: 'MDEwOlJlcG9zaXRvcnkyNDE5NTMzOQ==',
+  name: 'angular',
+  nameWithOwner: 'angular/angular',
+  description: 'One framework. Mobile & desktop.',
+  descriptionHTML: '<div>One framework. Mobile &amp; desktop.</div>',
+  createdAt: '2014-09-18T16:12:01Z',
+  pushedAt: '2017-10-18T09:52:15Z',
+  languages: {
+    nodes: [
+      {
+        name: 'JavaScript',
+        color: '#f1e05a'
+      }
+    ]
   },
-  html_url: 'https://github.com/twbs/bootstrap',
-  description: 'The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web.',
-  fork: false,
-  issues_url: 'https://api.github.com/repos/twbs/bootstrap/issues{/number}',
-  created_at: '2011-07-29T21:19:00Z',
-  updated_at: '2016-12-14T16:21:38Z',
-  pushed_at: '2016-12-14T13:31:16Z',
-  ssh_url: 'git@github.com:twbs/bootstrap.git',
-  clone_url: 'https://github.com/twbs/bootstrap.git',
-  homepage: 'http://getbootstrap.com',
-  size: 217052,
-  stargazers_count: 104518,
-  subscribers_count: 666,
-  language: 'JavaScript',
-  has_issues: true,
-  open_issues: 300,
-  forks: 47430,
+  url: 'https://github.com/angular/angular',
+  homepageUrl: 'https://angular.io',
+  isFork: false,
+  forks: {
+    totalCount: 7110
+  },
+  issues: {
+    totalCount: 12178
+  },
+  stargazers: {
+    totalCount: 28877
+  },
+  watchers: {
+    totalCount: 2690
+  },
+  owner: {
+    id: 'MDEyOk9yZ2FuaXphdGlvbjEzOTQyNg==',
+    login: 'angular',
+    avatarUrl: 'https://avatars3.githubusercontent.com/u/139426?v=4',
+    url: 'https://github.com/angular',
+    __typename: 'Organization'
+  }
 };

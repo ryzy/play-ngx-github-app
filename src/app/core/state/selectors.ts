@@ -2,13 +2,14 @@ import { createSelector } from '@ngrx/store';
 
 import { AppRootState } from './index';
 import { AppError } from '../../shared/model/app-error';
-import { Repository } from '../../shared/model/repository';
 import { Commit } from '../../shared/model/commit';
 import { Issue } from '../../shared/model/issue';
 import { PullRequest } from '../../shared/model/pull-request';
+import { RepositoryFragment } from '../queries.types';
 import * as repository from './reducers/repository.reducers';
 import * as repositorySearch from './reducers/repository-search.reducers';
 import { AppRouterState } from './reducers/router';
+
 
 //
 // Define reducer's selectors to ease selecting state from the root store

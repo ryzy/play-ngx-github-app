@@ -1,0 +1,18 @@
+{
+  "schema": {
+    "file": "graphql.schema.json"
+  },
+
+  "endpoints" : [
+    {
+      "name": "GitHub GraphQL",
+      "url": "https://dev-trendscope.bsapps.net/api/graphql",
+      "options" : {
+        "headers": {
+          "Authorization" : "Bearer 084dab93a09b8d29b3d6ebea45dd067636a584d0"
+        }
+      }
+    }
+  ]
+
+}

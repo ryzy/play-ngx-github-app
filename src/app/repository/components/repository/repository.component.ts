@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Repository } from '../../../shared/model/repository';
+
+import { RepositoryFragment } from '../../../core/queries.types';
 
 @Component({
   selector: 'app-repository',
@@ -7,5 +8,5 @@ import { Repository } from '../../../shared/model/repository';
   styleUrls: ['./repository.component.scss']
 })
 export class RepositoryComponent {
-  @Input() public repository: Repository;
+  @Input() public repository: RepositoryFragment;
 }

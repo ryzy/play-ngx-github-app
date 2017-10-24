@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/of';
 
-import { Repository } from '../../shared/model/repository';
+import { RepositoryFragment } from '../queries.types';
 import { GitHubAPIService } from '../../shared/services/github-api.service';
 import {
   ActionTypes, LoadReadmeAction, LoadReadmeCompleteAction,
@@ -31,9 +31,9 @@ export class RepositoryEffects {
   @Effect()
   public loadCommits$: Observable<Action> = this.actions$
     .ofType(ActionTypes.LOAD_COMMITS)
-    .map((action: LoadCommitsAction) => <Repository>action.payload )
-    .switchMap((repository: Repository) => {
-      return this.gitHubAPIService.retrieveRepositoryCommits(repository.full_name)
+    .map((action: LoadCommitsAction) => <RepositoryFragment>action.payload )
+    .switchMap((repository: RepositoryFragment) => {
+      return this.gitHubAPIService.retrieveRepositoryCommits(repository.nameWithOwner)
         .map((commits: Commit[]) => new LoadCommitsCompleteAction(commits))
         .catch((error: Response) => Observable.of(new LoadErrorAction(error)));
     })
@@ -42,9 +42,9 @@ export class RepositoryEffects {
   @Effect()
   public loadIssues$: Observable<Action> = this.actions$
     .ofType(ActionTypes.LOAD_ISSUES)
-    .map((action: LoadIssuesAction) => <Repository>action.payload )
-    .switchMap((repository: Repository) => {
-      return this.gitHubAPIService.retrieveRepositoryIssues(repository.full_name)
+    .map((action: LoadIssuesAction) => <RepositoryFragment>action.payload )
+    .switchMap((repository: RepositoryFragment) => {
+      return this.gitHubAPIService.retrieveRepositoryIssues(repository.nameWithOwner)
         .map((issues: Issue[]) => new LoadIssuesCompleteAction(issues))
         .catch((error: Response) => Observable.of(new LoadErrorAction(error)));
     })
@@ -53,9 +53,9 @@ export class RepositoryEffects {
   @Effect()
   public loadPulls$: Observable<Action> = this.actions$
     .ofType(ActionTypes.LOAD_PULLS)
-    .map((action: LoadPullsAction) => <Repository>action.payload )
-    .switchMap((repository: Repository) => {
-      return this.gitHubAPIService.retrieveRepositoryPulls(repository.full_name)
+    .map((action: LoadPullsAction) => <RepositoryFragment>action.payload )
+    .switchMap((repository: RepositoryFragment) => {
+      return this.gitHubAPIService.retrieveRepositoryPulls(repository.nameWithOwner)
         .map((pulls: PullRequest[]) => new LoadPullsCompleteAction(pulls))
         .catch((error: Response) => Observable.of(new LoadErrorAction(error)));
     })
@@ -64,9 +64,9 @@ export class RepositoryEffects {
   @Effect()
   public loadReadme$: Observable<Action> = this.actions$
     .ofType(ActionTypes.LOAD_README)
-    .map((action: LoadReadmeAction) => <Repository>action.payload )
-    .switchMap((repository: Repository) => {
-      return this.gitHubAPIService.retrieveRepositoryReadme(repository.full_name)
+    .map((action: LoadReadmeAction) => <RepositoryFragment>action.payload )
+    .switchMap((repository: RepositoryFragment) => {
+      return this.gitHubAPIService.retrieveRepositoryReadme(repository.nameWithOwner)
         .map((readme: string) => new LoadReadmeCompleteAction(readme))
         .catch((error: Response) => Observable.of(new LoadErrorAction(error)));
     })

@@ -2,13 +2,13 @@ import { Response } from '@angular/http';
 
 import * as repositoryActions from '../repository.actions';
 import { AppError } from '../../../shared/model/app-error';
-import { Repository } from '../../../shared/model/repository';
+import { RepositoryFragment } from '../../queries.types';
 
 /**
  * Repository search state schema
  */
 export interface State {
-  entities: Repository[];
+  entities: RepositoryFragment[];
   trending: boolean;
   query?: string;
   loading: boolean;
@@ -55,7 +55,7 @@ export function reducer(state: State = initialState, action: repositoryActions.A
 
     case repositoryActions.ActionTypes.SEARCH_COMPLETE:
     case repositoryActions.ActionTypes.LOAD_TRENDING_COMPLETE:
-      const entities = <Repository[]>action.payload;
+      const entities = <RepositoryFragment[]>action.payload;
       return {
         entities: entities,
         trending: repositoryActions.ActionTypes.LOAD_TRENDING_COMPLETE === action.type,

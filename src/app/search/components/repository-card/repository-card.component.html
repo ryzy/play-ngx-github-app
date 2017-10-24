@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-block">
     <div class="card-title">
-      {{repository.full_name}}
+      {{repository.nameWithOwner}}
     </div>
     <div class="card-text">
       {{repository.description}}
@@ -10,18 +10,18 @@
 
   <div class="card-footer">
     <span class="label label-purple" title="Primary language">
-      {{repository.language}}
+      {{repository.languages?.nodes[0]?.name}}
     </span>
     <span class="label label-orange" title="Stars">
-      Stars: <span class="badge">{{repository.stargazers_count | number}}</span>
+      Stars: <span class="badge">{{repository.stargazers.totalCount | number}}</span>
     </span>
     <span class="label label-light-blue" title="Forks">
-      Forks: <span class="badge">{{repository.forks | number}}</span>
+      Forks: <span class="badge">{{repository.forks.totalCount | number}}</span>
     </span>
-    <a class="label clickable" href="{{repository.owner.html_url}}" title="{{repository.owner.login}}">
+    <a class="label clickable" href="{{repository.owner.url}}" title="{{repository.owner.login}}">
       Built by:
-      <img src="{{repository.owner.avatar_url}}" class="badge badge--img" alt="{{repository.owner.login}}" />
+      <img src="{{repository.owner.avatarUrl}}" class="badge badge--img" alt="{{repository.owner.login}}" />
     </a>
-    <span class="label">Last update: {{repository.updated_at | date:'medium'}}</span>
+    <span class="label">Last update: {{repository.pushedAt | date:'medium'}}</span>
   </div>
 </div>

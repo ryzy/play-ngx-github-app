@@ -1,7 +1,7 @@
 import { Response } from '@angular/http';
 
 import * as repositoryActions from '../repository.actions';
-import { Repository } from '../../../shared/model/repository';
+import { RepositoryFragment } from '../../queries.types';
 import { AppError } from '../../../shared/model/app-error';
 import { Commit } from '../../../shared/model/commit';
 import { Issue } from '../../../shared/model/issue';
@@ -11,7 +11,7 @@ import { PullRequest } from '../../../shared/model/pull-request';
  * Repository state schema
  */
 export interface State {
-  entity?: Repository; // currently loaded/displayed repository
+  entity?: RepositoryFragment; // currently loaded/displayed repository
   error?: AppError; // any error while loading entity and/or commits/issues/pulls etc
   loading: boolean;
   commits: Commit[];
@@ -42,7 +42,7 @@ export function reducer(state: State = initialState, action: repositoryActions.A
     case repositoryActions.ActionTypes.LOAD:
       return {
         ...initialState,
-        entity: <Repository>action.payload,
+        entity: <RepositoryFragment>action.payload,
         error: undefined,
       };
 

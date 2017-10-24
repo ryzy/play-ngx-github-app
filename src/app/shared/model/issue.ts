@@ -1,4 +1,4 @@
-import { Owner } from './owner';
+import { RepositoryOwnerFragment } from '../../core/queries.types';
 
 /**
  * GitHub repository issue model
@@ -9,11 +9,11 @@ export interface Issue {
   number: number;
   title: string;
 
-  user: Owner;
+  user: RepositoryOwnerFragment;
   state: string;
   locked: boolean;
-  assignee?: Owner|null;
-  assignees?: Owner[]|null;
+  assignee?: RepositoryOwnerFragment|null;
+  assignees?: RepositoryOwnerFragment[]|null;
   milestone?: Object|null;
   labels: IssueLabel[];
   comments: number;

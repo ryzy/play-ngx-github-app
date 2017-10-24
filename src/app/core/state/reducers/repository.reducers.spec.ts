@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
-import { reducer, initialState, State } from './repository.reducers';
+import { reducer, initialState } from './repository.reducers';
 import * as repositoryActions from '../repository.actions';
-import { Repository } from '../../../shared/model/repository';
+import { RepositoryFragment } from '../../queries.types';
 
 import { repositoryTestData } from '../../../../testing/fixtures/repository';
 import { repositoryCommitsTestData } from '../../../../testing/fixtures/repository-commits';
@@ -10,7 +10,7 @@ import { repositoryPullsTestData } from '../../../../testing/fixtures/repository
 import { Response } from '@angular/http';
 
 describe('reducers: repository', () => {
-  const repository = <Repository>repositoryTestData;
+  const repository = <RepositoryFragment>repositoryTestData;
   const commits = [ repositoryCommitsTestData[0], repositoryCommitsTestData[1], repositoryCommitsTestData[2] ];
   const issues = [ repositoryIssuesTestData[0], repositoryIssuesTestData[1], repositoryIssuesTestData[2] ];
   const pulls = [ repositoryPullsTestData[0], repositoryPullsTestData[1], repositoryPullsTestData[2] ];

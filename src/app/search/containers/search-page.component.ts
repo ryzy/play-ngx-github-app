@@ -6,7 +6,7 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/combineLatest';
 
 import { SearchService } from '../services/search.service';
-import { Repository } from '../../shared/model/repository';
+import { RepositoryFragment } from '../../core/queries.types';
 
 @Component({
   selector: 'app-search-page',
@@ -16,7 +16,7 @@ import { Repository } from '../../shared/model/repository';
 export class SearchPageComponent implements OnInit, OnDestroy {
   public searchQuery$: Observable<string|undefined>;
   public isLoading$: Observable<boolean>;
-  public repositories$: Observable<Repository[]>;
+  public repositories$: Observable<RepositoryFragment[]>;
   public noResults$: Observable<boolean>;
   public showingTrending$: Observable<boolean>;
 
@@ -69,7 +69,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
    *
    * @param repository
    */
-  public selectRepository(repository: Repository): void {
+  public selectRepository(repository: RepositoryFragment): void {
     this.searchService.selectRepository(repository);
   }
 

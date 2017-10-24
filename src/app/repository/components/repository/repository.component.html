@@ -1,23 +1,23 @@
 <div class="stats">
   <span class="label" title="Watchers">
-    Watchers: {{repository.subscribers_count | number}}
+    Watchers: {{repository.watchers.totalCount | number}}
   </span>
   <span class="label label-orange" title="Stars">
-    Stars: <span class="badge">{{repository.stargazers_count | number}}</span>
+    Stars: <span class="badge">{{repository.stargazers.totalCount | number}}</span>
   </span>
   <span class="label label-light-blue" title="Forks">
-    Forks: <span class="badge">{{repository.forks | number}}</span>
+    Forks: <span class="badge">{{repository.forks.totalCount | number}}</span>
   </span>
 </div>
 
 <div class="card">
   <div class="card-header">
-    <a href="{{repository.owner.html_url}}">{{repository.owner.login}}</a>
+    <a href="{{repository.owner.url}}">{{repository.owner.login}}</a>
     /
-    <a href="{{repository.html_url}}">{{repository.name}}</a>
+    <a href="{{repository.url}}">{{repository.name}}</a>
 
-    <span class="label label-purple" title="Primary language">
-      {{repository.language}}
+    <span *ngIf="repository.languages?.nodes[0]?.name" class="label label-purple" title="Primary language">
+      {{repository.languages?.nodes[0]?.name}}
     </span>
   </div>
 
@@ -26,9 +26,9 @@
   </div>
 
   <div class="card-footer">
-    <a *ngIf="repository.homepage" href="{{repository.homepage}}" class="btn btn-sm btn-link" target="_blank">
-      {{repository.homepage}}
+    <a *ngIf="repository.homepageUrl" href="{{repository.homepageUrl}}" class="btn btn-sm btn-link" target="_blank">
+      {{repository.homepageUrl}}
     </a>
-    <span class="label">Last update: {{repository.updated_at | date:'medium'}}</span>
+    <span class="label">Last update: {{repository.pushedAt | date:'medium'}}</span>
   </div>
 </div>

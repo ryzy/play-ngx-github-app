@@ -8,8 +8,8 @@ import {
 } from '../../core/state/selectors';
 import { SearchAction, LoadTrendingAction, SelectAction } from '../../core/state/repository.actions';
 import { AppError } from '../../shared/model/app-error';
-import { Repository } from '../../shared/model/repository';
 import { AppRootState } from '../../core/state/index';
+import { RepositoryFragment } from '../../core/queries.types';
 
 
 @Injectable()
@@ -28,7 +28,7 @@ export class SearchService {
   /**
    * Get current repositories
    */
-  public getRepositories(): Observable<Repository[]> {
+  public getRepositories(): Observable<RepositoryFragment[]> {
     return this.store.select(getRepositorySearchEntities);
   }
 
@@ -72,7 +72,7 @@ export class SearchService {
    * Action performed when repository got selected (i.e. clicked)
    * @param repository
    */
-  public selectRepository(repository: Repository): void {
+  public selectRepository(repository: RepositoryFragment): void {
     this.store.dispatch(new SelectAction(repository));
   }
 }

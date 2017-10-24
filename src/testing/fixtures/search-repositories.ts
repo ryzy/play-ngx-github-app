@@ -1,277 +1,364 @@
+/* tslint:disable:max-line-length */
+
 /**
  * Sample data returned from
  * GET /search/repositories
  */
 export const repositoriesSearchResultTestData = {
-  total_count: 189648,
-  incomplete_results: false,
-  items: [
-  {
-    id: 460078,
-    name: 'angular.js',
-    full_name: 'angular/angular.js',
-    owner: {
-      login: 'angular',
-      id: 139426,
-      avatar_url: 'https://avatars.githubusercontent.com/u/139426?v=3',
-      gravatar_id: '',
-      url: 'https://api.github.com/users/angular',
-      html_url: 'https://github.com/angular',
-      followers_url: 'https://api.github.com/users/angular/followers',
-      following_url: 'https://api.github.com/users/angular/following{/other_user}',
-      gists_url: 'https://api.github.com/users/angular/gists{/gist_id}',
-      starred_url: 'https://api.github.com/users/angular/starred{/owner}{/repo}',
-      subscriptions_url: 'https://api.github.com/users/angular/subscriptions',
-      organizations_url: 'https://api.github.com/users/angular/orgs',
-      repos_url: 'https://api.github.com/users/angular/repos',
-      events_url: 'https://api.github.com/users/angular/events{/privacy}',
-      received_events_url: 'https://api.github.com/users/angular/received_events',
-      type: 'Organization',
-      site_admin: false
-    },
-    'private': false,
-    html_url: 'https://github.com/angular/angular.js',
-    description: 'HTML enhanced for web apps',
-    fork: false,
-    url: 'https://api.github.com/repos/angular/angular.js',
-    forks_url: 'https://api.github.com/repos/angular/angular.js/forks',
-    keys_url: 'https://api.github.com/repos/angular/angular.js/keys{/key_id}',
-    collaborators_url: 'https://api.github.com/repos/angular/angular.js/collaborators{/collaborator}',
-    teams_url: 'https://api.github.com/repos/angular/angular.js/teams',
-    hooks_url: 'https://api.github.com/repos/angular/angular.js/hooks',
-    issue_events_url: 'https://api.github.com/repos/angular/angular.js/issues/events{/number}',
-    events_url: 'https://api.github.com/repos/angular/angular.js/events',
-    assignees_url: 'https://api.github.com/repos/angular/angular.js/assignees{/user}',
-    branches_url: 'https://api.github.com/repos/angular/angular.js/branches{/branch}',
-    tags_url: 'https://api.github.com/repos/angular/angular.js/tags',
-    blobs_url: 'https://api.github.com/repos/angular/angular.js/git/blobs{/sha}',
-    git_tags_url: 'https://api.github.com/repos/angular/angular.js/git/tags{/sha}',
-    git_refs_url: 'https://api.github.com/repos/angular/angular.js/git/refs{/sha}',
-    trees_url: 'https://api.github.com/repos/angular/angular.js/git/trees{/sha}',
-    statuses_url: 'https://api.github.com/repos/angular/angular.js/statuses/{sha}',
-    languages_url: 'https://api.github.com/repos/angular/angular.js/languages',
-    stargazers_url: 'https://api.github.com/repos/angular/angular.js/stargazers',
-    contributors_url: 'https://api.github.com/repos/angular/angular.js/contributors',
-    subscribers_url: 'https://api.github.com/repos/angular/angular.js/subscribers',
-    subscription_url: 'https://api.github.com/repos/angular/angular.js/subscription',
-    commits_url: 'https://api.github.com/repos/angular/angular.js/commits{/sha}',
-    git_commits_url: 'https://api.github.com/repos/angular/angular.js/git/commits{/sha}',
-    comments_url: 'https://api.github.com/repos/angular/angular.js/comments{/number}',
-    issue_comment_url: 'https://api.github.com/repos/angular/angular.js/issues/comments{/number}',
-    contents_url: 'https://api.github.com/repos/angular/angular.js/contents/{+path}',
-    compare_url: 'https://api.github.com/repos/angular/angular.js/compare/{base}...{head}',
-    merges_url: 'https://api.github.com/repos/angular/angular.js/merges',
-    archive_url: 'https://api.github.com/repos/angular/angular.js/{archive_format}{/ref}',
-    downloads_url: 'https://api.github.com/repos/angular/angular.js/downloads',
-    issues_url: 'https://api.github.com/repos/angular/angular.js/issues{/number}',
-    pulls_url: 'https://api.github.com/repos/angular/angular.js/pulls{/number}',
-    milestones_url: 'https://api.github.com/repos/angular/angular.js/milestones{/number}',
-    notifications_url: 'https://api.github.com/repos/angular/angular.js/notifications{?since,all,participating}',
-    labels_url: 'https://api.github.com/repos/angular/angular.js/labels{/name}',
-    releases_url: 'https://api.github.com/repos/angular/angular.js/releases{/id}',
-    deployments_url: 'https://api.github.com/repos/angular/angular.js/deployments',
-    created_at: '2010-01-06T00:34:37Z',
-    updated_at: '2016-12-17T22:29:51Z',
-    pushed_at: '2016-12-17T13:51:28Z',
-    git_url: 'git://github.com/angular/angular.js.git',
-    ssh_url: 'git@github.com:angular/angular.js.git',
-    clone_url: 'https://github.com/angular/angular.js.git',
-    svn_url: 'https://github.com/angular/angular.js',
-    homepage: 'http://angularjs.org',
-    size: 84988,
-    stargazers_count: 53914,
-    watchers_count: 53914,
-    language: 'JavaScript',
-    has_issues: true,
-    has_downloads: true,
-    has_wiki: true,
-    has_pages: false,
-    forks_count: 26730,
-    mirror_url: null,
-    open_issues_count: 850,
-    forks: 26730,
-    open_issues: 850,
-    watchers: 53914,
-    default_branch: 'master',
-    score: 31.208199
-  },
-  {
-    id: 12256376,
-    name: 'ionic',
-    full_name: 'driftyco/ionic',
-    owner: {
-      login: 'driftyco',
-      id: 3171503,
-      avatar_url: 'https://avatars.githubusercontent.com/u/3171503?v=3',
-      gravatar_id: '',
-      url: 'https://api.github.com/users/driftyco',
-      html_url: 'https://github.com/driftyco',
-      followers_url: 'https://api.github.com/users/driftyco/followers',
-      following_url: 'https://api.github.com/users/driftyco/following{/other_user}',
-      gists_url: 'https://api.github.com/users/driftyco/gists{/gist_id}',
-      starred_url: 'https://api.github.com/users/driftyco/starred{/owner}{/repo}',
-      subscriptions_url: 'https://api.github.com/users/driftyco/subscriptions',
-      organizations_url: 'https://api.github.com/users/driftyco/orgs',
-      repos_url: 'https://api.github.com/users/driftyco/repos',
-      events_url: 'https://api.github.com/users/driftyco/events{/privacy}',
-      received_events_url: 'https://api.github.com/users/driftyco/received_events',
-      type: 'Organization',
-      site_admin: false
-    },
-    'private': false,
-    html_url: 'https://github.com/driftyco/ionic',
-    description: 'Build amazing native and progressive web apps with Angular and open web technologies. One app running on everything 🎉',
-    fork: false,
-    url: 'https://api.github.com/repos/driftyco/ionic',
-    forks_url: 'https://api.github.com/repos/driftyco/ionic/forks',
-    keys_url: 'https://api.github.com/repos/driftyco/ionic/keys{/key_id}',
-    collaborators_url: 'https://api.github.com/repos/driftyco/ionic/collaborators{/collaborator}',
-    teams_url: 'https://api.github.com/repos/driftyco/ionic/teams',
-    hooks_url: 'https://api.github.com/repos/driftyco/ionic/hooks',
-    issue_events_url: 'https://api.github.com/repos/driftyco/ionic/issues/events{/number}',
-    events_url: 'https://api.github.com/repos/driftyco/ionic/events',
-    assignees_url: 'https://api.github.com/repos/driftyco/ionic/assignees{/user}',
-    branches_url: 'https://api.github.com/repos/driftyco/ionic/branches{/branch}',
-    tags_url: 'https://api.github.com/repos/driftyco/ionic/tags',
-    blobs_url: 'https://api.github.com/repos/driftyco/ionic/git/blobs{/sha}',
-    git_tags_url: 'https://api.github.com/repos/driftyco/ionic/git/tags{/sha}',
-    git_refs_url: 'https://api.github.com/repos/driftyco/ionic/git/refs{/sha}',
-    trees_url: 'https://api.github.com/repos/driftyco/ionic/git/trees{/sha}',
-    statuses_url: 'https://api.github.com/repos/driftyco/ionic/statuses/{sha}',
-    languages_url: 'https://api.github.com/repos/driftyco/ionic/languages',
-    stargazers_url: 'https://api.github.com/repos/driftyco/ionic/stargazers',
-    contributors_url: 'https://api.github.com/repos/driftyco/ionic/contributors',
-    subscribers_url: 'https://api.github.com/repos/driftyco/ionic/subscribers',
-    subscription_url: 'https://api.github.com/repos/driftyco/ionic/subscription',
-    commits_url: 'https://api.github.com/repos/driftyco/ionic/commits{/sha}',
-    git_commits_url: 'https://api.github.com/repos/driftyco/ionic/git/commits{/sha}',
-    comments_url: 'https://api.github.com/repos/driftyco/ionic/comments{/number}',
-    issue_comment_url: 'https://api.github.com/repos/driftyco/ionic/issues/comments{/number}',
-    contents_url: 'https://api.github.com/repos/driftyco/ionic/contents/{+path}',
-    compare_url: 'https://api.github.com/repos/driftyco/ionic/compare/{base}...{head}',
-    merges_url: 'https://api.github.com/repos/driftyco/ionic/merges',
-    archive_url: 'https://api.github.com/repos/driftyco/ionic/{archive_format}{/ref}',
-    downloads_url: 'https://api.github.com/repos/driftyco/ionic/downloads',
-    issues_url: 'https://api.github.com/repos/driftyco/ionic/issues{/number}',
-    pulls_url: 'https://api.github.com/repos/driftyco/ionic/pulls{/number}',
-    milestones_url: 'https://api.github.com/repos/driftyco/ionic/milestones{/number}',
-    notifications_url: 'https://api.github.com/repos/driftyco/ionic/notifications{?since,all,participating}',
-    labels_url: 'https://api.github.com/repos/driftyco/ionic/labels{/name}',
-    releases_url: 'https://api.github.com/repos/driftyco/ionic/releases{/id}',
-    deployments_url: 'https://api.github.com/repos/driftyco/ionic/deployments',
-    created_at: '2013-08-20T23:06:02Z',
-    updated_at: '2016-12-17T23:24:23Z',
-    pushed_at: '2016-12-16T22:44:24Z',
-    git_url: 'git://github.com/driftyco/ionic.git',
-    ssh_url: 'git@github.com:driftyco/ionic.git',
-    clone_url: 'https://github.com/driftyco/ionic.git',
-    svn_url: 'https://github.com/driftyco/ionic',
-    homepage: 'http://ionicframework.com/',
-    size: 67525,
-    stargazers_count: 27108,
-    watchers_count: 27108,
-    language: 'TypeScript',
-    has_issues: true,
-    has_downloads: true,
-    has_wiki: false,
-    has_pages: false,
-    forks_count: 6289,
-    mirror_url: null,
-    open_issues_count: 860,
-    forks: 6289,
-    open_issues: 860,
-    watchers: 27108,
-    default_branch: 'master',
-    score: 11.2004385
-  },
-  {
-    id: 22362099,
-    name: 'angular-styleguide',
-    full_name: 'johnpapa/angular-styleguide',
-    owner: {
-      login: 'johnpapa',
-      id: 1202528,
-      avatar_url: 'https://avatars.githubusercontent.com/u/1202528?v=3',
-      gravatar_id: '',
-      url: 'https://api.github.com/users/johnpapa',
-      html_url: 'https://github.com/johnpapa',
-      followers_url: 'https://api.github.com/users/johnpapa/followers',
-      following_url: 'https://api.github.com/users/johnpapa/following{/other_user}',
-      gists_url: 'https://api.github.com/users/johnpapa/gists{/gist_id}',
-      starred_url: 'https://api.github.com/users/johnpapa/starred{/owner}{/repo}',
-      subscriptions_url: 'https://api.github.com/users/johnpapa/subscriptions',
-      organizations_url: 'https://api.github.com/users/johnpapa/orgs',
-      repos_url: 'https://api.github.com/users/johnpapa/repos',
-      events_url: 'https://api.github.com/users/johnpapa/events{/privacy}',
-      received_events_url: 'https://api.github.com/users/johnpapa/received_events',
-      type: 'User',
-      site_admin: false
-    },
-    'private': false,
-    html_url: 'https://github.com/johnpapa/angular-styleguide',
-    description: 'Angular Style Guide: A starting point for Angular development teams to provide consistency through good practices.',
-    fork: false,
-    url: 'https://api.github.com/repos/johnpapa/angular-styleguide',
-    forks_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/forks',
-    keys_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/keys{/key_id}',
-    collaborators_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/collaborators{/collaborator}',
-    teams_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/teams',
-    hooks_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/hooks',
-    issue_events_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/issues/events{/number}',
-    events_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/events',
-    assignees_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/assignees{/user}',
-    branches_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/branches{/branch}',
-    tags_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/tags',
-    blobs_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/git/blobs{/sha}',
-    git_tags_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/git/tags{/sha}',
-    git_refs_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/git/refs{/sha}',
-    trees_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/git/trees{/sha}',
-    statuses_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/statuses/{sha}',
-    languages_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/languages',
-    stargazers_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/stargazers',
-    contributors_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/contributors',
-    subscribers_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/subscribers',
-    subscription_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/subscription',
-    commits_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/commits{/sha}',
-    git_commits_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/git/commits{/sha}',
-    comments_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/comments{/number}',
-    issue_comment_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/issues/comments{/number}',
-    contents_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/contents/{+path}',
-    compare_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/compare/{base}...{head}',
-    merges_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/merges',
-    archive_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/{archive_format}{/ref}',
-    downloads_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/downloads',
-    issues_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/issues{/number}',
-    pulls_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/pulls{/number}',
-    milestones_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/milestones{/number}',
-    notifications_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/notifications{?since,all,participating}',
-    labels_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/labels{/name}',
-    releases_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/releases{/id}',
-    deployments_url: 'https://api.github.com/repos/johnpapa/angular-styleguide/deployments',
-    created_at: '2014-07-29T00:07:51Z',
-    updated_at: '2016-12-17T19:33:40Z',
-    pushed_at: '2016-12-02T16:35:15Z',
-    git_url: 'git://github.com/johnpapa/angular-styleguide.git',
-    ssh_url: 'git@github.com:johnpapa/angular-styleguide.git',
-    clone_url: 'https://github.com/johnpapa/angular-styleguide.git',
-    svn_url: 'https://github.com/johnpapa/angular-styleguide',
-    homepage: 'http://johnpapa.net',
-    size: 5911,
-    stargazers_count: 21371,
-    watchers_count: 21371,
-    language: null,
-    has_issues: true,
-    has_downloads: true,
-    has_wiki: false,
-    has_pages: false,
-    forks_count: 3936,
-    mirror_url: null,
-    open_issues_count: 53,
-    forks: 3936,
-    open_issues: 53,
-    watchers: 21371,
-    default_branch: 'master',
-    score: 26.666172
+  search: {
+    repositoryCount: 6520,
+    nodes: [
+      {
+        id: 'MDEwOlJlcG9zaXRvcnkxMjI1NjM3Ng==',
+        name: 'ionic',
+        nameWithOwner: 'ionic-team/ionic',
+        description: 'Build amazing native and progressive web apps with open web technologies. One app running on everything 🎉',
+        descriptionHTML: '<div>Build amazing native and progressive web apps with open web technologies. One app running on everything</div>',
+        createdAt: '2013-08-20T23:06:02Z',
+        updatedAt: '2017-10-18T09:29:35Z',
+        languages: {
+          nodes: [
+            {
+              name: 'JavaScript',
+              color: '#f1e05a'
+            }
+          ]
+        },
+        url: 'https://github.com/ionic-team/ionic',
+        homepageUrl: 'https://ionicframework.com/',
+        isFork: false,
+        forks: {
+          totalCount: 8979
+        },
+        issues: {
+          totalCount: 11285
+        },
+        stargazers: {
+          totalCount: 31771
+        },
+        watchers: {
+          totalCount: 1842
+        },
+        owner: {
+          id: 'MDEyOk9yZ2FuaXphdGlvbjMxNzE1MDM=',
+          login: 'ionic-team',
+          avatarUrl: 'https://avatars0.githubusercontent.com/u/3171503?v=4',
+          url: 'https://github.com/ionic-team',
+          __typename: 'Organization'
+        }
+      },
+      {
+        id: 'MDEwOlJlcG9zaXRvcnkyNDE5NTMzOQ==',
+        name: 'angular',
+        nameWithOwner: 'angular/angular',
+        description: 'One framework. Mobile & desktop.',
+        descriptionHTML: '<div>One framework. Mobile &amp; desktop.</div>',
+        createdAt: '2014-09-18T16:12:01Z',
+        updatedAt: '2017-10-18T09:52:15Z',
+        languages: {
+          nodes: [
+            {
+              name: 'JavaScript',
+              color: '#f1e05a'
+            }
+          ]
+        },
+        url: 'https://github.com/angular/angular',
+        homepageUrl: 'https://angular.io',
+        isFork: false,
+        forks: {
+          totalCount: 7110
+        },
+        issues: {
+          totalCount: 12178
+        },
+        stargazers: {
+          totalCount: 28877
+        },
+        watchers: {
+          totalCount: 2690
+        },
+        owner: {
+          id: 'MDEyOk9yZ2FuaXphdGlvbjEzOTQyNg==',
+          login: 'angular',
+          avatarUrl: 'https://avatars3.githubusercontent.com/u/139426?v=4',
+          url: 'https://github.com/angular',
+          __typename: 'Organization'
+        }
+      },
+      {
+        id: 'MDEwOlJlcG9zaXRvcnkzNjg5MTg2Nw==',
+        name: 'angular-cli',
+        nameWithOwner: 'angular/angular-cli',
+        description: 'CLI tool for Angular',
+        descriptionHTML: '<div>CLI tool for Angular</div>',
+        createdAt: '2015-06-04T19:49:37Z',
+        updatedAt: '2017-10-18T09:10:08Z',
+        languages: {
+          nodes: [
+            {
+              name: 'JavaScript',
+              color: '#f1e05a'
+            }
+          ]
+        },
+        url: 'https://github.com/angular/angular-cli',
+        homepageUrl: '',
+        isFork: false,
+        forks: {
+          totalCount: 2696
+        },
+        issues: {
+          totalCount: 5817
+        },
+        stargazers: {
+          totalCount: 13050
+        },
+        watchers: {
+          totalCount: 995
+        },
+        owner: {
+          id: 'MDEyOk9yZ2FuaXphdGlvbjEzOTQyNg==',
+          login: 'angular',
+          avatarUrl: 'https://avatars3.githubusercontent.com/u/139426?v=4',
+          url: 'https://github.com/angular',
+          __typename: 'Organization'
+        }
+      },
+      {
+        id: 'MDEwOlJlcG9zaXRvcnk0OTAxNjMyMg==',
+        name: 'material2',
+        nameWithOwner: 'angular/material2',
+        description: 'Material Design components for Angular',
+        descriptionHTML: '<div>Material Design components for Angular</div>',
+        createdAt: '2016-01-04T18:50:02Z',
+        updatedAt: '2017-10-18T09:10:19Z',
+        languages: {
+          nodes: [
+            {
+              name: 'JavaScript',
+              color: '#f1e05a'
+            }
+          ]
+        },
+        url: 'https://github.com/angular/material2',
+        homepageUrl: 'https://material.angular.io',
+        isFork: false,
+        forks: {
+          totalCount: 2662
+        },
+        issues: {
+          totalCount: 4632
+        },
+        stargazers: {
+          totalCount: 11356
+        },
+        watchers: {
+          totalCount: 1060
+        },
+        owner: {
+          id: 'MDEyOk9yZ2FuaXphdGlvbjEzOTQyNg==',
+          login: 'angular',
+          avatarUrl: 'https://avatars3.githubusercontent.com/u/139426?v=4',
+          url: 'https://github.com/angular',
+          __typename: 'Organization'
+        }
+      },
+      {
+        id: 'MDEwOlJlcG9zaXRvcnkzMTgyOTc3MA==',
+        name: 'angular-starter',
+        nameWithOwner: 'AngularClass/angular-starter',
+        description: ':tada: An Angular Starter kit featuring Angular 4 (Router, Http, Forms, Services, Tests, E2E, Dev/Prod, HMR, Async/Lazy Routes, AoT via ngc), Karma, Protractor, Jasmine, Istanbul, TypeScript 2, TsLint, Codelyzer, Hot Module Replacement, @types, and Webpack 3 by @AngularClass  a @OneSpeed-io company',
+        descriptionHTML: '<div>\n<g-emoji alias=\'tada\' fallback-src=\'https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png\' ios-version=\'6.0\'>🎉</g-emoji> An Angular Starter kit featuring Angular 4 (Router, Http, Forms, Services, Tests, E2E, Dev/Prod, HMR, Async/Lazy Routes, AoT via ngc), Karma, Protractor, Jasmine, Istanbul, TypeScript 2, TsLint, Codelyzer, Hot Module Replacement, <a href=\'https://github.com/types\' class=\'user-mention\'>@types</a>, and Webpack 3 by <a href=\'https://github.com/AngularClass\' class=\'user-mention\'>@AngularClass</a>  a <a href=\'https://github.com/OneSpeed-io\' class=\'user-mention\'>@OneSpeed-io</a> company</div>',
+        createdAt: '2015-03-07T22:25:10Z',
+        updatedAt: '2017-10-18T08:38:13Z',
+        languages: {
+          nodes: [
+            {
+              name: 'HTML',
+              color: '#e34c26'
+            }
+          ]
+        },
+        url: 'https://github.com/AngularClass/angular-starter',
+        homepageUrl: 'https://angularclass.github.io/angular-starter/',
+        isFork: false,
+        forks: {
+          totalCount: 4916
+        },
+        issues: {
+          totalCount: 1118
+        },
+        stargazers: {
+          totalCount: 9008
+        },
+        watchers: {
+          totalCount: 614
+        },
+        owner: {
+          id: 'MDEyOk9yZ2FuaXphdGlvbjExNjAyNjc4',
+          login: 'AngularClass',
+          avatarUrl: 'https://avatars2.githubusercontent.com/u/11602678?v=4',
+          url: 'https://github.com/AngularClass',
+          __typename: 'Organization'
+        }
+      },
+      {
+        id: 'MDEwOlJlcG9zaXRvcnkxMzc1MzYzNg==',
+        name: 'generator-jhipster',
+        nameWithOwner: 'jhipster/generator-jhipster',
+        description: 'Open Source application generator for creating Spring Boot + Angular projects in seconds!',
+        descriptionHTML: '<div>Open Source application generator for creating Spring Boot + Angular projects in seconds!</div>',
+        createdAt: '2013-10-21T20:07:22Z',
+        updatedAt: '2017-10-18T07:42:38Z',
+        languages: {
+          nodes: [
+            {
+              name: 'Java',
+              color: '#b07219'
+            }
+          ]
+        },
+        url: 'https://github.com/jhipster/generator-jhipster',
+        homepageUrl: 'http://www.jhipster.tech',
+        isFork: false,
+        forks: {
+          totalCount: 1843
+        },
+        issues: {
+          totalCount: 3554
+        },
+        stargazers: {
+          totalCount: 8327
+        },
+        watchers: {
+          totalCount: 610
+        },
+        owner: {
+          id: 'MDEyOk9yZ2FuaXphdGlvbjYwNTk0ODg=',
+          login: 'jhipster',
+          avatarUrl: 'https://avatars3.githubusercontent.com/u/6059488?v=4',
+          url: 'https://github.com/jhipster',
+          __typename: 'Organization'
+        }
+      },
+      {
+        id: 'MDEwOlJlcG9zaXRvcnkxMzkyNjQwNA==',
+        name: 'redash',
+        nameWithOwner: 'getredash/redash',
+        description: 'Make Your Company Data Driven. Connect to any data source, easily visualize and share your data.',
+        descriptionHTML: '<div>Make Your Company Data Driven. Connect to any data source, easily visualize and share your data.</div>',
+        createdAt: '2013-10-28T13:19:39Z',
+        updatedAt: '2017-10-18T08:50:23Z',
+        languages: {
+          nodes: [
+            {
+              name: 'Shell',
+              color: '#89e051'
+            }
+          ]
+        },
+        url: 'https://github.com/getredash/redash',
+        homepageUrl: 'http://redash.io/',
+        isFork: false,
+        forks: {
+          totalCount: 1061
+        },
+        issues: {
+          totalCount: 853
+        },
+        stargazers: {
+          totalCount: 7616
+        },
+        watchers: {
+          totalCount: 375
+        },
+        owner: {
+          id: 'MDEyOk9yZ2FuaXphdGlvbjEwNzQ2Nzgw',
+          login: 'getredash',
+          avatarUrl: 'https://avatars2.githubusercontent.com/u/10746780?v=4',
+          url: 'https://github.com/getredash',
+          __typename: 'Organization'
+        }
+      },
+      {
+        id: 'MDEwOlJlcG9zaXRvcnk3NjM5MjMy',
+        name: 'protractor',
+        nameWithOwner: 'angular/protractor',
+        description: 'E2E test framework for Angular apps',
+        descriptionHTML: '<div>E2E test framework for Angular apps</div>',
+        createdAt: '2013-01-16T04:30:53Z',
+        updatedAt: '2017-10-18T02:21:23Z',
+        languages: {
+          nodes: [
+            {
+              name: 'JavaScript',
+              color: '#f1e05a'
+            }
+          ]
+        },
+        url: 'https://github.com/angular/protractor',
+        homepageUrl: 'http://www.protractortest.org',
+        isFork: false,
+        forks: {
+          totalCount: 1784
+        },
+        issues: {
+          totalCount: 3289
+        },
+        stargazers: {
+          totalCount: 6983
+        },
+        watchers: {
+          totalCount: 493
+        },
+        owner: {
+          id: 'MDEyOk9yZ2FuaXphdGlvbjEzOTQyNg==',
+          login: 'angular',
+          avatarUrl: 'https://avatars3.githubusercontent.com/u/139426?v=4',
+          url: 'https://github.com/angular',
+          __typename: 'Organization'
+        }
+      },
+      {
+        id: 'MDEwOlJlcG9zaXRvcnkxMzkxMTExOA==',
+        name: 'generator-angular-fullstack',
+        nameWithOwner: 'angular-fullstack/generator-angular-fullstack',
+        description: 'Yeoman generator for AngularJS with an Express server',
+        descriptionHTML: '<div>Yeoman generator for AngularJS with an Express server</div>',
+        createdAt: '2013-10-27T21:56:18Z',
+        updatedAt: '2017-10-18T01:01:02Z',
+        languages: {
+          nodes: [
+            {
+              name: 'JavaScript',
+              color: '#f1e05a'
+            }
+          ]
+        },
+        url: 'https://github.com/angular-fullstack/generator-angular-fullstack',
+        homepageUrl: 'https://angular-fullstack.github.io/',
+        isFork: false,
+        forks: {
+          totalCount: 1215
+        },
+        issues: {
+          totalCount: 1850
+        },
+        stargazers: {
+          totalCount: 5918
+        },
+        watchers: {
+          totalCount: 296
+        },
+        owner: {
+          id: 'MDEyOk9yZ2FuaXphdGlvbjEyNjYzMTA2',
+          login: 'angular-fullstack',
+          avatarUrl: 'https://avatars0.githubusercontent.com/u/12663106?v=4',
+          url: 'https://github.com/angular-fullstack',
+          __typename: 'Organization'
+        }
+      }
+    ]
   }
-]
 };

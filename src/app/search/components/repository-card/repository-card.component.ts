@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Repository } from '../../../shared/model/repository';
+import { Component, Input } from '@angular/core';
+
+import { RepositoryFragment } from '../../../core/queries.types';
 
 @Component({
   selector: 'app-repository-card',
@@ -7,5 +8,5 @@ import { Repository } from '../../../shared/model/repository';
   styleUrls: ['./repository-card.component.scss']
 })
 export class RepositoryCardComponent {
-  @Input() public repository: Repository;
+  @Input() public repository: RepositoryFragment;
 }

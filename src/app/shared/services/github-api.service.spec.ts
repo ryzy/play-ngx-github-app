@@ -1,8 +1,8 @@
 /* tslint:disable:no-unused-variable max-line-length */
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import {
   HttpModule, Http, ConnectionBackend, RequestOptions, BaseRequestOptions, Response, ResponseOptions,
-  RequestMethod, ResponseType
+  RequestMethod
 } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
@@ -10,7 +10,7 @@ import { repositoriesSearchResultTestData } from '../../../testing/fixtures/sear
 import { repositoryTestData } from '../../../testing/fixtures/repository';
 import { repositoryReadmeTestData } from '../../../testing/fixtures/repository-readme';
 import { GitHubAPIService } from './github-api.service';
-import { Repository } from '../model/repository';
+import { RepositoryFragment } from '../../core/queries.types';
 import { Commit } from '../model/commit';
 import { repositoryCommitsTestData } from '../../../testing/fixtures/repository-commits';
 import { Issue } from '../model/issue';
@@ -48,7 +48,7 @@ describe('GitHubAPIService', () => {
       })));
     });
 
-    service.retrieveRepository('some/repo').subscribe((repo: Repository) => {
+    service.retrieveRepository('some/repo').subscribe((repo: RepositoryFragment) => {
       expect(repo).toBeTruthy();
       expect(repo.name).toBe('bootstrap');
     });
@@ -145,10 +145,10 @@ describe('GitHubAPIService', () => {
       })));
     });
 
-    service.retrieveRepositories('bootstrap').subscribe((repos: Repository[]) => {
+    service.retrieveRepositories('bootstrap').subscribe((repos: RepositoryFragment[]) => {
       expect(repos.length).toBe(3);
 
-      const repo: Repository = repos[0];
+      const repo: RepositoryFragment = repos[0];
       expect(repo.name).toBe('angular.js');
       expect(repo.owner).toBeDefined();
     });
@@ -161,10 +161,10 @@ describe('GitHubAPIService', () => {
       })));
     });
 
-    service.retrieveTrendingRepositories().subscribe((repos: Repository[]) => {
+    service.retrieveTrendingRepositories().subscribe((repos: RepositoryFragment[]) => {
       expect(repos.length).toBe(3);
 
-      const repo: Repository = repos[0];
+      const repo: RepositoryFragment = repos[0];
       expect(repo.name).toBe('angular.js');
       expect(repo.owner).toBeDefined();
     });

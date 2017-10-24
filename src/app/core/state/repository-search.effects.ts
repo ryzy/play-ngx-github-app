@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Action } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
@@ -12,13 +12,12 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/switchMap';
 
-import { Repository } from '../../shared/model/repository';
+import { RepositoryFragment } from '../queries.types';
 import { GitHubAPIService } from '../../shared/services/github-api.service';
 import {
   ActionTypes, LoadTrendingCompleteAction,
   SearchErrorAction, SearchAction, SearchCompleteAction, SelectAction, LoadTrendingAction
 } from './repository.actions';
-import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -31,9 +30,9 @@ export class RepositorySearchEffects {
   @Effect()
   public loadTrending$: Observable<LoadTrendingCompleteAction|SearchErrorAction> = this.actions$
     .ofType(ActionTypes.LOAD_TRENDING)
-    .switchMap((action: Action) => {
-      return this.gitHubAPIService.retrieveTrendingRepositories()
-        .map((repositories: Repository[]) => new LoadTrendingCompleteAction(repositories))
+    .switchMap(() => {
+      return this.gitHubAPIService.retrieveRepositories()
+        .map((repositories: RepositoryFragment[]) => new LoadTrendingCompleteAction(repositories))
         .catch((error: Response) => Observable.of(new SearchErrorAction(error)))
       ;
     })
@@ -75,7 +74,7 @@ export class RepositorySearchEffects {
       return this.gitHubAPIService.retrieveRepositories(query)
         .takeUntil(nextSearch$)
         .takeUntil(nextLoadTrending$)
-        .map((repositories: Repository[]) => new SearchCompleteAction(repositories))
+        .map((repositories: RepositoryFragment[]) => new SearchCompleteAction(repositories))
         .catch((error: Response) => Observable.of(new SearchErrorAction(error)))
       ;
     })
@@ -101,11 +100,11 @@ export class RepositorySearchEffects {
    * When repository got selected, dispatch router go() action
    */
   @Effect({ dispatch: false })
-  public selectRepo$: Observable<Repository> = this.actions$
+  public selectRepo$: Observable<RepositoryFragment> = this.actions$
     .ofType(ActionTypes.SELECT)
-    .map((action: SelectAction) => <Repository>action.payload)
-    .do((repository: Repository) => {
-      this.router.navigateByUrl('/repo/' + repository.full_name);
+    .map((action: SelectAction) => <RepositoryFragment>action.payload)
+    .do((repository: RepositoryFragment) => {
+      this.router.navigateByUrl('/repo/' + repository.nameWithOwner);
     })
   ;
 

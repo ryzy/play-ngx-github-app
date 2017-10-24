@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { AppRootState } from '../../core/state/index';
-import { Repository } from '../../shared/model/repository';
 import {
   getRepositoryEntity, getRepositoryError, getRepositoryReadme,
   getRepositoryIssues, getRepositoryCommits, getRepositoryPulls
@@ -16,6 +15,7 @@ import {
 import { Issue } from '../../shared/model/issue';
 import { Commit } from '../../shared/model/commit';
 import { PullRequest } from '../../shared/model/pull-request';
+import { RepositoryFragment } from '../../core/queries.types';
 
 
 @Injectable()
@@ -28,7 +28,7 @@ export class RepositoryService {
   /**
    * Get currently selected repository
    */
-  public getRepository(): Observable<Repository|undefined> {
+  public getRepository(): Observable<RepositoryFragment|undefined> {
     return this.store.select(getRepositoryEntity);
   }
 
@@ -42,12 +42,11 @@ export class RepositoryService {
   /**
    * Get repository Commit items
    *
-   * @param {Repository} repository
-   * @param {boolean} dispatch: flag indicating that a load action should be dispatched.
-   *                            Should be set to true when we want to trigger fetching new data to store.
-   * @returns {Observable}
+   * @param repository
+   * @param dispatch: flag indicating that a load action should be dispatched.
+   *                  Should be set to true when we want to trigger fetching new data to store.
    */
-  public getCommits(repository: Repository, dispatch = false): Observable<Commit[]> {
+  public getCommits(repository: RepositoryFragment, dispatch = false): Observable<Commit[]> {
     if (dispatch) {
       this.store.dispatch(new LoadCommitsAction(repository));
     }
@@ -57,12 +56,11 @@ export class RepositoryService {
   /**
    * Get repository Issue items
    *
-   * @param {Repository} repository
-   * @param {boolean} dispatch: flag indicating that a load action should be dispatched.
-   *                            Should be set to true when we want to trigger fetching new data to store.
-   * @returns {Observable}
+   * @param repository
+   * @param dispatch: flag indicating that a load action should be dispatched.
+   *                  Should be set to true when we want to trigger fetching new data to store.
    */
-  public getIssues(repository: Repository, dispatch = false): Observable<Issue[]> {
+  public getIssues(repository: RepositoryFragment, dispatch = false): Observable<Issue[]> {
     if (dispatch) {
       this.store.dispatch(new LoadIssuesAction(repository));
     }
@@ -72,12 +70,11 @@ export class RepositoryService {
   /**
    * Get repository PullRequest items
    *
-   * @param {Repository} repository
-   * @param {boolean} dispatch: flag indicating that a load action should be dispatched.
-   *                            Should be set to true when we want to trigger fetching new data to store.
-   * @returns {Observable}
+   * @param repository
+   * @param dispatch: flag indicating that a load action should be dispatched.
+   *                  Should be set to true when we want to trigger fetching new data to store.
    */
-  public getPulls(repository: Repository, dispatch = false): Observable<PullRequest[]> {
+  public getPulls(repository: RepositoryFragment, dispatch = false): Observable<PullRequest[]> {
     if (dispatch) {
       this.store.dispatch(new LoadPullsAction(repository));
     }
@@ -87,12 +84,11 @@ export class RepositoryService {
   /**
    * Get repository readme content
    *
-   * @param {Repository} repository
-   * @param {boolean} dispatch: flag indicating that a load action should be dispatched.
-   *                            Should be set to true when we want to trigger fetching new data to store.
-   * @returns {Observable}
+   * @param repository
+   * @param dispatch: flag indicating that a load action should be dispatched.
+   *                  Should be set to true when we want to trigger fetching new data to store.
    */
-  public getReadme(repository: Repository, dispatch = false): Observable<string|undefined> {
+  public getReadme(repository: RepositoryFragment, dispatch = false): Observable<string|undefined> {
     if (dispatch) {
       this.store.dispatch(new LoadReadmeAction(repository));
     }

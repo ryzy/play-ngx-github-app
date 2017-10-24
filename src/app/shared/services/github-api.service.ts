@@ -4,13 +4,17 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/switchMap';
+import { ApolloQueryResult } from 'apollo-client';
+import { Apollo } from 'apollo-angular';
 
 import { GITHUB_API_BASE_URL, GITHUB_API_CLIENT_ID, GITHUB_API_CLIENT_SECRET } from '../config';
-import { Repository } from '../model/repository';
 import { Commit } from '../model/commit';
 import { Issue } from '../model/issue';
 import { PullRequest } from '../model/pull-request';
-
+import { repositoryDetailsQuery, searchRepositoriesQuery } from '../../core/queries.graphql';
+import {
+  SearchRepositoriesQuery, RepositoryFragment, SearchRepositoriesQueryVariables, RepositoryDetailsQuery,
+} from '../../core/queries.types';
 
 const GITHUB_API_ERROR_README_NOT_FOUND = '<p><b>ERROR:</b> README not found for this repository.</p>';
 
@@ -22,16 +26,23 @@ export class GitHubAPIService {
     search: `client_id=${GITHUB_API_CLIENT_ID}&client_secret=${GITHUB_API_CLIENT_SECRET}`,
   };
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private apollo: Apollo) { }
 
   /**
    * Get repository data
-   * @param repoFullName
-   * @returns {Observable<Repository>}
    */
-  public retrieveRepository(repoFullName: string): Observable<Repository> {
-    return this.http.get(`${this.apiUrl}/repos/${repoFullName}`, this.requestOptions)
-      .map((res: Response) => res.json());
+  public retrieveRepository(repoFullName: string): Observable<RepositoryFragment|undefined> {
+    const [ owner, name ] = repoFullName.split('/');
+    if (!(owner && name)) {
+      return Observable.of(undefined);
+    }
+
+    return this.apollo.watchQuery({
+      query: repositoryDetailsQuery,
+      variables: { owner, name }
+    }).map((r: ApolloQueryResult<RepositoryDetailsQuery>) => {
+      return r.data.repository || undefined;
+    });
   }
 
   public retrieveRepositoryCommits(repoFullName: string): Observable<Commit[]> {
@@ -55,6 +66,7 @@ export class GitHubAPIService {
    * @returns {Observable<string>}
    */
   public retrieveRepositoryReadme(repoFullName: string): Observable<string> {
+    // Seems like there's no easy readme field in new GraphQL API. For now use old API for it.
     return this.http.get(`${this.apiUrl}/repos/${repoFullName}/readme`, this.requestOptions)
       .map((res: Response) => res.json())
       .map((data: { content: string }) => atob(data.content)) // decode base64 encoded README content
@@ -72,30 +84,22 @@ export class GitHubAPIService {
   /**
    * Search GitHub repositories by given query
    *
-   * @param {string} q: search query
-   * @returns {Observable<Repository[]>}
+   * @param q: search query, if any. When empty, we simply load so-called "trending" repositories from last `days`
+   * @param days
+   * @param topic
    */
-  public retrieveRepositories(q: string): Observable<Repository[]> {
-    const url = `${this.apiUrl}/search/repositories?q=${q}`;
-    return this.http.get(url, this.requestOptions)
-      .map((res: Response) => res.json())
-      .map((searchData: { items: Repository[] }) => searchData.items);
-  }
+  public retrieveRepositories(q?: string, days = 30, topic: string = 'angular'): Observable<RepositoryFragment[]> {
+    let searchQuery = `created:>${this.getDate(days)} topic:${topic}`;
+    if (q) {
+      searchQuery = `${encodeURI(q)} topic:${topic}`;
+    }
 
-  /**
-   * Get trending repositories in the last X days
-   *
-   * @param {number} days
-   * @param {string} language
-   * @returns {Observable<Repository[]>}
-   */
-  public retrieveTrendingRepositories(days = 30, language = 'JavaScript'): Observable<Repository[]> {
-    const q = `created:>${this.getDate(days)} language:${language}`;
-    const url = `${this.apiUrl}/search/repositories?q=${q}`;
-    return this.http.get(url, this.requestOptions)
-      .map((res: Response) => res.json())
-      .map((searchData: { items: Repository[] }) => searchData.items)
-    ;
+    return this.apollo.watchQuery<SearchRepositoriesQuery>({
+      query: searchRepositoriesQuery,
+      variables: <SearchRepositoriesQueryVariables>{ searchQuery },
+    }).map((r: ApolloQueryResult<SearchRepositoriesQuery>): RepositoryFragment[] => {
+      return r.data.search.nodes || [];
+    });
   }
 
   /**

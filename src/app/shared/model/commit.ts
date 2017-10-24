@@ -1,4 +1,4 @@
-import { Owner } from './owner';
+import { RepositoryOwnerFragment } from '../../core/queries.types';
 
 /**
  * GitHub repository commit model
@@ -21,6 +21,6 @@ export interface Commit {
   };
   html_url: string;
   url: string;
-  author?: Owner; // on some rare occasions not present (use commit.author)
-  committer: Owner;
+  author?: RepositoryOwnerFragment; // on some rare occasions not present (use commit.author)
+  committer: RepositoryOwnerFragment;
 }
